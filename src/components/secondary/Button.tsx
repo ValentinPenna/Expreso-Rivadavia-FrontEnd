@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({
     disabled={disabled}
     type={type}
     onClick={onClick}
-    className={`transition duration-300 bg-[#CB1B1A]  text-white text-xl font-bold border rounded-full w-[300px] p-2 hover:bg-white hover:border-[#CB1B1A] hover:border-2 hover:text-[#CB1B1A]  ${className}`}
+    className={`transition duration-300 bg-primary  text-white text-xl font-bold border rounded-full w-[300px] p-2 hover:bg-white hover:border-primary hover:border-2 hover:text-primary  ${className}`}
     >{children}</button>
   )
 }
