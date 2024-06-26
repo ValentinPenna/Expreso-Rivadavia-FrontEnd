@@ -30,11 +30,11 @@ export const Input: React.FC<InputProps> = ({
         className="bg-transparent border-b border-primary lg:text-3xl md:text-2xl sm:text-xl w-3/4"
       />
        <ErrorMessage
-                    name={name}
-                    component={() => (
-                      <div className="text-primary">{error}</div>
-                    )}
-                  />
+         name={name}
+         component={() => (
+           <div className="text-primary">{error}</div>
+         )}
+       />
     </div>
   );
 };
