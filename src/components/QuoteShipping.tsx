@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import validate from "./validation/validate";
-import { Input } from "./Input";
+import { Input } from "./secondary/Input";
 
 export interface Quote {
   origin: string;
