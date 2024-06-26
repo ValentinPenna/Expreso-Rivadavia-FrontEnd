@@ -1,6 +1,6 @@
 import type { Quote, QuoteError } from "../QuoteShipping";
 
-export default function validate(values: Quote) {
+export default function validate(values: Quote): QuoteError {
   const errors: QuoteError = {};
   if (!values.origin) {
     errors.origin = "Por favor ingrese un origen";
@@ -15,10 +15,11 @@ export default function validate(values: Quote) {
     errors.high = "Por favor ingrese una altura";
   }
   if (!values.long) {
-    errors.long = "Por favor ingrese una longitud";
+    errors.long = "Por favor ingrese una largo";
   }
   if (!values.widht) {
     errors.widht = "Por favor ingrese una ancho";
   }
   return errors;
+ 
 }

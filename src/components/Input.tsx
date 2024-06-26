@@ -1,15 +1,25 @@
 import React from "react";
-import { Field } from "formik";
+import { ErrorMessage, Field} from "formik";
 
 export interface InputProps {
   label: string;
   name: string;
   placeholder: string;
+  error?: string | null;
 }
-export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
+
+export const Input: React.FC<InputProps> = ({
+  label,
+  name,
+  placeholder,
+  error,
+}) => {
   return (
     <div className="flex flex-col">
-      <label htmlFor="origin" className="text-[#CB1B1A] text-4xl my-7">
+      <label
+        htmlFor={name}
+        className="text-[#CB1B1A] lg:text-4xl md:text-2xl sm:text-xl my-5"
+      >
         {label}
       </label>
       <Field
@@ -17,8 +27,14 @@ export const Input: React.FC<InputProps> = ({ label, name, placeholder }) => {
         id={name}
         name={name}
         placeholder={placeholder}
-        className="bg-transparent border-b border-[#CB1B1A] text-4xl w-3/4"
+        className="bg-transparent border-b border-[#CB1B1A] lg:text-4xl md:text-2xl sm:text-xl w-3/4"
       />
+       <ErrorMessage
+                    name={name}
+                    component={() => (
+                      <div className="text-[#CB1B1A]">{error}</div>
+                    )}
+                  />
     </div>
   );
 };
