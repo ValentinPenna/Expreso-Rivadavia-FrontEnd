@@ -83,8 +83,6 @@ export default function QuoteShipping() {
                   <Input label="Ancho" name="widht" placeholder="60cm" error={errors.widht} />
                 </div>
               </div>
-              <div className="m-20 flex justify-center">
-                <Button type="submit">
               <div className="mt-10 mb-5 flex justify-center">
                 <Button type="submit">
                   COTIZAR
