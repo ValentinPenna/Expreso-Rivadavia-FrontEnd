@@ -44,10 +44,10 @@ export default function QuoteShipping() {
         }}
       >
         {({ errors}) => (
-          <Form className="max-w-4xl mx-auto">
+          <Form className="max-w-4xl mx-auto bg-white p-4 my-4 rounded-lg">
             <div>
-              <h1 className="text-[#CB1B1A] font-bold lg:text-5xl md:text-4xl text-2xl text-center">
-                Cotización
+              <h1 className="text-primary font-bold lg:text-5xl md:text-4xl text-2xl text-center">
+                Cotizar envío
               </h1>
             </div>
             <div>
@@ -84,6 +84,8 @@ export default function QuoteShipping() {
                 </div>
               </div>
               <div className="m-20 flex justify-center">
+                <Button type="submit">
+              <div className="mt-10 mb-5 flex justify-center">
                 <Button type="submit">
                   COTIZAR
                 </Button>

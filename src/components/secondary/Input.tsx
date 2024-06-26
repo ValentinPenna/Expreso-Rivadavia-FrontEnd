@@ -18,7 +18,7 @@ export const Input: React.FC<InputProps> = ({
     <div className="flex flex-col">
       <label
         htmlFor={name}
-        className="text-[#CB1B1A] lg:text-4xl md:text-2xl sm:text-xl my-5"
+        className="text-primary lg:text-4xl md:text-2xl sm:text-xl my-5"
       >
         {label}
       </label>
@@ -27,14 +27,14 @@ export const Input: React.FC<InputProps> = ({
         id={name}
         name={name}
         placeholder={placeholder}
-        className="bg-transparent border-b border-[#CB1B1A] lg:text-4xl md:text-2xl sm:text-xl w-3/4 focus:outline-none focus:border-b-2 focus:border-[#CB1B1A]"
+        className="bg-transparent border-b border-primary lg:text-3xl md:text-2xl sm:text-xl w-3/4"
       />
        <ErrorMessage
-                    name={name}
-                    component={() => (
-                      <div className="text-[#CB1B1A]">{error}</div>
-                    )}
-                  />
+         name={name}
+         component={() => (
+           <div className="text-primary">{error}</div>
+         )}
+       />
     </div>
   );
 };
