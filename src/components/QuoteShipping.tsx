@@ -43,10 +43,10 @@ export default function QuoteShipping() {
         }}
       >
         {({ errors}) => (
-          <Form className="max-w-4xl mx-auto">
+          <Form className="max-w-4xl mx-auto bg-white p-4 my-4 rounded-lg">
             <div>
-              <h1 className="text-[#CB1B1A] font-bold lg:text-5xl md:text-4xl text-2xl text-center">
-                Cotizacion
+              <h1 className="text-primary font-bold lg:text-5xl md:text-4xl text-2xl text-center">
+                Cotizar envío
               </h1>
             </div>
             <div>
@@ -82,9 +82,9 @@ export default function QuoteShipping() {
                   <Input label="Ancho" name="widht" placeholder="60cm" error={errors.widht} />
                 </div>
               </div>
-              <div className="m-20 flex justify-center">
+              <div className="mt-10 mb-5 flex justify-center">
                 <button
-                  className="bg-[#CB1B1A] text-white text-xl border rounded-full w-[300px] p-2"
+                  className="bg-primary text-white text-xl border rounded-full w-[300px] p-2"
                   type="submit"
                 >
                   COTIZAR
