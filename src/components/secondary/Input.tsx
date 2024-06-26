@@ -27,7 +27,7 @@ export const Input: React.FC<InputProps> = ({
         id={name}
         name={name}
         placeholder={placeholder}
-        className="bg-transparent border-b border-[#CB1B1A] lg:text-4xl md:text-2xl sm:text-xl w-3/4"
+        className="bg-transparent border-b border-[#CB1B1A] lg:text-4xl md:text-2xl sm:text-xl w-3/4 focus:outline-none focus:border-b-2 focus:border-[#CB1B1A]"
       />
        <ErrorMessage
                     name={name}

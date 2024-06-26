@@ -15,7 +15,7 @@ export default function validate(values: Quote): QuoteError {
     errors.high = "Por favor ingrese una altura";
   }
   if (!values.long) {
-    errors.long = "Por favor ingrese una largo";
+    errors.long = "Por favor ingrese una longitud";
   }
   if (!values.widht) {
     errors.widht = "Por favor ingrese una ancho";

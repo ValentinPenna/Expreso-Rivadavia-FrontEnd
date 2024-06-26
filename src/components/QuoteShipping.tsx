@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import validate from "./validation/validate";
-import { Input } from "./Input";
+import { Input } from "./secondary/Input";
+import Button from "./secondary/Button";
 
 export interface Quote {
   origin: string;
@@ -46,7 +47,7 @@ export default function QuoteShipping() {
           <Form className="max-w-4xl mx-auto">
             <div>
               <h1 className="text-[#CB1B1A] font-bold lg:text-5xl md:text-4xl text-2xl text-center">
-                Cotizacion
+                Cotización
               </h1>
             </div>
             <div>
@@ -83,12 +84,9 @@ export default function QuoteShipping() {
                 </div>
               </div>
               <div className="m-20 flex justify-center">
-                <button
-                  className="bg-[#CB1B1A] text-white text-xl border rounded-full w-[300px] p-2"
-                  type="submit"
-                >
+                <Button type="submit">
                   COTIZAR
-                </button>
+                </Button>
               </div>
             </div>
             {quote && <p>cotizacion de envio</p>}
