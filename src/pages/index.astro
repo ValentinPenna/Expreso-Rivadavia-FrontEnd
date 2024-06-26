@@ -1,12 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import QuoteShipping from '../components/QuoteShipping'
+import MapSection from '../components/MapSection.astro';
 ---
 
 <Layout title="Expreso Rivadavia">
-	<main class="my-12">
+	<main class="my-12 p-4">
 		<div class="w-[60%] m-auto">
 			<QuoteShipping client:visible/>
+		</div>
+		<div class="flex justify-center">
+			<MapSection/>
 		</div>
 	</main>
 </Layout>
