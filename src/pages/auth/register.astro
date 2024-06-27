@@ -1,8 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro"
-import RegisterUser from "../../components/RegisterUser"
+import SelectForm from '../../components/SelectForm'
 ---
 
 <Layout title="Registrarte">
-   <RegisterUser client:visible/>
+    <section class="flex justify-center items-center">
+        <SelectForm client:visible />
+    </section>
 </Layout>

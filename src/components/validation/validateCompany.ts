@@ -1,8 +1,8 @@
-import type { IRegisterUser, IRegisterUserErrors } from "../types/typesRegister";
+import type { IRegisterCompany, IRegisterCompanyErrors,  } from "../types/typesRegister";
 
 
-export default function validateUser(values :IRegisterUser): IRegisterUserErrors{
-  const errors: IRegisterUserErrors = {};
+export default function validateCompany(values :IRegisterCompany) :IRegisterCompanyErrors {
+  const errors: IRegisterCompanyErrors = {};
   if (!values.email) {
     errors.email = "Por favor ingrese un correo electrónico";
   } else if (
@@ -13,8 +13,11 @@ export default function validateUser(values :IRegisterUser): IRegisterUserErrors
   }else if (values.email.length < 50) {
     errors.email = "El correo no puede tener más de 50 caracteres";
   }
-  if(!values.dni) {
-    errors.dni = "Por favor ingrese un número de DNI";
+  if(!values.cuit_cuil) {
+    errors.cuit_cuil = "Por favor ingrese un número de DNI";
+  }
+  if(!values.companyName) {
+    errors.companyName = "Por favor ingrese un nombre de empresa";
   }
   if (!values.name) {
     errors.name = "Por favor ingrese un nombre";
@@ -50,12 +53,6 @@ export default function validateUser(values :IRegisterUser): IRegisterUserErrors
   }
   if (values.password !== values.confirmPassword) {
     errors.confirmPassword = "Las contraseñas no coinciden";
-  } 
-  
+  }
   return errors;
 }
-
-
-
-
-
