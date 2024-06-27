@@ -8,6 +8,7 @@ export default function UserInfoDashboard() {
 
     return (
         <div className="w-full my-4 bg-white px-24 pb-24 pt-20 rounded-l-lg flex flex-col max-w-[80%]">
+            <h1 className="font-bold text-4xl text-primary">Informacion Personal</h1>
             <div className="flex flex-row justify-end mb-4">
             {   
                 editionMode?
