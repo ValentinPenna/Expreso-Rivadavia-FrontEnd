@@ -20,7 +20,7 @@ export const Input: React.FC<InputProps> = ({
     <div className="flex flex-col">
       <label
         htmlFor={name}
-        className="text-primary lg:text-4xl md:text-2xl sm:text-xl mt-5"
+        className="text-primary lg:text-2xl md:text-2xl sm:text-xl mt-5"
       >
         {label}
       </label>
@@ -29,7 +29,7 @@ export const Input: React.FC<InputProps> = ({
         id={name}
         name={name}
         placeholder={placeholder}
-        className="bg-transparent border-b border-primary focus:ring-0 focus:outline-none lg:text-3xl md:text-2xl text-xl py-2 px-1 w-3/4"
+        className="bg-transparent border-b border-primary focus:ring-0 focus:outline-none lg:text-xl md:text-2xl text-xl py-2 px-1 w-full"
       />
       <ErrorMessage
         name={name}
