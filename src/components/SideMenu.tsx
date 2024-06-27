@@ -1,7 +1,5 @@
 export default function SideMenu(){
-    console.log(window.location.pathname)
     return(
-
         <nav className="flex flex-col gap-24 items-center bg-white w-[25%] min-h-screen mt-4 mr-4">
             <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" className="w-48 pt-14"/> 
             <div className="flex flex-col gap-9 text-xl items-start w-full">
