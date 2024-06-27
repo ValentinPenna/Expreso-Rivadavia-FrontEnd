@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import { Input } from "./secondary/Input";
 import Button from "./secondary/Button";
-
-interface ILogin {
-  email: string;
-  password: string;
-}
+import { validateLogin } from "./validation/validateLogin";
+// import { useUserStore } from "../store/userStore";
+// import type { UserLogin } from "../types/user";
 
 const FormLogin = () => {
   const [login, setLogin] = useState(false);
+
+  // const setUser = useUserStore((state: any) => state.setUser);
 
   return (
     <div>
@@ -18,29 +18,46 @@ const FormLogin = () => {
           email: "",
           password: "",
         }}
-        onSubmit={(values: ILogin, { resetForm }) => {
+        onSubmit={(values: any, { resetForm }) => {
           resetForm();
           setLogin(true);
+          console.log(values);
+
+          // setUser(values);
         }}
+        validate={validateLogin}
       >
-        <Form className=" w-lg flex flex-col bg-white p-6  rounded-lg  shadow-lg">
-          <div>
-            <h1 className="text-primary text-4xl font-bold text-center">
-              Iniciar Sesión
-            </h1>
-          </div>
+        {({ errors }) => (
+          <Form className=" w-lg flex flex-col bg-white p-6 items-center rounded-lg  shadow-lg">
+            <div>
+              <h1 className="text-primary text-4xl font-bold text-center">
+                Iniciar Sesión
+              </h1>
+            </div>
 
-          <Input label="Email" name="email" placeholder="Email" />
+            <Input
+              error={errors.email}
+              label="Email"
+              name="email"
+              placeholder="Email"
+            />
 
-          <Input
-            label="Contraseña"
-            type="password"
-            name="password"
-            placeholder="*******"
-          />
-
-          <Button type="submit" children="Iniciar Sesión" className="mt-6" />
-        </Form>
+            <Input
+              error={errors.email}
+              label="Contraseña"
+              type="password"
+              name="password"
+              placeholder="*********"
+            />
+            <Button type="submit" children="Iniciar Sesión" className="mt-6" />
+            <p className="text-sm mt-4">
+              No tienes cuenta?{" "}
+              <a className="font-bold text-primary" href="/auth/register">
+                Resigtrate
+              </a>
+            </p>
+          </Form>
+        )}
       </Formik>
     </div>
   );
