@@ -13,7 +13,7 @@ export default function QuoteShipping() {
   const [quote, setQuote] = useState(false);
 
   return (
-    <div className="px-4 md:px-8">
+    <div className="px-4 md:px-8 z-50">
       <Formik
         initialValues={{
           origin: "",
@@ -28,7 +28,7 @@ export default function QuoteShipping() {
         }}
       >
         
-          <Form className="max-w-4xl mx-auto bg-white p-4 my-4 rounded-lg">
+          <Form className="max-w-4xl mx-auto bg-white p-4 my-4 rounded-lg  border border-primary">
             <div>
               <h1 className="text-primary font-bold lg:text-5xl md:text-4xl text-2xl text-center">
                 Cotizar envío
@@ -43,7 +43,7 @@ export default function QuoteShipping() {
                     </svg>
                     Ciudad de origen:
                   </label>
-                  <Field as="select" id="origin" name="origin" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary">
+                  <Field as="select" id="origin" name="origin" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56">
                     <option value="chapanay">Chapanay</option>
                     <option value="ciudad de mendoza">Ciudad de Mendoza</option>
                     <option value="corralitos">Corralitos</option>
@@ -73,7 +73,7 @@ export default function QuoteShipping() {
                     </svg>
                     Ciudad de destino:
                   </label>
-                  <Field as="select" id="destination" name="destination" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary">
+                  <Field as="select" id="destination" name="destination" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:outline-primary w-56">
                     <option value="chapanay">Chapanay</option>
                     <option value="ciudad de mendoza">Ciudad de Mendoza</option>
                     <option value="corralitos">Corralitos</option>
@@ -104,27 +104,27 @@ export default function QuoteShipping() {
                   </svg>
                   Selecciona un tamaño:
                 </label>
-                <div role="group" aria-labelledby="size" className="flex flex-col md:flex-row">
+                <div role="group" aria-labelledby="size" className="flex flex-col lg:flex-row">
                   <label htmlFor="size-pequeño" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
                    
                     <Field type="radio" id="size-pequeño" name="size" value="pequeño" />
                     <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Pequeño</span>
-                    <span className="text-sm md:ml-0 text-primary">máximo de 150cm / 10000 grs</span>
+                    <span className="text-sm md:ml-0 text-primary">Máximo de 150cm / 10000 grs</span>
                     </div>
                   </label>
                   <label htmlFor="size-mediano" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
                     <Field type="radio" id="size-mediano" name="size" value="mediano" />
                     <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Mediano</span>
-                    <span className="text-xs md:ml-0 text-primary">máximo de 300cm / 25000 grs</span>
+                    <span className="text-xs md:ml-0 text-primary">Máximo de 300cm / 25000 grs</span>
                     </div>
                   </label>
                   <label htmlFor="size-grande" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
                     <Field type="radio" id="size-grande" name="size" value="grande"/>
                     <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Grande</span>
-                    <span className="text-sm md:ml-0 text-primary">máximo de 495cm / 50000 grs</span>
+                    <span className="text-sm md:ml-0 text-primary">Máximo de 495cm / 50000 grs</span>
                     </div>
                   </label>
                 </div>

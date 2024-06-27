@@ -5,10 +5,11 @@ import MapSection from '../components/MapSection.astro';
 ---
 
 <Layout title="Expreso Rivadavia">
-	<main class="my-12 p-4">
-		<div class="w-[60%] m-auto">
-			<QuoteShipping client:visible/>
-		</div>
+	<main class="mb-12">
+			<img src="./banner.png" alt="" class="-z-50 relative" style="mask-image: linear-gradient(black 85%, transparent);">
+			<div class="w-[60%] m-auto -mt-12 sm:-mt-20 lg:-mt-28 z-50 relative">
+				<QuoteShipping client:visible />
+			</div>
 		<div class="flex justify-center">
 			<MapSection/>
 		</div>
