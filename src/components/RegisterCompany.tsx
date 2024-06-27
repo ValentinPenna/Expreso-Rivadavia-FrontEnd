@@ -2,16 +2,15 @@ import { Form, Formik } from 'formik'
 import React, { useState } from 'react'
 import { Input } from './secondary/Input'
 import Button from './secondary/Button'
-import type { IRegisterUser } from './types/typesRegister'
-import validateUser from './validation/validateUser'
+import type { IRegisterCompany, IRegisterUser } from './types/typesRegister'
+import validateCompany from './validation/validateCompany'
 
-interface RegisterUserProps {
+interface RegisterCompanyProps {
   handleBackToSelection: () => void;  
 }
 
-
-const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
-    const [registerUser, setRegisterUser]= useState(false)
+const RegisterCompany: React.FC<RegisterCompanyProps> =({ handleBackToSelection }) => {
+    const [registerCompany, setRegisterCompany]= useState(false)
 
 
   return (
@@ -19,7 +18,8 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
         <Formik
         initialValues={{
            email: "",
-           dni:"",
+           cuit_cuil:"",
+           companyName: "",
            name:"",
            lastName:"",
            address:"",
@@ -27,8 +27,8 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
            password:"",
            confirmPassword:"",
         }}
-        validate={validateUser}
-        onSubmit={(values: IRegisterUser)=>{}}
+        validate={validateCompany}
+        onSubmit={(values: IRegisterCompany)=>{}}
         >
           {({ errors })=>(
             <Form  className=" w-lg flex flex-col bg-white p-6  rounded-lg  shadow-lg my-10 relative">
@@ -37,12 +37,12 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
                 <p>completa todos los campos para crear una cuenta</p>
               </div>
               <div className='grid grid-cols-1 lg:grid-cols-2 items-center gap-x-20' >
-                <Input label="Email" name="email" placeholder='xxxx@mail.com' error={errors.email} ></Input>
-                <Input label="DNI" name="dni" placeholder='44444444' error={errors.dni}></Input>
+                <Input label="Email" name="email" placeholder='xxxx@mail.com' error={errors.email}></Input>
+                <Input label="CUIL" name="cuit_cuil" placeholder='44444444' error={errors.cuit_cuil}></Input>
+                <Input label="Nombre de la empresa" name="companyName" placeholder='Expreso Rivadavia' error={errors.companyName}></Input>
                 <Input label="Nombre" name="name" placeholder='Roberto' error={errors.name}></Input>
-                <Input label="Apellido" name="lastName" placeholder='Martinez' error={errors.lastName} ></Input>
+                <Input label="Apellido" name="lastName" placeholder='Martinez'error={errors.lastName} ></Input>
                 <Input label="Dirección" name="address" placeholder='calle 123' error={errors.address}></Input>
-                <Input label="Localidad" name="locality" placeholder='Springfield' error={errors.locality}></Input>
                 <Input label="Contraseña" name="password" placeholder='*******' type="password" error={errors.password}></Input>
                 <Input label="Confirmar contraseña" name="confirmPassword" placeholder='*******' type="password" error={errors.confirmPassword}></Input>
               </div>
@@ -66,4 +66,5 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
     </div>
   )
 }
-export default RegisterUser
+
+export default RegisterCompany
