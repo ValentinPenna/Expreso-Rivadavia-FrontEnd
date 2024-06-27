@@ -1,8 +1,12 @@
 ---
 import SideMenu from "../../components/SideMenu"
 import Layout from "../../layouts/Layout.astro"
+import UserInfoDashboard from "../../components/UserInfoDashboard"
 ---
 
 <Layout title="Dashboard">
-    <SideMenu client:only />
+    <main class="flex flex-row">
+        <SideMenu client:only />
+        <UserInfoDashboard client:load/>
+    </main>
 </Layout>
