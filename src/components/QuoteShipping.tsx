@@ -105,6 +105,15 @@ export default function QuoteShipping() {
                   Selecciona un tamaño:
                 </label>
                 <div role="group" aria-labelledby="size" className="flex flex-col lg:flex-row">
+                <label htmlFor="size-sobre" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
+                   
+                   <Field type="radio" id="size-sobre" name="size" value="sobre" />
+                   <div className="flex  flex-col items-center space-x-2">
+                   <span className="ml-2 mr-6 ">Sobre</span>
+                   <span className="text-sm md:ml-0 text-primary">Máximo formato A4 </span>
+      
+                   </div>
+                 </label>
                   <label htmlFor="size-pequeño" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
                    
                     <Field type="radio" id="size-pequeño" name="size" value="pequeño" />

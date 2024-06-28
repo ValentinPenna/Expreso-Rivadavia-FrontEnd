@@ -7,15 +7,21 @@ interface ILogin {
   password: string;
 }
 
-export const validateLogin = ({ email, password }: ILogin): ILoginError => {
-  let error: ILoginError = {};
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email) {
-    error.email = "El email es requerido";
-  } else if (!emailRegex.test(email)) {
-    error.email = "El Email no es valido ";
-  } else if (!password) {
-    error.password = "La contraseña es requerida";
+export const validateLogin = (values: ILogin): ILoginError => {
+  const errors: ILoginError = {};
+  
+  if (!values.email) {
+    errors.email = "Por favor ingrese un correo electrónico";
+  } else if (
+    !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)
+  ) {
+    errors.email =
+      "El correo solo puede contener letras, números, puntos, guiones y guion bajo";
+  }else if (values.email.length < 50) {
+    errors.email = "El correo no puede tener más de 50 caracteres";
   }
-  return error;
+   else if (!values.password) {
+    errors.password = "La contraseña es requerida";
+  }
+  return errors;
 };
