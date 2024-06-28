@@ -16,6 +16,10 @@ export interface Orders {
     status: string;
 }
 
+export interface IHistoryShipmentProps {
+    orders: Orders[];
+  }
+
 export interface Shipments {
     id: string;
     orders: string;
