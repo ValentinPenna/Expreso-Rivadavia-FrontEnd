@@ -3,7 +3,7 @@ import { CiMenuBurger } from "react-icons/ci";
 import SwitchGuestUser from "./SwitchGuestUser";
 
 const UlNavBar = () => {
-  const [isFocused, setIsFocused] = useState<boolean>(true);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   return (
     <>
       <button
