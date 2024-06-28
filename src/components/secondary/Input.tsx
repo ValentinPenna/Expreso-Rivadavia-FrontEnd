@@ -30,7 +30,7 @@ export const Input: React.FC<InputProps> = ({
         name={name}
         placeholder={placeholder}
 
-        className=" bg-transparent border-b border-primary focus:ring-0 focus:outline-none lg:text-3xl md:text-2xl text-xl pt-2 px-1 w-full"
+        className=" bg-transparent border-b border-primary focus:ring-0 focus:outline-none text-xl pt-2 px-1 w-full"
 
       />
       <ErrorMessage

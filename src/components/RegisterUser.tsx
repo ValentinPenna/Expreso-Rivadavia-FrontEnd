@@ -5,6 +5,8 @@ import Button from './secondary/Button'
 import type { IRegisterUser } from './types/typesRegister'
 import validateUser from './validation/validateUser'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { useUserStore } from '../store/userStore'
+import type { RegisterResponse } from '../types/user'
 
 interface RegisterUserProps {
   handleBackToSelection: () => void;  
@@ -13,13 +15,13 @@ interface RegisterUserProps {
 
 const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
     const [registerUser, setRegisterUser]= useState(false)
-    const [password, setPassword]= useState(false)
+    const [password, setPassword]= useState(true)
 
     const passwordVisibility = () => {
       setPassword(!password);
     };
 
-
+  const userRegister = useUserStore((state: any) => state.userRegister);
   return (
     <div>
         <Formik
@@ -34,7 +36,20 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
            confirmPassword:"",
         }}
         validate={validateUser}
-        onSubmit={(values: IRegisterUser)=>{}}
+        onSubmit={async (values: IRegisterUser)=>{
+          await userRegister(values)
+          .then((data: RegisterResponse) => {
+            if (data.id){
+              setRegisterUser(true);
+              window.location.href = '/auth/login';
+              // console.log(data);
+              // resetForm();
+            }
+          })
+          .catch((error: any) => {
+            console.log(error);
+          });
+        }}
         >
           {({ errors })=>(
             <Form  className=" w-lg flex flex-col bg-white p-6  rounded-lg  shadow-lg my-10 relative">
@@ -52,7 +67,7 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
                 <div className='relative'>
                 <Input label="Contraseña" name="password" placeholder='*******' type={password ? "password" : "text"} error={errors.password} ></Input>
                 <div onClick={passwordVisibility} className="absolute right-0 top-2/3 transform -translate-y-1/2 cursor-pointer">
-                {password ? (
+                {!password ? (
                       <AiFillEyeInvisible color="red" />
                     ) : (
                       <AiFillEye color="red" />

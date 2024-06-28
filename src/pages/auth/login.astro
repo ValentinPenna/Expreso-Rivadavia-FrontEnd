@@ -4,8 +4,7 @@ import Layout from "../../layouts/Layout.astro"
 ---
 
 <Layout title="Ingresar">
-    <section class="flex justify-center items-center h-dvh">
-
-        <FormLogin client:load/>
-    </section>
+    <main class="flex justify-center items-center">
+        <FormLogin client:visible/>
+    </main>
 </Layout>

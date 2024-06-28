@@ -1,25 +1,21 @@
-import { useUserStore } from "../store/userStore";
-import Button from "./secondary/Button";
+import { useEffect } from "react"
+import { useUserStore } from "../store/userStore"
+import Button from "./secondary/Button"
 
 export default function SwitchGuestUser() {
-  const token: string = useUserStore((state) => state.token);
-
-  return (
-    <>
-      {!token ? (
-        <div className="flex flex-row gap-6 ml-auto">
-          <button
-            className="w-fit p-2 transition-all duration-300 bg-white text-primary border-2 border-primary rounded-full text-xl font-bold hover:bg-primary hover:text-white hover:border-2"
-            onClick={() => (location.href = "/auth/login")}
-          >
-            Ingresar
-          </button>
-          <Button
-            className="w-fit"
-            onClick={() => (location.href = "/auth/register")}
-          >
-            Registrarse
-          </Button>
+    const token:string = useUserStore((state) => state.token)
+    const {setUser, setToken} = useUserStore((state) => state)
+    useEffect(() => {
+        setUser()
+        setToken()
+        console.log("prueba")
+    }, [])
+    return (
+        <>
+        {!token ?
+        <div className="flex flex-row gap-6">
+            <button className="w-fit p-2 transition-all duration-300 bg-white text-primary border-2 border-primary rounded-full text-xl font-bold hover:bg-primary hover:text-white hover:border-2" onClick={() => location.href='/auth/login'}>Ingresar</button>
+            <Button className="w-fit" onClick={() => location.href='/auth/register'}>Registrarse</Button>
         </div>
       ) : (
         <>

@@ -5,6 +5,8 @@ import Button from './secondary/Button'
 import type { IRegisterCompany, IRegisterUser } from './types/typesRegister'
 import validateCompany from './validation/validateCompany'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import type { CompanyRegister, RegisterResponse } from '../types/user'
+import { useUserStore } from '../store/userStore'
 
 interface RegisterCompanyProps {
   handleBackToSelection: () => void;  
@@ -19,7 +21,7 @@ const RegisterCompany: React.FC<RegisterCompanyProps> =({ handleBackToSelection 
     };
 
 
-
+    const userRegister = useUserStore((state) => state.userRegister)
   return (
     <div>
         <Formik
@@ -35,7 +37,16 @@ const RegisterCompany: React.FC<RegisterCompanyProps> =({ handleBackToSelection 
            confirmPassword:"",
         }}
         validate={validateCompany}
-        onSubmit={(values: IRegisterCompany)=>{}}
+        onSubmit={async (values: CompanyRegister)=>{
+          await userRegister(values)
+          .then((data: RegisterResponse) => {
+            setRegisterCompany(true);
+            window.location.href = '/auth/login';
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        }}
         >
           {({ errors })=>(
             <Form  className=" w-lg flex flex-col bg-white p-6  rounded-lg  shadow-lg my-10 relative">
