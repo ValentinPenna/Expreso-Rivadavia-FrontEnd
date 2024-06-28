@@ -1,19 +1,15 @@
 ---
 import SwitchGuestUser from "./SwitchGuestUser";
+import UlNavBar from "./UlNavBar";
 ---
 <header>
-    <nav class=" shadow-sm z-[99] w-full bg-white flex items-center justify-between p-4 h-24">
-        <div class="flex items-center gap-12">
+    <nav class=" relative shadow-sm z-[99] w-full bg-white flex items-center justify-between p-4 h-24">
+        <div class="flex items-center w-full gap-12">
             <a href="/">
                 <img src="/logo.png" alt="Expreso Rivadavia" class="w-48">
             </a>
-            <ul class="flex gap-6 text-black text-lg font-normal" >
-                <li><a href="/" class="hover:text-primary">Cotizar un envío</a></li>
-                <li><a href="/new-shipment" class="hover:text-primary">Hacer un envío</a></li>
-                <li><a href="/faqs" class="hover:text-primary">Preguntas Frecuentes</a></li>
-                <li><a href="/about" class="hover:text-primary">Sobre Nosotros</a></li>
-            </ul>
+            <UlNavBar client:visible/>
         </div>
-        <SwitchGuestUser client:load/>
+       
     </nav>
 </header>
