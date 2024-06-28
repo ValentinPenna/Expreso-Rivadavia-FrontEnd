@@ -50,7 +50,7 @@ const FormLogin = () => {
             />
 
             <Input
-              error={errors.email}
+              error={errors.password}
               label="Contraseña"
               type="password"
               name="password"
@@ -60,7 +60,7 @@ const FormLogin = () => {
             <p className="text-sm mt-4">
               No tienes cuenta?{" "}
               <a className="font-bold text-primary" href="/auth/register">
-                Resigtrate
+                Registrate
               </a>
             </p>
           </Form>
