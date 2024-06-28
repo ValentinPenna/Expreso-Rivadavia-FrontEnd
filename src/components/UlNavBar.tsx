@@ -16,28 +16,30 @@ const UlNavBar = () => {
       <ul
         onMouseDown={(e) => e.preventDefault()}
         className={`${isFocused ? "block gap-4 p-4 " : "hidden"} 
-        bg-white flex flex-col-reverse shadow-lg text-black text-lg font-normal duration-400 right-0 -bottom-64 absolute z-50 lg:static lg:shadow-none lg:flex lg:w-full lg:flex-row lg:items-center  lg:gap-3 lg:bg-transparent`}
+        bg-white flex flex-col-reverse shadow-lg text-black text-lg font-normal duration-400 right-0 -bottom-64 absolute z-50 lg:static lg:shadow-none lg:flex lg:w-full lg:flex-row lg:items-center  lg:gap-3 lg:bg-transparent justify-between`}
       >
-        <li>
-          <a href="/" className="hover:text-primary">
-            Cotizar un envío
-          </a>
-        </li>
-        <li>
-          <a href="/new-shipment" className="hover:text-primary">
-            Hacer un envío
-          </a>
-        </li>
-        <li>
-          <a href="/faqs" className="hover:text-primary">
-            Preguntas Frecuentes
-          </a>
-        </li>
-        <li>
-          <a href="/about" className="hover:text-primary">
-            Sobre Nosotros
-          </a>
-        </li>
+        <div className="flex flex-row gap-4">
+          <li>
+            <a href="/" className="hover:text-primary">
+              Cotizar un envío
+            </a>
+          </li>
+          <li>
+            <a href="/new-shipment" className="hover:text-primary">
+              Hacer un envío
+            </a>
+          </li>
+          <li>
+            <a href="/faqs" className="hover:text-primary">
+              Preguntas Frecuentes
+            </a>
+          </li>
+          <li>
+            <a href="/about" className="hover:text-primary">
+              Sobre Nosotros
+            </a>
+          </li>
+        </div>
         <SwitchGuestUser />
       </ul>
     </>
