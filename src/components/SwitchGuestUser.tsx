@@ -1,4 +1,5 @@
 import { useUserStore } from "../store/userStore"
+import Button from "./secondary/Button"
 
 export default function SwitchGuestUser() {
     const token:string = useUserStore((state) => state.token)
@@ -7,8 +8,8 @@ export default function SwitchGuestUser() {
         <>
         {!token ?
         <div className="flex flex-row gap-6">
-            <button className="bg-primary text-white text-lg font-bold px-6 py-2 rounded-md hover:bg-white hover:text-primary border-2 border-primary" onClick={() => location.href='/auth/login'}>Ingresar</button>
-            <button className="bg-white text-primary text-lg font-bold px-6 py-2 rounded-md hover:bg-primary hover:text-white border-2 border-primary" onClick={() => location.href='/auth/register'}>Registrarse</button>
+            <button className="w-fit p-2 transition-all duration-300 bg-white text-primary border-2 border-primary rounded-full text-xl font-bold hover:bg-primary hover:text-white hover:border-2" onClick={() => location.href='/auth/login'}>Ingresar</button>
+            <Button className="w-fit" onClick={() => location.href='/auth/register'}>Registrarse</Button>
         </div>
         :
         <>
