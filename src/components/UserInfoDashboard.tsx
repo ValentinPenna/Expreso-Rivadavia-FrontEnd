@@ -1,3 +1,4 @@
+import { FaEdit } from "react-icons/fa";
 import { useUserStore } from "../store/userStore";
 import type { User } from "../types/user";
 import { useState } from "react";
@@ -19,9 +20,10 @@ export default function UserInfoDashboard() {
         ) : (
           <button
             onClick={() => setEditionMode(!editionMode)}
-            className="bg-primary text-white text-lg font-bold px-6 py-2 rounded-md hover:bg-white hover:text-primary border-2 border-primary"
+            className=" flex items-center gap-2 bg-primary text-white text-lg font-bold px-6 py-2 rounded-md hover:bg-white hover:text-primary border-2 border-primary"
           >
             Editar
+            <FaEdit color="#fff" />
           </button>
         )}
       </div>
