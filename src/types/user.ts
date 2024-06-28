@@ -1,3 +1,5 @@
+import type { Orders } from "./shipments";
+
 export interface UserRegister {
     name: string;
     lastName: string;
@@ -28,13 +30,17 @@ export interface UserLogin {
 }
 
 export interface User {
+    id: string;
     name: string;
     lastName: string;
+    companyName: string;
     email: string;
     dni: string;
+    cuit_cuil: string;
     address: string;
     locality: string;
     role: string;
+    orders: Orders[];
 }
 
 export interface Company {

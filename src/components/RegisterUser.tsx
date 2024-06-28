@@ -4,6 +4,7 @@ import { Input } from './secondary/Input'
 import Button from './secondary/Button'
 import type { IRegisterUser } from './types/typesRegister'
 import validateUser from './validation/validateUser'
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 interface RegisterUserProps {
   handleBackToSelection: () => void;  
@@ -12,6 +13,11 @@ interface RegisterUserProps {
 
 const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
     const [registerUser, setRegisterUser]= useState(false)
+    const [password, setPassword]= useState(false)
+
+    const passwordVisibility = () => {
+      setPassword(!password);
+    };
 
 
   return (
@@ -36,14 +42,23 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
                 <h1 className="text-primary text-4xl font-bold ">Registrarse</h1>
                 <p>completa todos los campos para crear una cuenta</p>
               </div>
-              <div className='grid grid-cols-1 lg:grid-cols-2 items-center gap-x-20' >
+              <div className='grid grid-cols-1 lg:grid-cols-2 items-center gap-x-20 ' >
                 <Input label="Email" name="email" placeholder='xxxx@mail.com' error={errors.email} ></Input>
                 <Input label="DNI" name="dni" placeholder='44444444' error={errors.dni}></Input>
                 <Input label="Nombre" name="name" placeholder='Roberto' error={errors.name}></Input>
                 <Input label="Apellido" name="lastName" placeholder='Martinez' error={errors.lastName} ></Input>
                 <Input label="Dirección" name="address" placeholder='calle 123' error={errors.address}></Input>
-                <Input label="Localidad" name="locality" placeholder='Springfield' error={errors.locality}></Input>
-                <Input label="Contraseña" name="password" placeholder='*******' type="password" error={errors.password}></Input>
+                <Input label="Localidad" name="locality" placeholder='Springfield' error={errors.locality}></Input>  
+                <div className='relative'>
+                <Input label="Contraseña" name="password" placeholder='*******' type={password ? "password" : "text"} error={errors.password} ></Input>
+                <div onClick={passwordVisibility} className="absolute right-0 top-2/3 transform -translate-y-1/2 cursor-pointer">
+                {password ? (
+                      <AiFillEyeInvisible color="red" />
+                    ) : (
+                      <AiFillEye color="red" />
+                    )}
+                    </div>
+                    </div>  
                 <Input label="Confirmar contraseña" name="confirmPassword" placeholder='*******' type="password" error={errors.confirmPassword}></Input>
               </div>
               <div className="mt-10 mb-5 flex flex-col justify-center items-center">

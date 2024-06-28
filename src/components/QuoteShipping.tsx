@@ -28,7 +28,7 @@ export default function QuoteShipping() {
         }}
       >
         
-          <Form className="max-w-4xl mx-auto bg-white p-4 my-4 rounded-lg  border border-primary">
+          <Form className="max-w-4xl mx-auto bg-white p-4 my-4 rounded-lg  shadow-lg">
             <div>
               <h1 className="text-primary font-bold lg:text-5xl md:text-4xl text-2xl text-center">
                 Cotizar envío
@@ -73,7 +73,7 @@ export default function QuoteShipping() {
                     </svg>
                     Ciudad de destino:
                   </label>
-                  <Field as="select" id="destination" name="destination" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:outline-primary w-56">
+                  <Field as="select" id="destination" name="destination" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56">
                     <option value="chapanay">Chapanay</option>
                     <option value="ciudad de mendoza">Ciudad de Mendoza</option>
                     <option value="corralitos">Corralitos</option>
@@ -117,7 +117,7 @@ export default function QuoteShipping() {
                     <Field type="radio" id="size-mediano" name="size" value="mediano" />
                     <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Mediano</span>
-                    <span className="text-xs md:ml-0 text-primary">Máximo de 300cm / 25000 grs</span>
+                    <span className="text-sm md:ml-0 text-primary">Máximo de 300cm / 25000 grs</span>
                     </div>
                   </label>
                   <label htmlFor="size-grande" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
