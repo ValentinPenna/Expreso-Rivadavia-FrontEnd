@@ -1,8 +1,13 @@
 ---
 import SideMenu from "../../components/SideMenu"
+import UserSecurity from "../../components/UserSecurity"
 import Layout from "../../layouts/Layout.astro"
 ---
 
 <Layout title="Dashboard - Seguridad">
-    <SideMenu client:only />
+    <main class="flex  ">
+
+        <SideMenu client:only />
+        <UserSecurity client:only />
+    </main>
 </Layout>
