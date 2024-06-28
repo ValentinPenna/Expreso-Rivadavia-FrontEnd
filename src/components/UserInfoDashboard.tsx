@@ -34,8 +34,14 @@ export default function UserInfoDashboard() {
         )}
       </div>
       <div className="flex flex-col gap-16">
+        {user?.companyName && <div className="flex flex-row">
+          <div className="w-1/2 h-fit">
+            <h2 className="font-bold text-2xl text-primary">Nombre de la empresa:</h2>
+            <h3 className="font-normal text-xl">{user?.companyName}</h3>
+          </div>
+        </div>}
         <div className="flex flex-row">
-          <div className="w-1/2 h-fit  mb-6">
+          <div className="w-1/2 h-fit">
             <h2 className="font-bold text-2xl text-primary">Nombre:</h2>
             <h3 className="font-normal text-xl">{user?.name}</h3>
           </div>
@@ -49,12 +55,18 @@ export default function UserInfoDashboard() {
             <h2 className="font-bold text-2xl text-primary">Email:</h2>
             <h3 className="font-normal text-xl">{user?.email}</h3>
           </div>
+          {!user?.cuit_cuil ? (
           <div className="w-1/2 h-fit">
-            <h2 className="font-bold text-2xl text-primary">
-              Numero de Documento:
-            </h2>
+            <h2 className="font-bold text-2xl text-primary">Numero de Documento:</h2>
             <h3 className="font-normal text-xl">{user?.dni}</h3>
           </div>
+          ) : (
+          <div className="w-1/2 h-fit">
+            <h2 className="font-bold text-2xl text-primary">CUIT / CUIL:</h2>
+            <h3 className="font-normal text-xl">{user?.cuit_cuil}</h3>
+          </div>
+          )
+          }
         </div>
         <div className="flex flex-row">
           <div className="w-1/2 h-fit">
