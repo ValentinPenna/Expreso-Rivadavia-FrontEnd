@@ -7,8 +7,8 @@ import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout title="Preguntas Frecuentes">
-    <main>
-        <section class=" rounded-lg py-4 bg-white flex flex-col items-center m-6">
+    <main class="flex flex-col justify-center items-center">
+        <section class=" rounded-lg py-6 bg-white flex flex-col items-center m-10">
             <h1 class="text-4xl font-bold text-primary mb-4">Preguntas Frecuentes</h1>
             <Accordion client:idle category="Rastreo y envio" title="¿Cómo puedo rastrear mi paquete?" content="Puedes rastrear tu paquete ingresando el número de seguimiento en la sección de rastreo de nuestra aplicación. Recibirás actualizaciones en tiempo real sobre la ubicación y el estado de tu envío."/>
             <Accordion client:idle category="Rastreo y envio" title="¿Cuánto tiempo tarda en llegar mi envío?" content="El tiempo de entrega varía según el destino y el tipo de servicio seleccionado. Por lo general, los envíos nacionales tardan entre 1 y 3 días hábiles, mientras que los envíos internacionales pueden tardar de 5 a 10 días hábiles."/>
