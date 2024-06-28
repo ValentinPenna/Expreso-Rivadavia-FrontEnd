@@ -63,3 +63,21 @@ export interface LoginResponse {
     userId: string;
 }
 
+export interface RegisterResponse {
+    id: string;
+    name: string;
+    lastName: string;
+    companyName: string | null;
+    email: string;
+    dni: string | null;
+    cuit_cuil: string | null;
+    address: string;
+    locality: string;
+    role: string;
+}
+
+export interface LoginResponse {
+    message: string;
+    token: string;
+    userId: string;
+}

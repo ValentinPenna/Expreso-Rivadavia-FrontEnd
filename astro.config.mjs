@@ -7,4 +7,7 @@ import react from "@astrojs/react";
 export default defineConfig({
   integrations: [tailwind(), react()],
   output: "hybrid",
+  define: {
+    "import.meta.env.API_URL": JSON.stringify(process.env.API_URL),
+  }
 });

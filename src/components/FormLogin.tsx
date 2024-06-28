@@ -3,14 +3,14 @@ import { Formik, Form, ErrorMessage } from "formik";
 import { Input } from "./secondary/Input";
 import Button from "./secondary/Button";
 import { validateLogin } from "./validation/validateLogin";
-// import { useUserStore } from "../store/userStore";
-// import type { UserLogin } from "../types/user";
+import type { LoginResponse, UserLogin } from "../types/user";
+import { useUserStore } from "../store/userStore";
 
 const FormLogin = () => {
   const [login, setLogin] = useState(false);
-
-  // const setUser = useUserStore((state: any) => state.setUser);
-
+  const getUser = useUserStore((state: any) => state.getUser);
+  const loginUser = useUserStore((state: any) => state.loginUser);
+  
   return (
     <div>
       <Formik
@@ -18,17 +18,24 @@ const FormLogin = () => {
           email: "",
           password: "",
         }}
-        onSubmit={(values: any, { resetForm }) => {
-          resetForm();
-          setLogin(true);
-          console.log(values);
-
-          // setUser(values);
+        onSubmit={async (values: UserLogin, { resetForm }) => {
+          await loginUser(values)
+          .then((data: LoginResponse) => {
+            getUser(data.userId)
+            .then(() => {
+              setLogin(true);
+              // window.location.href = "/";
+              console.log(data);
+            })
+            
+            // resetForm();
+          })
+          .catch((error:any) => console.log(error));
         }}
         validate={validateLogin}
       >
         {({ errors }) => (
-          <Form className=" w-lg flex flex-col bg-white p-6 items-center rounded-lg  shadow-lg">
+          <Form className=" w-lg flex flex-col bg-white p-6 items-center rounded-lg  shadow-lg my-20">
             <div>
               <h1 className="text-primary text-4xl font-bold text-center">
                 Iniciar Sesión

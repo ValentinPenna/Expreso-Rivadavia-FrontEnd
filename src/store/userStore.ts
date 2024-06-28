@@ -1,5 +1,6 @@
 import {create} from "zustand";
-import type { User } from "../types/user";
+import type { CompanyRegister, LoginResponse, RegisterResponse, User, UserLogin, UserRegister } from "../types/user";
+const apiUrl = import.meta.env.PUBLIC_API_URL
 
 const userMock: User = {
     id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
@@ -97,15 +98,81 @@ const userMock: User = {
 interface State {
     user: User | null;
     token: string;
-    setUser: (user: User) => void;
-    setToken: (token: string) => void;
+    setUser: () => void;
+    setToken: () => void;
     removeSession: () => void;
+    getUser: (id: string) => Promise<void>;
+    loginUser: (user: UserLogin) => Promise<LoginResponse | void>;
+    userRegister: (user: UserRegister | CompanyRegister) => Promise<RegisterResponse>;
 }
 
 export const useUserStore = create<State>((set, get) => ({
-    user: userMock,
+    user: null,
     token: "",
-    setUser: (user: User) => set({ user }),
-    setToken: (token: string) => set({ token }),
-    removeSession: () => set({ user: null, token: "" }),
+    setUser: () => {
+      const userLocalStorage = JSON.parse(localStorage.getItem("user")!);
+      set({ user: userLocalStorage });
+    },
+    setToken: () => {
+      const tokenLocalStorage = localStorage.getItem("token")!;
+      set({ token: tokenLocalStorage });
+    },
+    getUser: async (id: string) => {
+      try {
+        const response = await fetch(`${apiUrl}/users/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${localStorage.getItem("token") || get().token}`,
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+        localStorage.setItem("user", JSON.stringify(data));
+        // set({ user: data });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    loginUser: async (user: UserLogin): Promise<LoginResponse | void> => {
+      try {
+        const response = await fetch(`${apiUrl}/auth/signin`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        });
+        const data: LoginResponse = await response.json();
+        if (data.token) {
+            localStorage.setItem("token", data.token);
+            return data;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+        
+    },
+    userRegister: async (user: UserRegister | CompanyRegister) => {
+      try {
+        console.log(user);
+        const response = await fetch(`${apiUrl}/auth/signup`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        });
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+        
+    },
+    removeSession: () => {
+      set({ user: null, token: "" })
+      localStorage.removeItem("token")
+      localStorage.removeItem("user")
+    }
 }))

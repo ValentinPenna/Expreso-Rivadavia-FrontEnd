@@ -1,9 +1,15 @@
+import { useEffect } from "react"
 import { useUserStore } from "../store/userStore"
 import Button from "./secondary/Button"
 
 export default function SwitchGuestUser() {
     const token:string = useUserStore((state) => state.token)
-    
+    const {setUser, setToken} = useUserStore((state) => state)
+    useEffect(() => {
+        setUser()
+        setToken()
+        console.log("prueba")
+    }, [])
     return (
         <>
         {!token ?
