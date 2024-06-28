@@ -35,7 +35,7 @@ export const Input: React.FC<InputProps> = ({
       />
       <ErrorMessage
         name={name}
-        component={() => <div className="text-primary">{error}</div>}
+        component={() => <div className="text-primary text-sm">{error}</div>}
       />
     </div>
   );

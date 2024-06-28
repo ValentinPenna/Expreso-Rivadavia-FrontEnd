@@ -43,3 +43,15 @@ export interface IRegisterUser {
     password?: string,
     confirmPassword?: string,
   }
+
+  export interface IShipment {
+    locality_origin: string,
+    locality_destination:string,
+    size:string,
+    address_origin: string,
+    address_destination: string,
+  }
+  export interface IShipmentErrors {
+    address_origin?: string,
+    address_destination?: string,
+  }
