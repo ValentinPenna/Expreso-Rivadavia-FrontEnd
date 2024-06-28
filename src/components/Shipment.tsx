@@ -1,17 +1,9 @@
-import { useState } from "react";
-import { Formik, Form, Field } from "formik";
+import { Field, Form, Formik } from 'formik';
+import React from 'react'
+import Button from './secondary/Button';
+import { Input } from './secondary/Input';
 
-import Button from "./secondary/Button";
-
-export interface Quote {
-  origin: string;
-  destination: string;
-  size: string;
-}
-
-export default function QuoteShipping() {
-  const [quote, setQuote] = useState(false);
-
+const Shipment = () => {
   return (
     <div className="px-4 md:px-8 z-50">
       <Formik
@@ -22,16 +14,16 @@ export default function QuoteShipping() {
           
         }}
         
-        onSubmit={(values: Quote, { resetForm }) => {
+        onSubmit={(values, { resetForm }) => {
           resetForm();
-          setQuote(true);
+          
         }}
       >
         
-          <Form className="max-w-4xl mx-auto bg-white p-4 my-4 rounded-lg  shadow-lg">
+          <Form className="max-w-4xl mx-auto bg-white p-4 my-4 rounded-lg shadow-lg">
             <div>
               <h1 className="text-primary font-bold lg:text-5xl md:text-4xl text-2xl text-center">
-                Cotizar envío
+                Realizar envío
               </h1>
             </div>
             <div className="text-xl lg:text-2xl m-10">
@@ -65,6 +57,7 @@ export default function QuoteShipping() {
                     <option value="rodeo del medio">Rodeo del Medio</option>
                     <option value="tres porteñas">Tres Porteñas</option>
                   </Field>
+                  <Input label="Dirección de origen" name="addressorigin" placeholder='calle 123' ></Input>
                 </div>
                 <div>
                   <label htmlFor="destination" className="flex items-center space-x-2 text-primary">
@@ -95,6 +88,7 @@ export default function QuoteShipping() {
                     <option value="rodeo del medio">Rodeo del Medio</option>
                     <option value="tres porteñas">Tres Porteñas</option>
                   </Field>
+                  <Input label="Dirección de destino" name="addressdestination" placeholder='calle 123' ></Input>
                 </div>
               </div>
               <div className="flex flex-col items-center mt-5">
@@ -131,7 +125,7 @@ export default function QuoteShipping() {
               </div>
               <div className="mt-10 mb-5 flex justify-center">
                 <Button type="submit">
-                  COTIZAR
+                  CREAR ENVIO
                 </Button>
               </div>
             </div>
@@ -140,5 +134,7 @@ export default function QuoteShipping() {
      
       </Formik>
     </div>
-  );
+  )
 }
+
+export default Shipment

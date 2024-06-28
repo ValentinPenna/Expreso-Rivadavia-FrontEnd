@@ -4,6 +4,7 @@ import { Input } from './secondary/Input'
 import Button from './secondary/Button'
 import type { IRegisterCompany, IRegisterUser } from './types/typesRegister'
 import validateCompany from './validation/validateCompany'
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 interface RegisterCompanyProps {
   handleBackToSelection: () => void;  
@@ -11,6 +12,12 @@ interface RegisterCompanyProps {
 
 const RegisterCompany: React.FC<RegisterCompanyProps> =({ handleBackToSelection }) => {
     const [registerCompany, setRegisterCompany]= useState(false)
+    const [password, setPassword]= useState(false)
+
+    const passwordVisibility = () => {
+      setPassword(!password);
+    };
+
 
 
   return (
@@ -43,7 +50,16 @@ const RegisterCompany: React.FC<RegisterCompanyProps> =({ handleBackToSelection 
                 <Input label="Nombre" name="name" placeholder='Roberto' error={errors.name}></Input>
                 <Input label="Apellido" name="lastName" placeholder='Martinez'error={errors.lastName} ></Input>
                 <Input label="Dirección" name="address" placeholder='calle 123' error={errors.address}></Input>
+                <div className='relative'>
                 <Input label="Contraseña" name="password" placeholder='*******' type="password" error={errors.password}></Input>
+                <div onClick={passwordVisibility} className="absolute right-0 top-2/3 transform -translate-y-1/2 cursor-pointer">
+                {password ? (
+                      <AiFillEyeInvisible color="red" />
+                    ) : (
+                      <AiFillEye color="red" />
+                    )}
+                    </div>
+                    </div>
                 <Input label="Confirmar contraseña" name="confirmPassword" placeholder='*******' type="password" error={errors.confirmPassword}></Input>
               </div>
               <div className="mt-10 mb-5 flex flex-col justify-center items-center">
