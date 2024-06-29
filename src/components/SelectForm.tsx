@@ -30,12 +30,13 @@ const SelectForm: React.FC = () => {
                 
             <Button onClick={()=>setSelectForm('company')} className='m-8 mt-16'>Registrarse como empresa </Button>
             </div>
+            <div className='text-3xl m-10 text-center bg-white p-10 rounded-lg shadow-lg col-span-1 lg:col-span-2'> 
+              <span className='m-5'>Ya tienes cuenta?<a href='/auth/login' className='text-primary font-bold'> Inicia sesión</a></span></div>
           </div>
       )}
       {selectForm === 'user' && <RegisterUser handleBackToSelection={handleBackToSelection} />}
       {selectForm === 'company' && <RegisterCompany handleBackToSelection={handleBackToSelection}/>}
-            <div className='text-3xl m-10 text-center bg-white p-10 rounded-lg shadow-lg'> 
-              <span className='m-5'>Ya tienes cuenta?<a href='/auth/login' className='text-primary hover:font-bold'> Inicia sesión</a></span></div>
+            
             </div>
     
   )

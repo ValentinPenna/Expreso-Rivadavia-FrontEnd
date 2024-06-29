@@ -20,7 +20,8 @@ export const validateLogin = (values: ILogin): ILoginError => {
   }else if (values.email.length < 50) {
     errors.email = "El correo no puede tener más de 50 caracteres";
   }
-   else if (!values.password) {
+   
+  if (!values.password) {
     errors.password = "La contraseña es requerida";
   }
   return errors;
