@@ -24,8 +24,8 @@ const FormLogin = () => {
             getUser(data.userId)
             .then(() => {
               setLogin(true);
-              // window.location.href = "/";
-              console.log(data);
+              window.location.href = "/";
+              // console.log(data);
             })
             
             // resetForm();
