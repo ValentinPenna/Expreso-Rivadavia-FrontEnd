@@ -8,7 +8,6 @@ export default function SwitchGuestUser() {
     useEffect(() => {
         setUser()
         setToken()
-        console.log("prueba")
     }, [])
     return (
         <>
