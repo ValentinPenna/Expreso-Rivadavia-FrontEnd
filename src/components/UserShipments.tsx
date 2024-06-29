@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUserStore } from "../store/userStore";
 import type { Orders } from "../types/shipments";
+import HistoryShipment from "./HistoryShipment";
 
 export default function UserShipments() {
     const user = useUserStore((state) => state.user)
@@ -50,7 +51,7 @@ export default function UserShipments() {
 
     return (
         <div className="w-full my-4 bg-white px-24 pb-24 pt-20 rounded-l-lg flex flex-col max-w-[80%] gap-2">
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-row justify-between">
                 <h1 className="font-bold text-4xl text-primary">Historial de Envios</h1>
                 <div className="flex flex-row gap-4 justify-end">
                     <div className="flex flex-col items-start ">
@@ -84,21 +85,12 @@ export default function UserShipments() {
                     </select>
                 </div>
             </div>
-            <div className="flex flex-row font-bold p-4 rounded-lg justify-between items-center">
-                <h3>Fecha</h3>
-                <h3>Precio</h3>
-                <h3>Estado de<br/>la orden</h3>
-            </div>
             <div className="flex flex-col gap-4">
-                {orders ? orders.map((order, i) => (
-                    <div className="flex flex-row bg-primary text-white p-4 rounded-lg justify-between" key={i}>
-                        <h3>{new Date(order.date).toLocaleDateString()}</h3>
-                        <h3>${order.final_price}</h3>
-                        <h3>{(order.status).toUpperCase()}</h3>
-                    </div>
-                    )) : (
-                        <div className="flex flex-row bg-primary text-white p-4 rounded-lg justify-between">
-                            <h3 className="text-center font-bold">No hay ordenes</h3>
+                {orders ? (
+                    <HistoryShipment orders={orders} />
+                ) : (
+                        <div className="flex flex-row text-black pt-12 w-full justify-center">
+                            <h3 className=" text-2xl font-bold">No hay ordenes</h3>
                         </div>
                     )
                 }
