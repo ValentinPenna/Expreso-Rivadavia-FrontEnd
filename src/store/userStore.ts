@@ -15,7 +15,7 @@ const userMock: User = {
         role: "user",
         orders: [
             {
-                id: "string",
+                id: "string1",
                 user: {
                   id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
                   email: "user@example.com",
@@ -49,12 +49,12 @@ const userMock: User = {
                   orders: "string",
                   link: "string"
                 },
-                date: "2024-06-27T22:30:46.427Z",
+                date: "2024-06-30T22:30:46.427Z",
                 final_price: 0,
-                status: "Entregada"
+                status: "delivered"
               },
               {
-                id: "string",
+                id: "string2",
                 user: {
                   id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
                   email: "user@example.com",
@@ -90,13 +90,130 @@ const userMock: User = {
                 },
                 date: "2024-06-27T22:30:46.427Z",
                 final_price: 0,
-                status: "Entregada"
+                status: "delivered"
+              },
+              {
+                id: "string3",
+                user: {
+                  id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
+                  email: "user@example.com",
+                  name: "Pedro",
+                  lastName: "Gomez",
+                  companyName: "Gucci",
+                  dni: "12345678",
+                  cuit_cuil: "20304050607",
+                  address: "string",
+                  locality: "string",
+                  role: "user",
+                  orders: [
+                    
+                  ],
+                },
+                shipments: {
+                  id: "706becbe-9521-43be-a8ab-1938210ad078",
+                  orders: "string",
+                  locality_origin: "Rivadavia",
+                  locality_destination: "San Martín",
+                  address_origin: "string",
+                  address_destination: "string",
+                  shipment_price: 4000
+                },
+                packages: [
+                  "string"
+                ],
+                receipt: {
+                  id: "string",
+                  user: "string",
+                  orders: "string",
+                  link: "string"
+                },
+                date: "2024-06-29T22:30:46.427Z",
+                final_price: 0,
+                status: "delivered"
+              },
+              {
+                id: "string4",
+                user: {
+                  id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
+                  email: "user@example.com",
+                  name: "Pedro",
+                  lastName: "Gomez",
+                  companyName: "Gucci",
+                  dni: "12345678",
+                  cuit_cuil: "20304050607",
+                  address: "string",
+                  locality: "string",
+                  role: "user",
+                  orders: [
+                    
+                  ],
+                },
+                shipments: {
+                  id: "706becbe-9521-43be-a8ab-1938210ad078",
+                  orders: "string",
+                  locality_origin: "Rivadavia",
+                  locality_destination: "San Martín",
+                  address_origin: "string",
+                  address_destination: "string",
+                  shipment_price: 4000
+                },
+                packages: [
+                  "string"
+                ],
+                receipt: {
+                  id: "string",
+                  user: "string",
+                  orders: "string",
+                  link: "string"
+                },
+                date: "2024-06-29T22:30:46.427Z",
+                final_price: 0,
+                status: "sending"
+              },
+              {
+                id: "string5",
+                user: {
+                  id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
+                  email: "user@example.com",
+                  name: "Pedro",
+                  lastName: "Gomez",
+                  companyName: "Gucci",
+                  dni: "12345678",
+                  cuit_cuil: "20304050607",
+                  address: "string",
+                  locality: "string",
+                  role: "user",
+                  orders: [
+                    
+                  ],
+                },
+                shipments: {
+                  id: "706becbe-9521-43be-a8ab-1938210ad078",
+                  orders: "string",
+                  locality_origin: "Rivadavia",
+                  locality_destination: "San Martín",
+                  address_origin: "string",
+                  address_destination: "string",
+                  shipment_price: 4000
+                },
+                packages: [
+                  "string"
+                ],
+                receipt: {
+                  id: "string",
+                  user: "string",
+                  orders: "string",
+                  link: "string"
+                },
+                date: "2024-06-25T22:30:46.427Z",
+                final_price: 0,
+                status: "sending"
               }
         ]
 }
 
 interface State {
-    user: User | null;
+    user: User;
     token: string;
     setUser: () => void;
     setToken: () => void;
@@ -107,7 +224,7 @@ interface State {
 }
 
 export const useUserStore = create<State>((set, get) => ({
-    user: null,
+    user: userMock,
     token: "",
     setUser: () => {
       const userLocalStorage = JSON.parse(localStorage.getItem("user")!);
@@ -171,7 +288,7 @@ export const useUserStore = create<State>((set, get) => ({
         
     },
     removeSession: () => {
-      set({ user: null, token: "" })
+      // set({ user: null, token: "" })
       localStorage.removeItem("token")
       localStorage.removeItem("user")
     }

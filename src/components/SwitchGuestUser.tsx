@@ -8,14 +8,13 @@ export default function SwitchGuestUser() {
     useEffect(() => {
         setUser()
         setToken()
-        console.log("prueba")
     }, [])
     return (
         <>
         {!token ?(
         <div className="flex flex-row gap-6">
-            <button className="w-fit p-2 transition-all duration-300 bg-white text-primary border-2 border-primary rounded-full text-xl font-bold hover:bg-primary hover:text-white hover:border-2" onClick={() => location.href='/auth/login'}>Ingresar</button>
-            <Button className="w-fit" onClick={() => location.href='/auth/register'}>Registrarse</Button>
+            
+            <Button className="w-fit mx-10 px-4" onClick={() => location.href='/auth/register'}>INGRESAR</Button>
         </div>
       ) : (
         <>

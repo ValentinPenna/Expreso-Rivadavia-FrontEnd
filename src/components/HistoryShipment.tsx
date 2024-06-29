@@ -14,7 +14,7 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
   }
   }
   return (
-    <div className="w-full my-4 px-24 pb-24 pt-20 flex flex-col max-w-[80%] gap-2 ">
+    <div className="w-full my-4 pt-10 flex flex-col gap-2 ">
       <h1 className="text-primary text-4xl font-bold text-center">Ordenes</h1>
      {orders.map ((order: Orders)=> (
       <div key={order.id} className="bg-white shadow-lg p-6 rounded-lg relative">  
@@ -55,7 +55,7 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
             <div className="ml-8 mt-2 text-xl ">
               <p>
                  Estado de la orden:
-                <span className='text-primary'> {order.status}</span>
+                <span className='text-primary'> {(order.status).toUpperCase()}</span>
                 </p>
               <p>Paquetes:
                 <span className='text-primary'> {order.packages.join(', ')}</span>

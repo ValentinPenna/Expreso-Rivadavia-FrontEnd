@@ -8,11 +8,11 @@ export default function SideMenu() {
   const [isFocused, setIsFocused] = useState<boolean>(true);
 
   return (
-    <aside className="relative max-w-fit">
+    <aside className="relative w-[20%] pr-4 pb-8">
       <nav
         className={`${
-          isFocused ? " w-40 lg:w-60 pr-4 " : "w-12"
-        } duration-300 relative transition-all overflow-hidden tran  flex flex-col  gap-10 items-center bg-white my-4 mr-4 rounded-r-lg  py-4 min-h-[79dvh]`}
+          isFocused ? " w-40 lg:w-full pr-4 " : "w-12 pr:4"
+        } duration-300 relative transition-all overflow-hidden flex flex-col gap-10 items-center bg-white my-4 rounded-r-lg py-4 min-h-[79dvh] h-full`}
       >
         <button
           className="absolute right-4 lg:hidden "
@@ -38,7 +38,7 @@ export default function SideMenu() {
                   href="/dashboard"
                   className={`${
                     isFocused ? "block" : "hidden"
-                  } font-bold text-sm pl-3`}
+                  } font-bold text-lg pl-3`}
                 >
                   Información del Usuario
                 </a>
@@ -53,7 +53,7 @@ export default function SideMenu() {
                   href="/dashboard"
                   className={`${
                     isFocused ? "block" : "hidden"
-                  } font-normal text-sm pl-1`}
+                  } font-normal text-lg pl-1`}
                 >
                   Información del Usuario
                 </a>
@@ -70,7 +70,7 @@ export default function SideMenu() {
                   href="/dashboard/shipments"
                   className={`${
                     isFocused ? "block" : "hidden"
-                  } font-bold text-sm pl-3`}
+                  } font-bold text-lg pl-3`}
                 >
                   Historial de envios
                 </a>
@@ -84,7 +84,7 @@ export default function SideMenu() {
                   href="/dashboard/shipments"
                   className={`${
                     isFocused ? "block" : "hidden"
-                  } font-normal text-sm pl-1`}
+                  } font-normal text-lg pl-1`}
                 >
                   Historial de envios
                 </a>
@@ -101,7 +101,7 @@ export default function SideMenu() {
                   href="/dashboard/security"
                   className={`${
                     isFocused ? "block" : "hidden"
-                  } font-bold text-xs pl-3`}
+                  } font-bold text-lg pl-3`}
                 >
                   Seguridad
                 </a>
@@ -115,7 +115,7 @@ export default function SideMenu() {
                   href="/dashboard/security"
                   className={`${
                     isFocused ? "block" : "hidden"
-                  } font-normal text-sm pl-1`}
+                  } font-normal text-lg pl-1`}
                 >
                   Seguridad
                 </a>
