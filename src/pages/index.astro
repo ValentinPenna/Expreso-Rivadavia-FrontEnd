@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import QuoteShipping from '../components/QuoteShipping'
 import MapSection from '../components/MapSection.astro';
+import OrdersShipment from '../components/OrdersShipment'
+
 ---
 
 <Layout title="Expreso Rivadavia">
@@ -13,6 +15,8 @@ import MapSection from '../components/MapSection.astro';
 		<div class="flex justify-center">
 			<MapSection/>
 		</div>
+		<OrdersShipment client:visible />
+		
 	</main>
 </Layout>
 
