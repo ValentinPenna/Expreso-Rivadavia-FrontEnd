@@ -1,124 +1,115 @@
 ---
+import { FaLinkedin, FaRegCircleCheck } from "react-icons/fa6"
 import Layout from "../layouts/Layout.astro"
 
 ---
 
 <Layout title="about">
-    <div class="flex flex-col lg:flex-row m-10">
+  <section title="About-us" class="flex flex-col  px-32">
+    <section>
+      <article class=" my-5 flex flex-col lg:flex-row lg:m-10">
         <img class="w-full lg:w-1/2 rounded-xl" src="https://images.pexels.com/photos/6868621/pexels-photo-6868621.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image">
         <div class="flex flex-col m-10">
-          <h1 class="text-primary text-4xl lg:text-6xl font-bold">¿Por qué lo hacemos?</h1>
-          <h3 class="text-xl lg:text-2xl mt-4 text-justify">En Expreso Rivadavia, creemos en la importancia de conectar a las personas y negocios a través de un servicio de envíos rápido y confiable. Nos apasiona facilitar el intercambio de bienes y productos, apoyando el crecimiento y la prosperidad de nuestra comunidad en Mendoza.</h3>
+          <h1 class="text-primary text-3xl lg:text-4xl font-bold">¿Por qué lo hacemos?</h1>
+          <h3 class="text-xl lg:text-xl mt-4 text-justify">En Expreso Rivadavia, creemos en la importancia de conectar a las personas y negocios a través de un servicio de envíos rápido y confiable. Nos apasiona facilitar el intercambio de bienes y productos, apoyando el crecimiento y la prosperidad de nuestra comunidad en Mendoza.</h3>
         </div>
-      </div>
-      
-      <div class="flex flex-col lg:flex-row m-10">
+      </article>
+    </section>
+
+    <section>
+      <article class=" my-5 flex flex-col-reverse lg:flex-row lg:m-10">
         <div class="flex flex-col m-10">
-          <h1 class="text-primary text-4xl lg:text-6xl font-bold">¿Cómo lo hacemos?</h1>
-          <h3 class="text-xl lg:text-2xl mt-4 text-justify">Nuestro compromiso es ofrecer un servicio eficiente y seguro, utilizando tecnología avanzada y un equipo dedicado. Nos aseguramos de que cada paquete llegue a su destino en perfectas condiciones y en el menor tiempo posible. Cotizamos tu envio según el origen y el destino que eligas!</h3>
+          <h1 class="text-primary text-3xl lg:text-4xl font-bold">¿Cómo lo hacemos?</h1>
+          <h3 class="text-xl lg:text-xl mt-4 text-justify">Nuestro compromiso es ofrecer un servicio eficiente y seguro, utilizando tecnología avanzada y un equipo dedicado. Nos aseguramos de que cada paquete llegue a su destino en perfectas condiciones y en el menor tiempo posible. Cotizamos tu envio según el origen y el destino que eligas!</h3>
         </div>
         <img class="w-full lg:w-1/2 rounded-xl" src="https://images.pexels.com/photos/6868618/pexels-photo-6868618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image">
-      </div>
-      
-      <div class="bg-white m-10 p-10 rounded-xl">
-        <h1 class="text-primary text-4xl lg:text-6xl font-bold text-center mb-10">Nuestros valores</h1>
-        <div class="flex flex-col lg:flex-row gap-10">
-          <div class="flex flex-col items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 1024 1024" class="mb-10">
-              <path fill="#949494" d="M512 0C229.232 0 0 229.232 0 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512C1024 229.232 794.784 0 512 0m0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01m204.336-636.352L415.935 626.944l-135.28-135.28c-12.496-12.496-32.752-12.496-45.264 0c-12.496 12.496-12.496 32.752 0 45.248l158.384 158.4c12.496 12.48 32.752 12.48 45.264 0c1.44-1.44 2.673-3.009 3.793-4.64l318.784-320.753c12.48-12.496 12.48-32.752 0-45.263c-12.512-12.496-32.768-12.496-45.28 0"/>
-            </svg>
-            <h1 class="text-primary text-2xl lg:text-4xl font-bold text-center mb-5">Responsabilidad</h1>
-            <section class="text-lg lg:text-xl text-center">Cumplimos con nuestras promesas y nos hacemos responsables de cada envío.</section>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 1024 1024" class="mb-10">
-              <path fill="#CB1B1A" d="M512 0C229.232 0 0 229.232 0 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512C1024 229.232 794.784 0 512 0m0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01m204.336-636.352L415.935 626.944l-135.28-135.28c-12.496-12.496-32.752-12.496-45.264 0c-12.496 12.496-12.496 32.752 0 45.248l158.384 158.4c12.496 12.48 32.752 12.48 45.264 0c1.44-1.44 2.673-3.009 3.793-4.64l318.784-320.753c12.48-12.496 12.48-32.752 0-45.263c-12.512-12.496-32.768-12.496-45.28 0"/>
-            </svg>
-            <h1 class="text-primary text-2xl lg:text-4xl font-bold text-center mb-5">Confianza</h1>
-            <section class="text-lg lg:text-xl text-center">Establecemos relaciones de confianza con nuestros clientes, basadas en la transparencia y el respeto.</section>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 1024 1024" class="mb-10">
-              <path fill="#000000" d="M512 0C229.232 0 0 229.232 0 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512C1024 229.232 794.784 0 512 0m0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01m204.336-636.352L415.935 626.944l-135.28-135.28c-12.496-12.496-32.752-12.496-45.264 0c-12.496 12.496-12.496 32.752 0 45.248l158.384 158.4c12.496 12.48 32.752 12.48 45.264 0c1.44-1.44 2.673-3.009 3.793-4.64l318.784-320.753c12.48-12.496 12.48-32.752 0-45.263c-12.512-12.496-32.768-12.496-45.28 0"/>
-            </svg>
-            <h1 class="text-primary text-2xl lg:text-4xl font-bold text-center mb-5">Compromiso</h1>
-            <section class="text-lg lg:text-xl text-center">Estamos comprometidos con la satisfacción de nuestros clientes y el bienestar de nuestra comunidad.</section>
-          </div>
-        </div>
-      </div>
-      
-      <div class="m-20">
-        <div class="flex flex-col items-center justify-center">
-          <h1 class="text-primary text-4xl lg:text-6xl font-bold text-center">Nuestro equipo</h1>
-          <svg xmlns="http://www.w3.org/2000/svg" width="150" height="160" viewBox="0 0 24 24" ><g fill="none" fill-rule="evenodd">
-            <path d="M24 0v24H0V0zM12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036c-.01-.003-.019 0-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"/><path fill="#CB1B1A" d="M12 12c1.873 0 3.57.62 4.815 1.487c1.183.825 2.185 2.051 2.185 3.37c0 .724-.309 1.324-.796 1.77c-.458.421-1.056.694-1.672.88C15.301 19.88 13.68 20 12 20c-1.68 0-3.301-.12-4.532-.493c-.616-.186-1.214-.459-1.673-.88C5.31 18.182 5 17.582 5 16.858c0-1.319 1.002-2.545 2.185-3.37C8.43 12.62 10.127 12 12 12m0 2c-1.44 0-2.743.48-3.67 1.127c-.989.69-1.33 1.392-1.33 1.73c0 .304.352.494.672.614l.205.07l.17.052c.94.284 2.32.407 3.953.407c1.508 0 2.799-.105 3.728-.344l.304-.087l.19-.06c.343-.117.778-.314.778-.652s-.341-1.04-1.33-1.73C14.744 14.481 13.44 14 12 14m7-1c1.044 0 1.992.345 2.693.833c.64.447 1.307 1.19 1.307 2.096c0 1.335-1.297 1.813-2.463 1.98l-.3.037l-.289.025a9.535 9.535 0 0 1-.138.008c.122-.345.19-.72.19-1.122a3.78 3.78 0 0 0-.107-.888c.386-.03.703-.08.939-.151c.104-.032.01-.13-.1-.215l-.107-.078l-.076-.051a2.698 2.698 0 0 0-.995-.418c-.38-.76-.964-1.418-1.586-1.943A4.78 4.78 0 0 1 19 13M5 13c.357 0 .703.04 1.032.113c-.622.525-1.206 1.183-1.586 1.943a2.701 2.701 0 0 0-.995.418l-.128.088c-.127.092-.276.22-.155.256c.236.071.553.122.94.151a3.73 3.73 0 0 0-.108.888c0 .402.068.777.19 1.122l-.28-.02l-.296-.03c-1.202-.147-2.614-.607-2.614-2c0-.905.666-1.649 1.307-2.096A4.756 4.756 0 0 1 5 13m13.5-6a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5m-13 0a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5M12 3a4 4 0 1 1 0 8a4 4 0 0 1 0-8m6.5 6a.5.5 0 1 0 0 1a.5.5 0 0 0 0-1m-13 0a.5.5 0 1 0 0 1a.5.5 0 0 0 0-1M12 5a2 2 0 1 0 0 4a2 2 0 0 0 0-4"/></g></svg>
-            <g fill="none" fill-rule="evenodd">
-              <path d="M24 0v24H0V0zM12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036c-.01-.003-.019 0-.029-.004a1.248 1.248 0 0 0-.035-.015c-.075-.033-.157-.072-.232-.115a10.695 10.695 0 0 1-.49-.288c-.333-.2-.66-.43-.982-.685a14.204 14.204 0 0 1-1.556-1.457c-1.14-1.206-2.207-2.791-2.89-4.811c-1.293-3.785-.324-6.966 1.793-9.282c.796-.882 1.783-1.594 2.926-2.065a6.93 6.93 0 0 1 1.152-.368c.263-.06.537-.109.832-.133c.096-.008.188-.023.285-.028a5.636 5.636 0 0 1 .203 0c.078 0 .155-.01.233-.01h.106c.078 0 .155.01.233.01c.07 0 .14-.009.203 0c.096.005.188.02.285.028c.295.024.569.073.832.133c.394.1.78.241 1.152.368c1.143.471 2.13 1.183 2.926 2.065c2.117 2.316 3.086 5.497 1.793 9.282c-.683 2.02-1.65 3.605-2.89 4.811a14.204 14.204 0 0 1-1.556 1.457a11.77 11.77 0 0 1-1.472.973c-.184.107-.362.218-.543.316c-.078.044-.159.083-.232.115a1.248 1.248 0 0 0-.035.015c-.01.004-.02.001-.03.004z" fill="#DE0045"></path>
-              <path fill="#FFF" d="M14.277 12.52c.057 0 .105.016.155.023c.188.026.371.057.553.1c.077.018.15.044.224.066c.154.048.297.107.434.18a2.499 2.499 0 0 1 1.047.975c.078.127.144.26.2.397a2.85 2.85 0 0 1 .176.692a3.23 3.23 0 0 1-.036.823a2.4 2.4 0 0 1-.323.84c-.095.162-.2.317-.323.459c-.124.143-.263.272-.42.376a1.18 1.18 0 0 1-.385.173c-.132.033-.263.062-.396.079c-.134.017-.267.03-.4.036a10.11 10.11 0 0 1-.802.003c-.193-.007-.387-.017-.58-.031c-.187-.016-.373-.039-.559-.065c-.187-.028-.375-.057-.563-.093c-.15-.03-.3-.073-.45-.11c-.169-.043-.336-.093-.5-.156c-.223-.084-.443-.183-.657-.3c-.146-.081-.287-.175-.424-.281c-.121-.094-.239-.194-.35-.308c-.113-.116-.21-.247-.298-.387c-.085-.136-.155-.281-.215-.432a2.37 2.37 0 0 1-.134-.58a2.08 2.08 0 0 1-.018-.555a2.5 2.5 0 0 1 .155-.592c.042-.113.09-.226.147-.334c.084-.16.187-.31.301-.452c.11-.135.23-.263.363-.375a2.51 2.51 0 0 1 .45-.3c.08-.04.158-.091.24-.127c.143-.066.291-.12.44-.167c.185-.058.373-.108.562-.15c.169-.037.34-.071.51-.102c.17-.031.34-.059.51-.085c.16-.023.321-.043.48-.058c.107-.01.213-.025.32-.032c.053-.005.104-.01.155-.01zm-4.722-5.519a2.5 2.5 0 0 1 2.5-2.5a2.5 2.5 0 1 1-2.5 2.5z"></path>
-              <path fill="#FFF" d="M14.277 12.52c-.05 0-.102.005-.155.01a1.236 1.236 0 0 1-.319.032c-.16.015-.321.035-.48.058c-.17.026-.34.054-.51.085c-.17.03-.34.065-.51.102c-.189.041-.377.091-.562.15c-.149.046-.297.101-.44.167c-.082.037-.16.088-.24.127c-.157.107-.307.214-.45.3c-.133.112-.253.24-.363.375c-.114.142-.217.292-.301.452c-.057.108-.105.221-.147.334c-.057.17-.106.347-.155.592a2.08 2.08 0 0 0 .018.555c.03.197.08.39.134.58c.06.151.13.296.215.432c.088.14.185.271.298.387c.111.114.229.214.35.308c.137.106.278.2.424.281c.214.117.434.216.657.3c.164.063.331.113.5.156c.15.037.3.08.45.11c.188.036.376.065.563.093c.186.026.372.049.559.065c.193.014.387.024.58.031c.265.01.532.006.802-.003c.133-.006.266-.02.4-.036c.133-.017.264-.046.396-.079c.14-.036.268-.09.385-.173c.156-.104.295-.233.42-.376c.123-.142.228-.297.323-.459a2.4 2.4 0 0 0 .323-.84a3.23 3.23 0 0 0 .036-.823a2.85 2.85 0 0 0-.176-.692a2.37 2.37 0 0 0-.2-.397a2.499 2.499 0 0 0-1.047-.975a4.89 4.89 0 0 0-.434-.18a4.984 4.984 0 0 0-.224-.066c-.182-.043-.365-.074-.553-.1a1.293 1.293 0 0 0-.155-.023zM12.055 4.5a2.5 2.5 0 1 0 0 5a2.5 2.5 0 0 0 0-5z"></path>
-              <path fill="#DE0045" fill-rule="nonzero" d="M12.01 23.2l.038-.012l.014-.006c.123-.049.255-.107.387-.17c.364-.164.762-.38 1.156-.65a16.67 16.67 0 0 0 1.816-1.371c1.33-1.127 2.58-2.597 3.34-4.605c1.41-3.97.35-7.15-1.905-9.3c-.836-.834-1.85-1.486-3.036-1.893c-.424-.147-.878-.24-1.36-.279a6.006 6.006 0 0 0-.248 0c-.062 0-.124-.007-.187-.007s-.125.007-.187.007c-.083.007-.166.007-.248 0a5.802 5.802 0 0 0-1.36.279c-1.186.407-2.2 1.059-3.036 1.893c-2.255 2.15-3.315 5.33-1.905 9.3c.76 2.008 2.01 3.478 3.34 4.605c.614.521 1.212.969 1.816 1.371c.394.27.792.486 1.156.65c.132.062.264.12.387.17l.014.006l.038.012c.027.008.054.006.08.014z"></path>
-            </g>
-          </svg>
-          <h2 class=" text-2xl lg:text-4xl  text-justify">En Expreso Rivadavia, nuestro equipo es nuestra mayor fortaleza. Contamos con profesionales altamente capacitados. 
-            Cada miembro del equipo aporta su experiencia y dedicación para garantizar que nuestros clientes reciban el mejor servicio posible. </h2>
-          
-        </div>
-      </div>
-    <div class="m-10">
-        <h1 class="text-primary text-6xl font-bold text-center m-10">Socios fundadores</h1>
-        <div class="flex flex-col lg:flex-row gap-8 justify-center">
-        <div class="flex flex-col items-center">
-            <h1 class="text-2xl">Penna Valentin</h1>
-            <h2 class="text-gray font-bold">Front End</h2>
-            <a href="https://www.linkedin.com/in/valentin-penna-78a5832b6/" ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#CB1B1A" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 
-                2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 
-                0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg></a>
-        </div>
-        <div class="flex flex-col items-center">
-            <h1 class=" text-2xl">Daruich Fátima</h1>
-            <h2 class="text-gray font-bold">Front End</h2>
-            <a href="https://www.linkedin.com/in/valentin-penna-78a5832b6/" ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#CB1B1A" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 
-                2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 
-                0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg></a>
-        </div>
-        <div class="flex flex-col items-center">
-            <h1 class=" text-2xl">Diaz Nicolas</h1>
-            <h2 class="text-gray font-bold">Front End</h2>
-            <a href="https://www.linkedin.com/in/nicolas-diaz-99944b232/" ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#CB1B1A" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 
-                2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 
-                0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg></a>
-        </div>
-        <div class="flex flex-col items-center">
-            <h1 class=" text-2xl">Ramirez Matias</h1>
-            <h2 class="text-gray font-bold">Back End</h2>
-            <a href="#" ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#CB1B1A" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 
-                2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 
-                0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg></a>
-        </div>
-        <div class="flex flex-col items-center">
-            <h1 class="  text-2xl">Abrego Franco</h1>
-            <h2 class="text-gray font-bold">Back End</h2>
-            <a href="https://www.linkedin.com/in/franco-nicolas-abrego/" ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#CB1B1A" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 
-                2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 
-                0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg></a>
-        </div>
-        <div class="flex flex-col items-center">
-            <h1 class=" text-2xl">Ramallo Juan Pablo</h1>
-            <h2 class="text-gray font-bold">Back End</h2>
-            <a href="https://www.linkedin.com/in/juanpabloramallo/" ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#CB1B1A" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 
-                2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 
-                0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg></a>
-        </div>
-        <div class="flex flex-col items-center">
-            <h1 class=" text-2xl">Juarez Nahuel</h1>
-            <h2 class="text-gray font-bold">Back End</h2>
-            <a href="#" ><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"><path fill="#CB1B1A" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 
-                2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 
-                0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg></a>
-        </div>
-    </div>
-
-
-    </div>
+      </article>
+    </section>
     
+    <section>
+        <article class=" my-5 bg-white text-center p-10 rounded-xl lg:m-10 ">
+          <h1 class="text-primary text-3xl lg:text-4xl  font-bold m-auto mb-10">Nuestros valores</h1>
+          <div class="flex flex-col justify-center items-center my-4 lg:flex-row gap-12 tex">
+            <div class="flex flex-col min-h-[240px] items-center justify-center lg:flex-1 ">
+              <FaRegCircleCheck color="gray" size={85} />
+              <h2 class="text-primary text-2xl lg:text-2xl font-semibold text-center mb-5">Responsabilidad</h2>
+              <p class="text-lg lg:text-lg ">Cumplimos con nuestras promesas y nos hacemos responsables de cada envío.</p>
+            </div>
+            <div class="flex flex-col min-h-[240px] items-center justify-center lg:flex-1 ">
+              <FaRegCircleCheck color="#DE0045" size={85} />
+              <h2 class="text-primary text-2xl lg:text-2xl font-semibold text-center mb-5">Confianza</h2>
+              <p class="text-lg lg:text-lg ">Establecemos relaciones de confianza con nuestros clientes, basadas en la transparencia y el respeto.</p>
+            </div>
+            <div class="flex flex-col min-h-[240px] items-center justify-center lg:flex-1 ">
+              <FaRegCircleCheck color="black" size={85}  />
+              <h2 class="text-primary text-2xl lg:text-2xl font-semibold text-center mb-5">Compromiso</h2>
+              <p class="text-lg lg:text-lg ">Estamos comprometidos con la satisfacción de nuestros clientes y el bienestar de nuestra comunidad.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      
+      <section class="flex flex-col" >
+          <article class="  my-5 lg:m-10 flex flex-col items-center justify-center">
+              <h1 class="text-primary text-4xl lg:text-4xl font-bold text-center">Nuestro equipo</h1>
+              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="110" viewBox="0 0 24 24" ><g fill="none" fill-rule="evenodd">
+                <path d="M24 0v24H0V0zM12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036c-.01-.003-.019 0-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"/><path fill="#CB1B1A" d="M12 12c1.873 0 3.57.62 4.815 1.487c1.183.825 2.185 2.051 2.185 3.37c0 .724-.309 1.324-.796 1.77c-.458.421-1.056.694-1.672.88C15.301 19.88 13.68 20 12 20c-1.68 0-3.301-.12-4.532-.493c-.616-.186-1.214-.459-1.673-.88C5.31 18.182 5 17.582 5 16.858c0-1.319 1.002-2.545 2.185-3.37C8.43 12.62 10.127 12 12 12m0 2c-1.44 0-2.743.48-3.67 1.127c-.989.69-1.33 1.392-1.33 1.73c0 .304.352.494.672.614l.205.07l.17.052c.94.284 2.32.407 3.953.407c1.508 0 2.799-.105 3.728-.344l.304-.087l.19-.06c.343-.117.778-.314.778-.652s-.341-1.04-1.33-1.73C14.744 14.481 13.44 14 12 14m7-1c1.044 0 1.992.345 2.693.833c.64.447 1.307 1.19 1.307 2.096c0 1.335-1.297 1.813-2.463 1.98l-.3.037l-.289.025a9.535 9.535 0 0 1-.138.008c.122-.345.19-.72.19-1.122a3.78 3.78 0 0 0-.107-.888c.386-.03.703-.08.939-.151c.104-.032.01-.13-.1-.215l-.107-.078l-.076-.051a2.698 2.698 0 0 0-.995-.418c-.38-.76-.964-1.418-1.586-1.943A4.78 4.78 0 0 1 19 13M5 13c.357 0 .703.04 1.032.113c-.622.525-1.206 1.183-1.586 1.943a2.701 2.701 0 0 0-.995.418l-.128.088c-.127.092-.276.22-.155.256c.236.071.553.122.94.151a3.73 3.73 0 0 0-.108.888c0 .402.068.777.19 1.122l-.28-.02l-.296-.03c-1.202-.147-2.614-.607-2.614-2c0-.905.666-1.649 1.307-2.096A4.756 4.756 0 0 1 5 13m13.5-6a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5m-13 0a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5M12 3a4 4 0 1 1 0 8a4 4 0 0 1 0-8m6.5 6a.5.5 0 1 0 0 1a.5.5 0 0 0 0-1m-13 0a.5.5 0 1 0 0 1a.5.5 0 0 0 0-1M12 5a2 2 0 1 0 0 4a2 2 0 0 0 0-4"/></g></svg>
+                <g fill="none" fill-rule="evenodd">
+                  <path d="M24 0v24H0V0zM12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036c-.01-.003-.019 0-.029-.004a1.248 1.248 0 0 0-.035-.015c-.075-.033-.157-.072-.232-.115a10.695 10.695 0 0 1-.49-.288c-.333-.2-.66-.43-.982-.685a14.204 14.204 0 0 1-1.556-1.457c-1.14-1.206-2.207-2.791-2.89-4.811c-1.293-3.785-.324-6.966 1.793-9.282c.796-.882 1.783-1.594 2.926-2.065a6.93 6.93 0 0 1 1.152-.368c.263-.06.537-.109.832-.133c.096-.008.188-.023.285-.028a5.636 5.636 0 0 1 .203 0c.078 0 .155-.01.233-.01h.106c.078 0 .155.01.233.01c.07 0 .14-.009.203 0c.096.005.188.02.285.028c.295.024.569.073.832.133c.394.1.78.241 1.152.368c1.143.471 2.13 1.183 2.926 2.065c2.117 2.316 3.086 5.497 1.793 9.282c-.683 2.02-1.65 3.605-2.89 4.811a14.204 14.204 0 0 1-1.556 1.457a11.77 11.77 0 0 1-1.472.973c-.184.107-.362.218-.543.316c-.078.044-.159.083-.232.115a1.248 1.248 0 0 0-.035.015c-.01.004-.02.001-.03.004z" fill="#DE0045"></path>
+                  <path fill="#FFF" d="M14.277 12.52c.057 0 .105.016.155.023c.188.026.371.057.553.1c.077.018.15.044.224.066c.154.048.297.107.434.18a2.499 2.499 0 0 1 1.047.975c.078.127.144.26.2.397a2.85 2.85 0 0 1 .176.692a3.23 3.23 0 0 1-.036.823a2.4 2.4 0 0 1-.323.84c-.095.162-.2.317-.323.459c-.124.143-.263.272-.42.376a1.18 1.18 0 0 1-.385.173c-.132.033-.263.062-.396.079c-.134.017-.267.03-.4.036a10.11 10.11 0 0 1-.802.003c-.193-.007-.387-.017-.58-.031c-.187-.016-.373-.039-.559-.065c-.187-.028-.375-.057-.563-.093c-.15-.03-.3-.073-.45-.11c-.169-.043-.336-.093-.5-.156c-.223-.084-.443-.183-.657-.3c-.146-.081-.287-.175-.424-.281c-.121-.094-.239-.194-.35-.308c-.113-.116-.21-.247-.298-.387c-.085-.136-.155-.281-.215-.432a2.37 2.37 0 0 1-.134-.58a2.08 2.08 0 0 1-.018-.555a2.5 2.5 0 0 1 .155-.592c.042-.113.09-.226.147-.334c.084-.16.187-.31.301-.452c.11-.135.23-.263.363-.375a2.51 2.51 0 0 1 .45-.3c.08-.04.158-.091.24-.127c.143-.066.291-.12.44-.167c.185-.058.373-.108.562-.15c.169-.037.34-.071.51-.102c.17-.031.34-.059.51-.085c.16-.023.321-.043.48-.058c.107-.01.213-.025.32-.032c.053-.005.104-.01.155-.01zm-4.722-5.519a2.5 2.5 0 0 1 2.5-2.5a2.5 2.5 0 1 1-2.5 2.5z"></path>
+                  <path fill="#FFF" d="M14.277 12.52c-.05 0-.102.005-.155.01a1.236 1.236 0 0 1-.319.032c-.16.015-.321.035-.48.058c-.17.026-.34.054-.51.085c-.17.03-.34.065-.51.102c-.189.041-.377.091-.562.15c-.149.046-.297.101-.44.167c-.082.037-.16.088-.24.127c-.157.107-.307.214-.45.3c-.133.112-.253.24-.363.375c-.114.142-.217.292-.301.452c-.057.108-.105.221-.147.334c-.057.17-.106.347-.155.592a2.08 2.08 0 0 0 .018.555c.03.197.08.39.134.58c.06.151.13.296.215.432c.088.14.185.271.298.387c.111.114.229.214.35.308c.137.106.278.2.424.281c.214.117.434.216.657.3c.164.063.331.113.5.156c.15.037.3.08.45.11c.188.036.376.065.563.093c.186.026.372.049.559.065c.193.014.387.024.58.031c.265.01.532.006.802-.003c.133-.006.266-.02.4-.036c.133-.017.264-.046.396-.079c.14-.036.268-.09.385-.173c.156-.104.295-.233.42-.376c.123-.142.228-.297.323-.459a2.4 2.4 0 0 0 .323-.84a3.23 3.23 0 0 0 .036-.823a2.85 2.85 0 0 0-.176-.692a2.37 2.37 0 0 0-.2-.397a2.499 2.499 0 0 0-1.047-.975a4.89 4.89 0 0 0-.434-.18a4.984 4.984 0 0 0-.224-.066c-.182-.043-.365-.074-.553-.1a1.293 1.293 0 0 0-.155-.023zM12.055 4.5a2.5 2.5 0 1 0 0 5a2.5 2.5 0 0 0 0-5z"></path>
+                  <path fill="#DE0045" fill-rule="nonzero" d="M12.01 23.2l.038-.012l.014-.006c.123-.049.255-.107.387-.17c.364-.164.762-.38 1.156-.65a16.67 16.67 0 0 0 1.816-1.371c1.33-1.127 2.58-2.597 3.34-4.605c1.41-3.97.35-7.15-1.905-9.3c-.836-.834-1.85-1.486-3.036-1.893c-.424-.147-.878-.24-1.36-.279a6.006 6.006 0 0 0-.248 0c-.062 0-.124-.007-.187-.007s-.125.007-.187.007c-.083.007-.166.007-.248 0a5.802 5.802 0 0 0-1.36.279c-1.186.407-2.2 1.059-3.036 1.893c-2.255 2.15-3.315 5.33-1.905 9.3c.76 2.008 2.01 3.478 3.34 4.605c.614.521 1.212.969 1.816 1.371c.394.27.792.486 1.156.65c.132.062.264.12.387.17l.014.006l.038.012c.027.008.054.006.08.014z"></path>
+                </g>
+              </svg>
+              <p class="text-2xl lg:text-lg  text-justify">En Expreso Rivadavia, nuestro equipo es nuestra mayor fortaleza. Contamos con profesionales altamente capacitados. 
+                Cada miembro del equipo aporta su experiencia y dedicación para garantizar que nuestros clientes reciban el mejor servicio posible. </p>
+            
+          </article>
+
+          <article class=" flex flex-col mt-10 my-5 lg:m-10">
+            <h1 class="text-primary text-4xl font-bold text-center mb-5">Socios fundadores</h1>
+            <div class="flex flex-col lg:flex-row gap-8 text-center justify-center">
+              <div class="flex flex-col items-center ">
+                <h2 class="text-xl font-bold text-center">Penna Valentin</h2>
+                <h3 class="text-gray font-bold">Front End</h3>
+                <a href="https://www.linkedin.com/in/valentin-penna-78a5832b6/" ><FaLinkedin color="black" size={45} />
+                </a>
+              </div>
+              <div class="flex flex-col font-bold items-center">
+                <h2 class=" text-xl font-bold">Daruich Fátima</h2>
+                <h3 class="text-gray font-bold">Front End</h3>
+                <a href="https://www.linkedin.com/in/valentin-penna-78a5832b6/" ><FaLinkedin color="black" size={45} /></a>
+              </div>
+              <div class="flex flex-col items-center">
+                <h2 class=" text-xl font-bold">Diaz Nicolas</h2>
+                <h3 class="text-gray font-bold">Front End</h3>
+                <a href="https://www.linkedin.com/in/nicolas-diaz-99944b232/" ><FaLinkedin color="black" size={45} /></a>
+              </div>
+            
+              <div class="flex flex-col items-center">
+                <h2 class=" text-xl font-bold">Ramirez Matias</h2>
+                <h3 class="text-gray font-bold">Back End</h3>
+                <a href="#" ><FaLinkedin color="black" size={45} /></a>
+              </div>
+              <div class="flex flex-col items-center">
+                <h2 class="  text-xl font-bold">Abrego Franco</h2>
+                <h3 class="text-gray font-bold">Back End</h3>
+                <a href="https://www.linkedin.com/in/franco-nicolas-abrego/" ><FaLinkedin color="black" size={45} /></a>
+              </div>
+              <div class="flex flex-col items-center">
+                <h2 class=" text-xl font-bold">Ramallo Juan Pablo</h2>
+                <h3 class="text-gray font-bold">Back End</h3>
+                <a href="https://www.linkedin.com/in/juanpabloramallo/" ><FaLinkedin color="black" size={45} /></a>
+              </div>
+            
+              <div class="flex flex-col items-center">
+                <h2 class=" text-xl font-bold">Juarez Nahuel</h2>
+                <h3 class="text-gray font-bold">Back End</h3>
+                <a href="#" ><FaLinkedin color="black" size={45} /></a>
+              </div>
+            </div>  
+          </article>
+      </section>
+    </section>
 </Layout>
