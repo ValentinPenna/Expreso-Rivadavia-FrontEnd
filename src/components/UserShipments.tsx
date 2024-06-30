@@ -5,6 +5,7 @@ import HistoryShipment from "./HistoryShipment";
 
 export default function UserShipments() {
     const user = useUserStore((state) => state.user)
+    const setOrdersMock = useUserStore((state) => state.setOrders)
     const [orders, setOrders] = useState<Orders[] | undefined>([...user?.orders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())])
     const [searchDate, setSearchDate] = useState("")
     // const [sorted, setSorted] = useState("")
@@ -13,7 +14,8 @@ export default function UserShipments() {
     useEffect(() => {
         setOrders(user?.orders?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
         setOrderState("all")
-        console.log(orderState)
+        setOrdersMock()
+        // console.log(orderState)
             // localStorage.setItem("user", JSON.stringify(user))
     }, [])
     
@@ -42,7 +44,7 @@ export default function UserShipments() {
         }
         if(orderState && orderState !== "all"){
             filteredOrders = filteredOrders.filter(order => order.status === orderState)
-            console.log(filteredOrders);
+            // console.log(filteredOrders);
             // setOrders(orders?.filter(order => order.status === orderState))
         }
         setOrders(filteredOrders)

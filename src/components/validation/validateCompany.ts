@@ -32,12 +32,12 @@ export default function validateCompany(values :IRegisterCompany) :IRegisterComp
   if (!values.address) {
     errors.address = "Por favor ingrese una dirección";
   }else if (values.address.length > 50) {
-    errors.address = "El correo no puede tener más de 50 caracteres";
+    errors.address = "La direccion no puede tener más de 50 caracteres";
   }
   if(!values.locality) {
     errors.locality = "Por favor ingrese una localidad";
   }else if (values.locality.length > 50) {
-    errors.locality = "El correo no puede tener más de 50 caracteres";
+    errors.locality = "La localidad no puede tener más de 50 caracteres";
   }
   if (!values.password) {
     errors.password = "Por favor ingrese una contraseña";
