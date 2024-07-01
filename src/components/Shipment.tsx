@@ -1,11 +1,17 @@
 import { Field, Form, Formik } from 'formik';
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from './secondary/Button';
 import { Input } from './secondary/Input';
 import { validateShipment } from './validation/validateShipment';
 import type { IShipment } from './types/typesRegister';
+import { useUserStore } from '../store/userStore';
 
 const Shipment = () => {
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      window.location.href = "/auth/register";
+    }
+  }, [])
   return (
     <div className="px-4 md:px-8 z-50">
       <Formik
