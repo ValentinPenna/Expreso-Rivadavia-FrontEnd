@@ -1,0 +1,17 @@
+---
+import SwitchGuestUser from "./SwitchGuestUser";
+import UlNavBar from "./UlNavBar";
+---
+<header>
+    <nav class=" relative shadow-sm z-[99] w-full bg-white flex items-center justify-between p-4 h-24">
+        <div class="flex items-center w-full gap-12">
+            <a href="/">
+                <img src="/logo.png" alt="Expreso Rivadavia" class="w-48">
+            </a>
+            <div class="flex justify-between w-full">
+                <UlNavBar client:visible/>
+            </div>
+        </div>
+       
+    </nav>
+</header>

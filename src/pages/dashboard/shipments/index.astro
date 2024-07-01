@@ -1,0 +1,12 @@
+---
+import SideMenu from "../../../components/SideMenu"
+import Layout from "../../../layouts/Layout.astro"
+import UserShipments from "../../../components/UserShipments"
+---
+
+<Layout title="Dashboard - Envios">
+  <main class="flex flex-row">
+    <SideMenu client:only />
+    <UserShipments client:load/>
+  </main>
+</Layout>
