@@ -16,28 +16,30 @@ export default function UserShipments() {
         setOrderState("all")
         setOrdersMock()
         // console.log(orderState)
-            // localStorage.setItem("user", JSON.stringify(user))
+        // localStorage.setItem("user", JSON.stringify(user))
     }, [])
     
     // useEffect(() => {
     //     setOrders(user?.orders?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
     // }, [sorted, orderState, searchDate])
-
+    
     // useEffect(() => {
     //     setSearchDate("")
     //     if(sorted === "latest"){
     //         sortedOrders = (user?.orders?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())) //nuevas -> viejas
     //         setOrders(sortedOrders)
     //     }else if (sorted === "oldest"){
-    //         sortedOrders = (user?.orders?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())) //viejas -> nuevas
+        //         sortedOrders = (user?.orders?.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())) //viejas -> nuevas
     //         setOrders(sortedOrders)
     //     }
     //     console.log(sorted)
     //     console.log(orders)
     // }, [sorted])
-
+    
     useEffect(() => {
+        setOrdersMock()
         let filteredOrders = [...user?.orders || []]
+        console.log(user?.orders);
         if(searchDate && searchDate !== ""){
             filteredOrders = filteredOrders.filter(order => new Date(order.date).toISOString().split("T")[0] === new Date(searchDate).toISOString().split("T")[0])
             // setOrders(orders?.filter(order => new Date(order.date).toISOString().split("T")[0] === new Date(searchDate).toISOString().split("T")[0]))
@@ -88,8 +90,8 @@ export default function UserShipments() {
                 </div>
             </div>
             <div className="flex flex-col gap-4">
-                {orders ? (
-                    <HistoryShipment orders={orders} />
+                {orders?.length! > 0 ? (
+                    <HistoryShipment orders={orders!} />
                 ) : (
                         <div className="flex flex-row text-black pt-12 w-full justify-center">
                             <h3 className=" text-2xl font-bold">No hay ordenes</h3>
