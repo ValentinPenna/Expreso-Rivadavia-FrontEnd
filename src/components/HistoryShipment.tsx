@@ -1,4 +1,4 @@
-
+import { statusMap } from '../types/shipments';
 import { useState } from 'react'
 import type { IHistoryShipmentProps, Orders} from '../types/shipments'
 
@@ -55,7 +55,7 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
             <div className="ml-8 mt-2 text-xl ">
               <p>
                  Estado de la orden:
-                <span className='text-primary'> {(order.status).toUpperCase()}</span>
+                <span className='text-primary'> {statusMap[(order.status)]}</span>
                 </p>
               <p>Paquetes:
                 <span className='text-primary'> {order.packages.join(', ')}</span>
