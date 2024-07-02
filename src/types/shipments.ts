@@ -36,3 +36,28 @@ export interface Packages {
     package_price: number;
     orders: Orders;
 }
+
+// export enum Status {
+//     "receipted" = "RECIBIDO",
+//     "acepted" = "ACEPTADO",
+//     "sending" = "EN CAMINO",
+//     "delivered" = "ENTREGADO",
+//     "cancelled" = "CANCELADO",
+// }
+
+export type Status = {
+    [key: string]: string;
+    receipted: "RECIBIDO",
+    acepted: "ACEPTADO",
+    sending: "EN CAMINO",
+    delivered: "ENTREGADO",
+    cancelled: "CANCELADO",
+  };
+
+export const statusMap: {[key: string]: string} = {
+    receipted: "RECIBIDO",
+    acepted: "ACEPTADO",
+    sending: "EN CAMINO",
+    delivered: "ENTREGADO",
+    cancelled: "CANCELADO",
+}
