@@ -6,7 +6,7 @@ import { validateLogin } from "./validation/validateLogin";
 import type { LoginResponse, UserLogin } from "../types/user";
 import { useUserStore } from "../store/userStore";
 import { auth } from "../helpers/auth";
-import { toast } from "sonner";
+import { toast} from 'react-toastify'
 
 const FormLogin = () => {
   const [login, setLogin] = useState(false);
@@ -24,20 +24,29 @@ const FormLogin = () => {
           email: "",
           password: "",
         }}
-        onSubmit={async (values: UserLogin, { resetForm }) => {
-          await loginUser(values)
+        onSubmit={ (values: UserLogin, { resetForm }) => {
+          loginUser(values)
             .then((data: LoginResponse) => {
+              
               getUser(data.userId).then(() => {
                 setLogin(true);
                 toast.success("Usuario conectado");
-                window.location.href = "/";
+                resetForm();
+                setTimeout(() => {
+                  window.location.href = "/";
+                }, 1000);
+                
+                
                 // console.log(data);
               });
 
-              // resetForm();
+         
             })
-            .catch((error: any) => console.log(error));
-            toast.error("Correo electrónico o contraseña incorrecto");
+            .catch((error: any) => {
+              toast.error("El usuario no pudo iniciar sesión");
+            }
+              );
+            
         }}
         validate={validateLogin}
       >
@@ -63,7 +72,7 @@ const FormLogin = () => {
               name="password"
               placeholder="*********"
             />
-            <Button type="submit" children="Iniciar Sesión" className="mt-6" />
+            <Button type="submit" children="Iniciar Sesión" className="mt-6"  />
             <p className="text-sm mt-4">
               No tienes cuenta?{" "}
               <a className="font-bold text-primary" href="/auth/register">

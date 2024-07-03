@@ -7,7 +7,9 @@ import validateUser from './validation/validateUser'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { useUserStore } from '../store/userStore'
 import type { RegisterResponse } from '../types/user'
-import { toast } from 'sonner'
+import { toast} from 'react-toastify'
+
+
 
 interface RegisterUserProps {
   handleBackToSelection: () => void;  
@@ -37,20 +39,21 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
            confirmPassword:"",
         }}
         validate={validateUser}
-        onSubmit={async (values: IRegisterUser)=>{
-          await userRegister(values)
-          .then((data: RegisterResponse) => {
-            if (data.id){
+        onSubmit={ (values: IRegisterUser)=>{
+           userRegister(values)
+          .then((data: boolean) => {
+
+            console.log(data)
+            if ((data)){
               setRegisterUser(true);
               toast.success("Usuario registrado con éxito");
-              window.location.href = '/auth/login';
-              // console.log(data);
-              // resetForm();
-            }
+              setTimeout(() => {
+                window.location.href = "/auth/login";
+              }, 1000);
+            } 
           })
           .catch((error: any) => {
             console.log(error);
-            toast.error("Error al registrar usuario");
           });
         }}
         >

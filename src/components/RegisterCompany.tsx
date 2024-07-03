@@ -7,7 +7,7 @@ import validateCompany from './validation/validateCompany'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import type { CompanyRegister, RegisterResponse } from '../types/user'
 import { useUserStore } from '../store/userStore'
-import { toast } from 'sonner'
+import { toast } from 'react-toastify'
 
 interface RegisterCompanyProps {
   handleBackToSelection: () => void;  
@@ -38,16 +38,19 @@ const RegisterCompany: React.FC<RegisterCompanyProps> =({ handleBackToSelection 
            confirmPassword:"",
         }}
         validate={validateCompany}
-        onSubmit={async (values: CompanyRegister)=>{
-          await userRegister(values)
-          .then((data: RegisterResponse) => {
-            setRegisterCompany(true);
-            toast.success("Empresa registrada con éxito");
-            window.location.href = '/auth/login';
+        onSubmit={ (values: CompanyRegister)=>{
+         userRegister(values)
+          .then((data: RegisterResponse | void) => {
+            if((data)){
+              setRegisterCompany(true);
+              toast.success("Empresa registrada con éxito");
+              setTimeout(() => {
+                window.location.href = "/auth/login";
+              }, 1000);
+            }
           })
           .catch((error) => {
             console.log(error);
-            toast.error("Error al registrar empresa");
           });
         }}
         >
@@ -59,14 +62,14 @@ const RegisterCompany: React.FC<RegisterCompanyProps> =({ handleBackToSelection 
               </div>
               <div className='grid grid-cols-1 lg:grid-cols-2 items-center gap-x-20' >
                 <Input label="Email" name="email" placeholder='xxxx@mail.com' error={errors.email}></Input>
-                <Input label="CUIL" name="cuit_cuil" placeholder='44444444' error={errors.cuit_cuil}></Input>
+                <Input label="CUIT" name="cuit_cuil" placeholder='44444444' error={errors.cuit_cuil}></Input>
                 <Input label="Nombre de la empresa" name="companyName" placeholder='Expreso Rivadavia' error={errors.companyName}></Input>
                 <Input label="Nombre" name="name" placeholder='Roberto' error={errors.name}></Input>
                 <Input label="Apellido" name="lastName" placeholder='Martinez'error={errors.lastName} ></Input>
                 <Input label="Dirección" name="address" placeholder='calle 123' error={errors.address}></Input>
                 <Input label="Localidad" name="locality" placeholder='Springfield' error={errors.locality}></Input>
                 <div className='relative'>
-                <Input label="Contraseña" name="password" placeholder='*******' type="password" error={errors.password}></Input>
+                <Input label="Contraseña" name="password" placeholder='*******' type={password ? "password" : "text"} error={errors.password}></Input>
                 <div onClick={passwordVisibility} className="absolute right-0 top-2/3 transform -translate-y-1/2 cursor-pointer">
                 {password ? (
                       <AiFillEyeInvisible color="red" />
