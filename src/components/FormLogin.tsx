@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import { Formik, Form, ErrorMessage } from "formik";
+import React, { useEffect, useState } from "react";
+import { Formik, Form } from "formik";
 import { Input } from "./secondary/Input";
 import Button from "./secondary/Button";
 import { validateLogin } from "./validation/validateLogin";
 import type { LoginResponse, UserLogin } from "../types/user";
 import { useUserStore } from "../store/userStore";
+import { auth } from "../helpers/auth";
 
 const FormLogin = () => {
   const [login, setLogin] = useState(false);
   const getUser = useUserStore((state: any) => state.getUser);
   const loginUser = useUserStore((state: any) => state.loginUser);
-  
+  useEffect(() => {
+    const isAuth = auth();
+    if (isAuth) window.location.href = "/";
+  }, []);
+
   return (
     <div>
       <Formik
@@ -20,17 +25,16 @@ const FormLogin = () => {
         }}
         onSubmit={async (values: UserLogin, { resetForm }) => {
           await loginUser(values)
-          .then((data: LoginResponse) => {
-            getUser(data.userId)
-            .then(() => {
-              setLogin(true);
-              window.location.href = "/";
-              // console.log(data);
+            .then((data: LoginResponse) => {
+              getUser(data.userId).then(() => {
+                setLogin(true);
+                window.location.href = "/";
+                // console.log(data);
+              });
+
+              // resetForm();
             })
-            
-            // resetForm();
-          })
-          .catch((error:any) => console.log(error));
+            .catch((error: any) => console.log(error));
         }}
         validate={validateLogin}
       >
