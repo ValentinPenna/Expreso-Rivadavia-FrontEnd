@@ -16,7 +16,7 @@ const UlNavBar = () => {
       <ul
         onMouseDown={(e) => e.preventDefault()}
         className={`${isFocused ? "block gap-4 p-4 " : "hidden"} 
-        bg-white flex rounded-sm flex-col-reverse shadow-lg text-black text-lg font-normal duration-400 right-0 -bottom-60 absolute z-50 lg:static lg:shadow-none lg:flex lg:w-full lg:flex-row lg:items-center  lg:gap-3 lg:bg-transparent justify-between`}
+        bg-white flex rounded-sm flex-col-reverse shadow-lg text-black text-lg font-normal duration-400 right-0 -bottom-44 absolute z-50 lg:static lg:shadow-none lg:flex lg:w-full lg:flex-row lg:items-center  lg:gap-3 lg:bg-transparent justify-between`}
       >
         <div className="flex flex-col lg:flex-row gap-4">
           <li>
@@ -40,8 +40,8 @@ const UlNavBar = () => {
             </a>
           </li>
         </div>
-        <SwitchGuestUser />
       </ul>
+      <SwitchGuestUser />
     </>
   );
 };
