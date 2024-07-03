@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 
 import Button from "./secondary/Button";
+import { toast } from "sonner";
 
 export interface Quote {
   origin: string;
@@ -25,6 +26,7 @@ export default function QuoteShipping() {
         onSubmit={(values: Quote, { resetForm }) => {
           resetForm();
           setQuote(true);
+          toast.success("Cotización realizada con éxito");
         }}
       >
         

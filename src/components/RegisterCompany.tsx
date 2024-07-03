@@ -7,6 +7,7 @@ import validateCompany from './validation/validateCompany'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import type { CompanyRegister, RegisterResponse } from '../types/user'
 import { useUserStore } from '../store/userStore'
+import { toast } from 'sonner'
 
 interface RegisterCompanyProps {
   handleBackToSelection: () => void;  
@@ -41,10 +42,12 @@ const RegisterCompany: React.FC<RegisterCompanyProps> =({ handleBackToSelection 
           await userRegister(values)
           .then((data: RegisterResponse) => {
             setRegisterCompany(true);
+            toast.success("Empresa registrada con éxito");
             window.location.href = '/auth/login';
           })
           .catch((error) => {
             console.log(error);
+            toast.error("Error al registrar empresa");
           });
         }}
         >

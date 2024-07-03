@@ -5,6 +5,7 @@ import { Input } from "./secondary/Input";
 import { validateShipment } from "./validation/validateShipment";
 import type { IShipment } from "./types/typesRegister";
 import { auth } from "../helpers/auth";
+import { toast } from "sonner";
 
 const Shipment = () => {
   useEffect(() => {
@@ -25,6 +26,7 @@ const Shipment = () => {
         }}
         validate={validateShipment}
         onSubmit={(values: IShipment, { resetForm }) => {
+          toast.success("Envío creado con éxito");
           resetForm();
         }}
       >
