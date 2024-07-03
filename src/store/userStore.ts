@@ -10,6 +10,9 @@ import type {
 } from "../types/user";
 import type { Orders } from "../types/shipments";
 import { init } from "astro/virtual-modules/prefetch.js";
+import { toast } from "react-toastify";
+
+
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
 const userMock: User = {
@@ -403,7 +406,7 @@ interface State {
   loginUser: (user: UserLogin) => Promise<LoginResponse | void>;
   userRegister: (
     user: UserRegister | CompanyRegister
-  ) => Promise<RegisterResponse>;
+  ) => Promise<RegisterResponse | void>;
   setOrders: () => void;
 }
 
@@ -455,9 +458,8 @@ export const useUserStore = create<State>((set, get) => ({
       console.log(error);
     }
   },
-  userRegister: async (user: UserRegister | CompanyRegister) => {
+  userRegister: async (user: UserRegister | CompanyRegister): Promise <RegisterResponse | void>=> {
     try {
-      // console.log(user);
       const response = await fetch(`${apiUrl}/auth/signup`, {
         method: "POST",
         headers: {
@@ -465,11 +467,21 @@ export const useUserStore = create<State>((set, get) => ({
         },
         body: JSON.stringify(user),
       });
+  
+      if (!response.ok) {
+        const error = await response.json();
+        toast.error(`Error al registrar usuario: ${error.message}`);
+        return Promise.reject(`Error al registrar usuario: ${error.message}`);
+      }
+  
       const data = await response.json();
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      toast.error("Error al comunicarse con el servidor");
+      return Promise.reject("Error al comunicarse con el servidor");
     }
+
   },
   removeSession: () => {
     set({ user: initialUser, token: "" });

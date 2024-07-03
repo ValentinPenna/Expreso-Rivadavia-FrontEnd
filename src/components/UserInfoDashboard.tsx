@@ -2,6 +2,8 @@ import { FaEdit } from "react-icons/fa";
 import { useUserStore } from "../store/userStore";
 import type { User } from "../types/user";
 import { useState } from "react";
+import Button from "./secondary/Button";
+import { toast } from "react-toastify";
 
 export default function UserInfoDashboard() {
   const user: User | null = useUserStore((state) => state.user);
@@ -10,7 +12,11 @@ export default function UserInfoDashboard() {
 
   const handleSessionClose = () => {
     removeSession();
-    window.location.href = "/";
+    toast.info('Has cerrado sesión')
+   
+                setTimeout(() => {
+                  window.location.href = "/";
+                }, 2000);
   };
 
   return (
@@ -88,12 +94,12 @@ export default function UserInfoDashboard() {
         {editionMode ? (
           <></>
         ) : (
-          <button
+          <Button
             onClick={handleSessionClose}
-            className="bg-primary text-white text-lg font-bold px-6 py-2 rounded-md hover:bg-white hover:text-primary border-2 border-primary"
+        
           >
             Cerrar sesión
-          </button>
+          </Button>
         )}
       </div>
     </div>
