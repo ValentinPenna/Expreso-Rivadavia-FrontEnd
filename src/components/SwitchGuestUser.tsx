@@ -1,28 +1,49 @@
-import { useEffect } from "react"
-import { useUserStore } from "../store/userStore"
-import Button from "./secondary/Button"
+import { useEffect, useState } from "react";
+import { useUserStore } from "../store/userStore";
+import Button from "./secondary/Button";
+import { toast } from "react-toastify";
 
 export default function SwitchGuestUser() {
-    const token:string = useUserStore((state) => state.token)
-    const {setUser, setToken} = useUserStore((state) => state)
-    useEffect(() => {
-        setUser()
-        setToken()
-    }, [])
-    return (
-        <>
-        {!token ?(
+  const token: string = useUserStore((state) => state.token);
+  const removeSession = useUserStore((state) => state.removeSession);
+  const { setUser, setToken } = useUserStore((state) => state);
+  const [isFocused, setIsFocused] = useState<boolean>(true);
+  useEffect(() => {
+    setUser();
+    setToken();
+  }, []);
+
+  const handleSessionClose = () => {
+    removeSession();
+    toast.info("Has cerrado sesión");
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+  };
+
+  return (
+    <>
+      {!token ? (
         <div className="flex flex-row gap-6">
-            
-            <Button className="w-fit mx-10 px-4" onClick={() => location.href='/auth/register'}>INGRESAR</Button>
+          <Button
+            className="w-fit mx-10 px-4"
+            onClick={() => (location.href = "/auth/register")}
+          >
+            INGRESAR
+          </Button>
         </div>
       ) : (
         <>
-          <button className="" onClick={() => (location.href = "/dashboard")}>
+          <button
+            onBlur={() => setIsFocused(false)}
+            className=" absolute right-12 top-4  z-50 flex flex-col gap-[3px] rounded-lg bg-secundary px-2 py-2 text-soft-letter "
+            onClick={() => setIsFocused(!isFocused)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
+              width="48"
+              height="48"
               viewBox="0 0 24 24"
               preserveAspectRatio="none"
             >
@@ -35,6 +56,24 @@ export default function SwitchGuestUser() {
               />
             </svg>
           </button>
+          <ul
+            onMouseDown={(e) => e.preventDefault()}
+            className={`${isFocused ? "block gap-4 p-4 " : "hidden"} 
+          bg-white flex flex-col shadow-lg text-black text-lg font-normal duration-400 right-4 top-20 rounded-lg absolute z-50  justify-center`}
+          >
+            <div className="flex flex-col justify-center items-center gap-4">
+              <li>
+                <a href="/dashboard" className="hover:text-primary">
+                  Perfil
+                </a>
+              </li>
+              <li>
+                <Button className="text-xs w-fit" onClick={handleSessionClose}>
+                  Cerrar sesión
+                </Button>
+              </li>
+            </div>
+          </ul>
         </>
       )}
     </>
