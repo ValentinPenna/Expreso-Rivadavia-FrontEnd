@@ -9,4 +9,9 @@ import UserShipments from "../../../components/UserShipments"
     <SideMenu client:only />
     <UserShipments client:load/>
   </main>
+  <script>
+    import { auth } from "../../../helpers/auth"
+    const isAuth =auth()
+    if(!isAuth) window.location.href = "/" 
+</script>
 </Layout>
