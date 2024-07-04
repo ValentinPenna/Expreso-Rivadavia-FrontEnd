@@ -1,0 +1,19 @@
+---
+import SideMenu from "../../components/SideMenu"
+import ShipmentProgress from '../../components/ShipmentProgress'
+import Layout from "../../layouts/Layout.astro"
+---
+
+<Layout title="Dashboard - Seguridad">
+    <main class="flex  ">
+
+        <SideMenu client:only />
+        <ShipmentProgress client:only />
+    </main>
+    <script>
+        import { auth } from "../../helpers/auth";
+
+        const isAuth =auth()
+        if(!isAuth) window.location.href = "/"
+    </script>
+</Layout>
