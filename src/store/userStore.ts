@@ -9,7 +9,6 @@ import type {
   UserRegister,
 } from "../types/user";
 import type { Orders } from "../types/shipments";
-import { init } from "astro/virtual-modules/prefetch.js";
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
 const userMock: User = {

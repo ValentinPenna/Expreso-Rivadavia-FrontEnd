@@ -7,7 +7,6 @@ import validateUser from './validation/validateUser'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { useUserStore } from '../store/userStore'
 import type { RegisterResponse } from '../types/user'
-import { toast } from 'sonner'
 
 interface RegisterUserProps {
   handleBackToSelection: () => void;  
@@ -42,7 +41,7 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
           .then((data: RegisterResponse) => {
             if (data.id){
               setRegisterUser(true);
-              toast.success("Usuario registrado con éxito");
+
               window.location.href = '/auth/login';
               // console.log(data);
               // resetForm();
@@ -50,7 +49,7 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
           })
           .catch((error: any) => {
             console.log(error);
-            toast.error("Error al registrar usuario");
+
           });
         }}
         >

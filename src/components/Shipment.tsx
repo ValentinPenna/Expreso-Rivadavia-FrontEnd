@@ -1,32 +1,45 @@
-import { Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
+import { Field, Form, Formik, type FormikHelpers } from "formik";
+import React, { useEffect, useState } from "react";
 import Button from "./secondary/Button";
 import { Input } from "./secondary/Input";
 import { validateShipment } from "./validation/validateShipment";
 import type { IShipment } from "./types/typesRegister";
 import { auth } from "../helpers/auth";
-import { toast } from "sonner";
+import { useOrdersStore } from "../store/ordersStore";
+import type { ICreateOrderProps, ILocality } from "../types/shipments";
 
 const Shipment = () => {
+  const [localities, setLocalities] = useState<ILocality[]>([]);
+  const createOrder = useOrdersStore((state) => state.createOrder);
+  const getLocalities = useOrdersStore((state) => state.getLocalities);
+
   useEffect(() => {
     const isAuth: boolean = auth();
     if (!isAuth) {
       window.location.href = "/auth/register";
     }
+
+    async function fetchLocalities() {
+      const data = await getLocalities();
+      console.log(data)
+      setLocalities(data);
+    }
+    fetchLocalities();
   }, []);
   return (
     <div className="px-4 md:px-8 z-50">
       <Formik
         initialValues={{
-          locality_origin: "",
-          locality_destination: "",
+          locality_origin: "0",
+          locality_destination: "0",
           size: "",
           address_origin: "",
           address_destination: "",
         }}
         validate={validateShipment}
-        onSubmit={(values: IShipment, { resetForm }) => {
-          toast.success("Envío creado con éxito");
+        onSubmit={(values, { resetForm }) => {
+          createOrder({size: values.size, locality_origin: Number(values.locality_origin), locality_destination: Number(values.locality_destination), address_origin: values.address_origin, address_destination: values.address_destination})
+          .then((data: any) => alert("Pedido creado correctamente"))
           resetForm();
         }}
       >
@@ -64,28 +77,11 @@ const Shipment = () => {
                     name="locality_origin"
                     className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56"
                   >
-                    <option value="chapanay">Chapanay</option>
-                    <option value="ciudad de mendoza">Ciudad de Mendoza</option>
-                    <option value="corralitos">Corralitos</option>
-                    <option value="fray luis beltran">Fray Luis Beltrán</option>
-                    <option value="godoy cruz">Godoy Cruz</option>
-                    <option value="guaymallen">Guaymallén</option>
-                    <option value="ingeniero giagnoni">
-                      Ingeniero Giagnoni
-                    </option>
-                    <option value="junin">Junín</option>
-                    <option value="las heras">Las Heras</option>
-                    <option value="lavalle">Lavalle</option>
-                    <option value="los barriales">Los Barriales</option>
-                    <option value="lujan de cuyo">Luján de Cuyo</option>
-                    <option value="maipu">Maipú</option>
-                    <option value="medrano">Medrano</option>
-                    <option value="palmira">Palmira</option>
-                    <option value="rivadavia">Rivadavia</option>
-                    <option value="rodriguez peña">Rodriguez Peña</option>
-                    <option value="rodeo de la cruz">Rodeo de la Cruz</option>
-                    <option value="rodeo del medio">Rodeo del Medio</option>
-                    <option value="tres porteñas">Tres Porteñas</option>
+                    <option value={0}>Seleccionar</option>
+                    {localities.map((locality) => (
+                        <option key={locality.id} value={locality.id}>{locality.name}</option>
+                      ))
+                    }
                   </Field>
                   <Input
                     label="Dirección de origen"
@@ -119,28 +115,11 @@ const Shipment = () => {
                     name="locality_destination"
                     className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56"
                   >
-                    <option value="chapanay">Chapanay</option>
-                    <option value="ciudad de mendoza">Ciudad de Mendoza</option>
-                    <option value="corralitos">Corralitos</option>
-                    <option value="fray luis beltran">Fray Luis Beltrán</option>
-                    <option value="godoy cruz">Godoy Cruz</option>
-                    <option value="guaymallen">Guaymallén</option>
-                    <option value="ingeniero giagnoni">
-                      Ingeniero Giagnoni
-                    </option>
-                    <option value="junin">Junín</option>
-                    <option value="las heras">Las Heras</option>
-                    <option value="lavalle">Lavalle</option>
-                    <option value="los barriales">Los Barriales</option>
-                    <option value="lujan de cuyo">Luján de Cuyo</option>
-                    <option value="maipu">Maipú</option>
-                    <option value="medrano">Medrano</option>
-                    <option value="palmira">Palmira</option>
-                    <option value="rivadavia">Rivadavia</option>
-                    <option value="rodriguez peña">Rodriguez Peña</option>
-                    <option value="rodeo de la cruz">Rodeo de la Cruz</option>
-                    <option value="rodeo del medio">Rodeo del Medio</option>
-                    <option value="tres porteñas">Tres Porteñas</option>
+                    <option value={0}>Seleccionar</option>
+                    {localities.map((locality) => (
+                        <option key={locality.id} value={locality.id}>{locality.name}</option>
+                      ))
+                    }
                   </Field>
                   <Input
                     label="Dirección de destino"
@@ -203,7 +182,7 @@ const Shipment = () => {
                       type="radio"
                       id="size-pequeño"
                       name="size"
-                      value="pequeño"
+                      value="small"
                     />
                     <div className="flex  flex-col items-center space-x-2">
                       <span className="ml-2 mr-6 ">Pequeño</span>
@@ -220,7 +199,7 @@ const Shipment = () => {
                       type="radio"
                       id="size-mediano"
                       name="size"
-                      value="mediano"
+                      value="medium"
                     />
                     <div className="flex  flex-col items-center space-x-2">
                       <span className="ml-2 mr-6 ">Mediano</span>
@@ -237,7 +216,7 @@ const Shipment = () => {
                       type="radio"
                       id="size-grande"
                       name="size"
-                      value="grande"
+                      value="large"
                     />
                     <div className="flex  flex-col items-center space-x-2">
                       <span className="ml-2 mr-6 ">Grande</span>

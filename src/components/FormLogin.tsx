@@ -6,7 +6,7 @@ import { validateLogin } from "./validation/validateLogin";
 import type { LoginResponse, UserLogin } from "../types/user";
 import { useUserStore } from "../store/userStore";
 import { auth } from "../helpers/auth";
-import { toast } from "sonner";
+
 
 const FormLogin = () => {
   const [login, setLogin] = useState(false);
@@ -29,7 +29,7 @@ const FormLogin = () => {
             .then((data: LoginResponse) => {
               getUser(data.userId).then(() => {
                 setLogin(true);
-                toast.success("Usuario conectado");
+
                 window.location.href = "/";
                 // console.log(data);
               });
@@ -37,7 +37,7 @@ const FormLogin = () => {
               // resetForm();
             })
             .catch((error: any) => console.log(error));
-            toast.error("Correo electrónico o contraseña incorrecto");
+
         }}
         validate={validateLogin}
       >
