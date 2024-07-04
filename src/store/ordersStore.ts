@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import type { ICreateOrderProps, ILocality, IordersQuotationsProps, Orders } from "../types/shipments";
-import { useEffect } from "react";
+import { useUserStore } from "./userStore";
 
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
 interface State {
     quotation: ({size, locality_origin, locality_destination}:IordersQuotationsProps) => Promise<number>
     getLocalities: () => Promise<ILocality[]>
+    getUser: (userId:string) => Promise<void>
     createOrder: ({size, locality_origin, locality_destination, address_origin, address_destination}:ICreateOrderProps) => Promise<Orders>
 }
 
@@ -33,10 +34,8 @@ export const useOrdersStore = create<State>((set, get) => ({
                 }
             })
         })
-
         const data = await response.json();
         return data;
-
         } catch (error) {
             console.log(error);
         }
@@ -56,6 +55,25 @@ export const useOrdersStore = create<State>((set, get) => ({
             console.log(error);
         }
     },
+    getUser: async (id: string) => {
+        try {
+          const response = await fetch(`${apiUrl}/users/${id}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${
+                localStorage.getItem("token")
+              }`,
+            },
+          });
+          const data = await response.json();
+          // console.log(data);
+          localStorage.setItem("user", JSON.stringify(data));
+          // set({ user: data });
+        } catch (error) {
+          console.log(error);
+        }
+      },
     createOrder: async ({size, locality_origin, locality_destination, address_origin, address_destination}:ICreateOrderProps) => {
         const userId = JSON.parse(localStorage.getItem("user")!).id;
         try {
@@ -81,10 +99,9 @@ export const useOrdersStore = create<State>((set, get) => ({
                     }
                   })
             })
-    
+            await get().getUser(userId);
             const data = await response.json();
             return data;
-    
             } catch (error) {
                 console.log(error);
             }

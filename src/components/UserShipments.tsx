@@ -5,16 +5,18 @@ import HistoryShipment from "./HistoryShipment";
 
 export default function UserShipments() {
     const user = useUserStore((state) => state.user)
-    const setOrdersMock = useUserStore((state) => state.setOrders)
+    const setUser = useUserStore((state) => state.setUser)
     const [orders, setOrders] = useState<Orders[] | undefined>([...user?.orders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())])
     const [searchDate, setSearchDate] = useState("")
     // const [sorted, setSorted] = useState("")
     const [orderState, setOrderState] = useState("")
 
     useEffect(() => {
+        setUser()
         setOrders(user?.orders?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
         setOrderState("all")
-        setOrdersMock()
+        console.log(user)
+        // setOrdersMock()
         // console.log(orderState)
         // localStorage.setItem("user", JSON.stringify(user))
     }, [])
@@ -37,7 +39,8 @@ export default function UserShipments() {
     // }, [sorted])
     
     useEffect(() => {
-        setOrdersMock()
+        setUser()
+        // setOrdersMock()
         let filteredOrders = [...user?.orders || []]
         console.log(user?.orders);
         if(searchDate && searchDate !== ""){
@@ -91,6 +94,7 @@ export default function UserShipments() {
             </div>
             <div className="flex flex-col gap-4">
                 {orders?.length! > 0 ? (
+                    console.log(orders),
                     <HistoryShipment orders={orders!} />
                 ) : (
                         <div className="flex flex-row text-black pt-12 w-full justify-center">
