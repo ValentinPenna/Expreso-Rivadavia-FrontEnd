@@ -1,8 +1,22 @@
-import React from "react";
-import { Input } from "./secondary/Input";
+import React, { useState } from "react";
+
 import Button from "./secondary/Button";
+import { Form, Formik } from "formik";
+import { Input } from "./secondary/Input";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { validateNewPass } from "./validation/validateNewPass";
+import { useUserStore } from "../store/userStore";
+import { toast } from "react-toastify";
 
 const UserSecurity = () => {
+  const [password, setPassword] = useState(true);
+  const user = useUserStore((state) => state.user);
+  const changePassword = useUserStore((state) => state.changePassword);
+  const removeSession = useUserStore((state) => state.removeSession);
+
+  const passwordVisibility = () => {
+    setPassword(!password);
+  };
   return (
     <section className="w-full text-center my-4 bg-white px-12 py-16 rounded-l-lg flex flex-col max-w-[80%] gap-2">
       <h1 className="font-bold text-4xl text-primary">Seguridad</h1>
@@ -16,45 +30,74 @@ const UserSecurity = () => {
           <h3 className="text-xl text-primary font-semibold mb-2">
             Cambio de Contraseña
           </h3>
-          <form className=" flex flex-col justify-center items-center ">
-            <label
-              htmlFor="current-password"
-              className="text-primary lg:text-2xl md:text-2xl sm:text-xl mt-5"
-            >
-              Contraseña Actual
-            </label>
-            <input
-              className="mb-4 bg-transparent border-b border-primary focus:ring-0 focus:outline-none lg:text-3xl md:text-2xl text-xl pt-2 px-1 w-full"
-              type="password"
-              placeholder="***********"
-            />
+          <Formik
+            initialValues={{
+              oldPassword: "",
+              newPassword: "",
+              confirmNewPassword: "",
+            }}
+            validate={validateNewPass}
+            onSubmit={(values, { resetForm }) => {
+              const { confirmNewPassword, ...newValues } = values;
 
-            <label
-              htmlFor="new-password"
-              className="text-primary lg:text-2xl md:text-2xl sm:text-xl mt-5"
-            >
-              Nueva Contraseña
-            </label>
-            <input
-              className="mb-4 bg-transparent border-b border-primary focus:ring-0 focus:outline-none lg:text-3xl md:text-2xl text-xl pt-2 px-1 w-full"
-              type="password"
-              placeholder="***********"
-            />
-
-            <label
-              htmlFor="confirm-password"
-              className="text-primary lg:text-2xl md:text-2xl sm:text-xl mt-5"
-            >
-              Confirmar Nueva Contraseña
-            </label>
-            <input
-              className="mb-4 bg-transparent border-b border-primary focus:ring-0 focus:outline-none lg:text-3xl md:text-2xl text-xl pt-2 px-1 w-full"
-              type="password"
-              placeholder="***********"
-            />
-
-            <Button type="submit">Cambiar Contraseña</Button>
-          </form>
+              changePassword(newValues, user.id)
+                .then((res) => {
+                  toast.success("El Cambio de contraseña se realizo con exito");
+                  removeSession();
+                  toast.info(
+                    "Se va a cerrar sesión, vuelve a loguearte con la nueva contraseña"
+                  );
+                  setTimeout(() => {
+                    window.location.href = "/auth/login";
+                  }, 3000);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  toast.error("Las credenciales estan mal");
+                });
+            }}
+          >
+            {({ errors }) => (
+              <Form className=" flex flex-col justify-center items-center ">
+                <Input
+                  error={errors.oldPassword}
+                  label="Contraseña Actual"
+                  name="oldPassword"
+                  placeholder="**********"
+                  type="password"
+                />
+                <div className="relative">
+                  <Input
+                    error={errors.newPassword}
+                    label="Nueva contraseña"
+                    name="newPassword"
+                    placeholder="**********"
+                    type={password ? "password" : "text"}
+                  />
+                  <div
+                    onClick={passwordVisibility}
+                    className="absolute right-0 top-2/3  transform  cursor-pointer"
+                  >
+                    {!password ? (
+                      <AiFillEyeInvisible color="red" />
+                    ) : (
+                      <AiFillEye color="red" />
+                    )}
+                  </div>
+                </div>
+                <Input
+                  error={errors.confirmNewPassword}
+                  label="Confirmar contraseña"
+                  name="confirmNewPassword"
+                  placeholder="**********"
+                  type="password"
+                />
+                <Button className="mt-4 p-0.5 text-base w-fit" type="submit">
+                  Hacer Cambio
+                </Button>
+              </Form>
+            )}
+          </Formik>
         </div>
 
         {/* Historial de Inicios de Sesión */}

@@ -7,7 +7,7 @@ export default function SwitchGuestUser() {
   const token: string = useUserStore((state) => state.token);
   const removeSession = useUserStore((state) => state.removeSession);
   const { setUser, setToken } = useUserStore((state) => state);
-  const [isFocused, setIsFocused] = useState<boolean>(true);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   useEffect(() => {
     setUser();
     setToken();

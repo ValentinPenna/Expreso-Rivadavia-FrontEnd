@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type {
+  ChangePassProps,
   Company,
   CompanyRegister,
   LoginResponse,
@@ -9,9 +10,7 @@ import type {
   UserRegister,
 } from "../types/user";
 import type { Orders } from "../types/shipments";
-import { init } from "astro/virtual-modules/prefetch.js";
 import { toast } from "react-toastify";
-
 
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
@@ -27,6 +26,7 @@ const userMock: User = {
   locality: "string",
   role: "user",
   orders: [],
+  profilePicture: "",
 };
 
 const ordersMock: Orders[] = [
@@ -44,6 +44,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -79,6 +80,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -114,6 +116,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -149,6 +152,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -184,6 +188,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -219,6 +224,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -254,6 +260,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -289,6 +296,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -324,6 +332,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -359,6 +368,7 @@ const ordersMock: Orders[] = [
       locality: "string",
       role: "user",
       orders: [],
+      profilePicture: "",
     },
     shipments: {
       id: "706becbe-9521-43be-a8ab-1938210ad078",
@@ -394,6 +404,7 @@ const initialUser: User = {
   locality: "",
   role: "",
   orders: [],
+  profilePicture: "",
 };
 
 interface State {
@@ -408,6 +419,7 @@ interface State {
     user: UserRegister | CompanyRegister
   ) => Promise<RegisterResponse | void>;
   setOrders: () => void;
+  changePassword: (dataUser: ChangePassProps, id: string) => Promise<User>;
 }
 
 export const useUserStore = create<State>((set, get) => ({
@@ -458,7 +470,9 @@ export const useUserStore = create<State>((set, get) => ({
       console.log(error);
     }
   },
-  userRegister: async (user: UserRegister | CompanyRegister): Promise <RegisterResponse | void>=> {
+  userRegister: async (
+    user: UserRegister | CompanyRegister
+  ): Promise<RegisterResponse | void> => {
     try {
       const response = await fetch(`${apiUrl}/auth/signup`, {
         method: "POST",
@@ -467,13 +481,13 @@ export const useUserStore = create<State>((set, get) => ({
         },
         body: JSON.stringify(user),
       });
-  
+
       if (!response.ok) {
         const error = await response.json();
         toast.error(`Error al registrar usuario: ${error.message}`);
         return Promise.reject(`Error al registrar usuario: ${error.message}`);
       }
-  
+
       const data = await response.json();
       return data;
     } catch (error) {
@@ -481,7 +495,6 @@ export const useUserStore = create<State>((set, get) => ({
       toast.error("Error al comunicarse con el servidor");
       return Promise.reject("Error al comunicarse con el servidor");
     }
-
   },
   removeSession: () => {
     set({ user: initialUser, token: "" });
@@ -490,5 +503,31 @@ export const useUserStore = create<State>((set, get) => ({
   },
   setOrders: () => {
     set({ user: { ...get().user, orders: ordersMock } });
+  },
+  changePassword: async (dataUser: ChangePassProps, id: string) => {
+    try {
+      let bodyContent = JSON.stringify(dataUser);
+
+      const response = await fetch(`${apiUrl}/users/changepassword/${id}`, {
+        method: `PUT`,
+        headers: {
+          "Content-Type": `application/json`,
+          authorization: `Bearer ${
+            localStorage.getItem("token") || get().token
+          } `,
+        },
+        body: bodyContent,
+      });
+      if (!response.ok) {
+        let errorText = response.statusText;
+
+        throw new Error(`${errorText}!`);
+      } else {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error: any) {
+      throw new Error(error);
+    }
   },
 }));
