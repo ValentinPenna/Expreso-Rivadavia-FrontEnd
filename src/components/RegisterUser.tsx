@@ -9,8 +9,6 @@ import { useUserStore } from '../store/userStore'
 import type { RegisterResponse } from '../types/user'
 import { toast} from 'react-toastify'
 
-
-
 interface RegisterUserProps {
   handleBackToSelection: () => void;  
 }
@@ -42,7 +40,6 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
         onSubmit={ (values: IRegisterUser)=>{
            userRegister(values)
           .then((data: boolean) => {
-
             console.log(data)
             if ((data)){
               setRegisterUser(true);

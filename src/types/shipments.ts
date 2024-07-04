@@ -61,3 +61,22 @@ export const statusMap: {[key: string]: string} = {
     delivered: "ENTREGADO",
     cancelled: "CANCELADO",
 }
+
+export interface IordersQuotationsProps{
+    size: string,
+    locality_origin: number,
+    locality_destination: number,
+}
+
+export interface ILocality {
+    id: string;
+    name: string;
+}
+
+export interface ICreateOrderProps{
+    size: string,
+    locality_origin: number,
+    locality_destination: number,
+    address_origin: string,
+    address_destination: string,
+}

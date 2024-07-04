@@ -35,8 +35,6 @@ const FormLogin = () => {
                 setTimeout(() => {
                   window.location.href = "/";
                 }, 1000);
-                
-                
                 // console.log(data);
               });
 
@@ -46,7 +44,6 @@ const FormLogin = () => {
               toast.error("El usuario no pudo iniciar sesión");
             }
               );
-            
         }}
         validate={validateLogin}
       >

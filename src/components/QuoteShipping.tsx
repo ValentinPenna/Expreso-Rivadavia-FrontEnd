@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 
 import Button from "./secondary/Button";
-import { toast } from "sonner";
+import { useOrdersStore } from "../store/ordersStore";
+import type { ILocality } from "../types/shipments";
 
 export interface Quote {
   origin: string;
@@ -12,21 +13,33 @@ export interface Quote {
 
 export default function QuoteShipping() {
   const [quote, setQuote] = useState(false);
+  const [localities, setLocalities] = useState<ILocality[]>([]);
+  const quotation = useOrdersStore((state) => state.quotation);
+  const getLocalities = useOrdersStore((state) => state.getLocalities);
+
+  useEffect(() => {
+    async function fetchLocalities() {
+      const data = await getLocalities();
+      console.log(data)
+      setLocalities(data);
+    }
+    fetchLocalities();
+  }, []);
 
   return (
     <div className="px-4 md:px-8 z-50">
       <Formik
         initialValues={{
-          origin: "",
-          destination: "",
+          origin: "0",
+          destination: "0",
           size: "",
-          
         }}
         
         onSubmit={(values: Quote, { resetForm }) => {
+          quotation({size: values.size, locality_origin: Number(values.origin), locality_destination: Number(values.destination)})
+          .then ((data: any) => alert("El envio costaria: " + data))
           resetForm();
           setQuote(true);
-          toast.success("Cotización realizada con éxito");
         }}
       >
         
@@ -46,26 +59,11 @@ export default function QuoteShipping() {
                     Ciudad de origen:
                   </label>
                   <Field as="select" id="origin" name="origin" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56">
-                    <option value="chapanay">Chapanay</option>
-                    <option value="ciudad de mendoza">Ciudad de Mendoza</option>
-                    <option value="corralitos">Corralitos</option>
-                    <option value="fray luis beltran">Fray Luis Beltrán</option>
-                    <option value="godoy cruz">Godoy Cruz</option>
-                    <option value="guaymallen">Guaymallén</option>
-                    <option value="ingeniero giagnoni">Ingeniero Giagnoni</option>
-                    <option value="junin">Junín</option>
-                    <option value="las heras">Las Heras</option>
-                    <option value="lavalle">Lavalle</option>
-                    <option value="los barriales">Los Barriales</option>
-                    <option value="lujan de cuyo">Luján de Cuyo</option>
-                    <option value="maipu">Maipú</option>
-                    <option value="medrano">Medrano</option>
-                    <option value="palmira">Palmira</option>
-                    <option value="rivadavia">Rivadavia</option>
-                    <option value="rodriguez peña">Rodriguez Peña</option>
-                    <option value="rodeo de la cruz">Rodeo de la Cruz</option>
-                    <option value="rodeo del medio">Rodeo del Medio</option>
-                    <option value="tres porteñas">Tres Porteñas</option>
+                    <option value={0}>Seleccionar</option>
+                    {localities.map((locality) => (
+                        <option key={locality.id} value={locality.id}>{locality.name}</option>
+                      ))
+                    }
                   </Field>
                 </div>
                 <div>
@@ -76,26 +74,11 @@ export default function QuoteShipping() {
                     Ciudad de destino:
                   </label>
                   <Field as="select" id="destination" name="destination" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56">
-                    <option value="chapanay">Chapanay</option>
-                    <option value="ciudad de mendoza">Ciudad de Mendoza</option>
-                    <option value="corralitos">Corralitos</option>
-                    <option value="fray luis beltran">Fray Luis Beltrán</option>
-                    <option value="godoy cruz">Godoy Cruz</option>
-                    <option value="guaymallen">Guaymallén</option>
-                    <option value="ingeniero giagnoni">Ingeniero Giagnoni</option>
-                    <option value="junin">Junín</option>
-                    <option value="las heras">Las Heras</option>
-                    <option value="lavalle">Lavalle</option>
-                    <option value="los barriales">Los Barriales</option>
-                    <option value="lujan de cuyo">Luján de Cuyo</option>
-                    <option value="maipu">Maipú</option>
-                    <option value="medrano">Medrano</option>
-                    <option value="palmira">Palmira</option>
-                    <option value="rivadavia">Rivadavia</option>
-                    <option value="rodriguez peña">Rodriguez Peña</option>
-                    <option value="rodeo de la cruz">Rodeo de la Cruz</option>
-                    <option value="rodeo del medio">Rodeo del Medio</option>
-                    <option value="tres porteñas">Tres Porteñas</option>
+                  <option value={0}>Seleccionar</option>
+                  {localities.map((locality) => (
+                      <option key={locality.id} value={locality.id}>{locality.name}</option>
+                    ))
+                  }
                   </Field>
                 </div>
               </div>
@@ -118,21 +101,21 @@ export default function QuoteShipping() {
                  </label>
                   <label htmlFor="size-pequeño" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
                    
-                    <Field type="radio" id="size-pequeño" name="size" value="pequeño" />
+                    <Field type="radio" id="size-pequeño" name="size" value="small" />
                     <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Pequeño</span>
                     <span className="text-sm md:ml-0 text-primary">Máximo de 150cm / 10000 grs</span>
                     </div>
                   </label>
                   <label htmlFor="size-mediano" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
-                    <Field type="radio" id="size-mediano" name="size" value="mediano" />
+                    <Field type="radio" id="size-mediano" name="size" value="medium" />
                     <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Mediano</span>
                     <span className="text-sm md:ml-0 text-primary">Máximo de 300cm / 25000 grs</span>
                     </div>
                   </label>
                   <label htmlFor="size-grande" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
-                    <Field type="radio" id="size-grande" name="size" value="grande"/>
+                    <Field type="radio" id="size-grande" name="size" value="large"/>
                     <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Grande</span>
                     <span className="text-sm md:ml-0 text-primary">Máximo de 495cm / 50000 grs</span>
@@ -152,4 +135,5 @@ export default function QuoteShipping() {
       </Formik>
     </div>
   );
+
 }
