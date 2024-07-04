@@ -4,9 +4,15 @@ import Button from "./secondary/Button";
 import { Form, Formik } from "formik";
 import { Input } from "./secondary/Input";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { validateNewPass } from "./validation/validateNewPass";
+import { useUserStore } from "../store/userStore";
+import { toast } from "react-toastify";
 
 const UserSecurity = () => {
   const [password, setPassword] = useState(true);
+  const user = useUserStore((state) => state.user);
+  const changePassword = useUserStore((state) => state.changePassword);
+  const removeSession = useUserStore((state) => state.removeSession);
 
   const passwordVisibility = () => {
     setPassword(!password);
@@ -28,17 +34,33 @@ const UserSecurity = () => {
             initialValues={{
               oldPassword: "",
               newPassword: "",
-              confirmPassword: "",
+              confirmNewPassword: "",
             }}
-            onSubmit={(values: any, { resetForm }) => {
-              //* logica de put para cmabiar contraseña
+            validate={validateNewPass}
+            onSubmit={(values, { resetForm }) => {
+              const { confirmNewPassword, ...newValues } = values;
+
+              changePassword(newValues, user.id)
+                .then((res) => {
+                  toast.success("El Cambio de contraseña se realizo con exito");
+                  removeSession();
+                  toast.info(
+                    "Se va a cerrar sesión, vuelve a loguearte con la nueva contraseña"
+                  );
+                  setTimeout(() => {
+                    window.location.href = "/auth/login";
+                  }, 3000);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  toast.error("Las credenciales estan mal");
+                });
             }}
-            // validate={validateNewPassword}
           >
             {({ errors }) => (
               <Form className=" flex flex-col justify-center items-center ">
                 <Input
-                  // error={errors.oldPassword}
+                  error={errors.oldPassword}
                   label="Contraseña Actual"
                   name="oldPassword"
                   placeholder="**********"
@@ -46,11 +68,11 @@ const UserSecurity = () => {
                 />
                 <div className="relative">
                   <Input
+                    error={errors.newPassword}
                     label="Nueva contraseña"
-                    name="newpassword"
+                    name="newPassword"
                     placeholder="**********"
                     type={password ? "password" : "text"}
-                    // error={errors.newPassword}
                   />
                   <div
                     onClick={passwordVisibility}
@@ -64,13 +86,14 @@ const UserSecurity = () => {
                   </div>
                 </div>
                 <Input
-                  // error={errors.confirmPassword}
+                  error={errors.confirmNewPassword}
                   label="Confirmar contraseña"
-                  name="confirmPassword"
+                  name="confirmNewPassword"
                   placeholder="**********"
+                  type="password"
                 />
-                <Button className="mt-4" type="submit">
-                  Cambiar Contraseña
+                <Button className="mt-4 p-0.5 text-base w-fit" type="submit">
+                  Hacer Cambio
                 </Button>
               </Form>
             )}
