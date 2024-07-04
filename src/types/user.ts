@@ -74,6 +74,7 @@ export interface RegisterResponse {
     address: string;
     locality: string;
     role: string;
+    profilePicture: string;
 }
 
 export interface LoginResponse {

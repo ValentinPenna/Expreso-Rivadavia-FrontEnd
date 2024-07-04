@@ -2,16 +2,31 @@ import { FaEdit } from "react-icons/fa";
 import { useUserStore } from "../store/userStore";
 import type { User } from "../types/user";
 import { useState } from "react";
+import Button from "./secondary/Button";
+import { toast } from "react-toastify";
+import { Input } from "./secondary/Input";
+import InputDashboard from "./secondary/InputDashboard";
 
 export default function UserInfoDashboard() {
   const user: User | null = useUserStore((state) => state.user);
   const removeSession = useUserStore((state) => state.removeSession);
   const [editionMode, setEditionMode] = useState(false);
+  const [userData, setUserData] = useState<User | null>(user);
 
   const handleSessionClose = () => {
     removeSession();
-    window.location.href = "/";
+    toast.info('Has cerrado sesión')
+       setTimeout(() => {
+      window.location.href = "/";
+      }, 2000);
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (userData) {
+      setUserData({ ...userData, [name]: value });
+    }
+  }
 
   return (
     <div className="w-full my-4 bg-white px-24 pb-24 pt-20 rounded-l-lg flex flex-col max-w-[80%]">
@@ -38,49 +53,122 @@ export default function UserInfoDashboard() {
           <div className="flex flex-row">
             <div className="w-1/2 h-fit">
               <h2 className="font-bold text-2xl text-primary">
-                Nombre de la empresa:
-              </h2>
-              <h3 className="font-normal text-xl">{user?.companyName}</h3>
+                Nombre de la empresa:</h2>
+                {editionMode ? (
+                  <InputDashboard
+                  type="text"
+                  name="companyName"
+                  value={userData?.companyName}
+                  onChange={handleChange}
+                 />
+                ) : (
+               <h3 className="font-normal text-xl">{user?.companyName}</h3>
+                )}
+              
             </div>
           </div>
         )}
         <div className="flex flex-row">
           <div className="w-1/2 h-fit">
             <h2 className="font-bold text-2xl text-primary">Nombre:</h2>
-            <h3 className="font-normal text-xl">{user?.name}</h3>
+            {editionMode ? (
+              <InputDashboard
+                type="text"
+                name="name"
+                value={userData?.name}
+                onChange={handleChange}
+              />
+            ): (
+              <h3 className="font-normal text-xl">{user?.name}</h3>
+            )
+        }
           </div>
           <div className="w-1/2 h-fit">
             <h2 className="font-bold text-2xl text-primary">Apellido:</h2>
-            <h3 className="font-normal text-xl">{user?.lastName}</h3>
+            {editionMode ? (
+              <InputDashboard
+                type="text"
+                name="lastName"
+                value={userData?.lastName}
+                onChange={handleChange}
+              />
+            ):(
+              <h3 className="font-normal text-xl">{user?.lastName}</h3>
+            )}
           </div>
         </div>
         <div className="flex flex-row">
           <div className="w-1/2 h-fit">
             <h2 className="font-bold text-2xl text-primary">Email:</h2>
-            <h3 className="font-normal text-xl">{user?.email}</h3>
+            {editionMode ? (
+              <InputDashboard
+                type="email"
+                name="email"
+                value={userData?.email}
+                onChange={handleChange}
+              />
+            ):(
+              <h3 className="font-normal text-xl">{user?.email}</h3>
+            )}
           </div>
           {!user?.cuit_cuil ? (
             <div className="w-1/2 h-fit">
               <h2 className="font-bold text-2xl text-primary">
                 Numero de Documento:
               </h2>
-              <h3 className="font-normal text-xl">{user?.dni}</h3>
+              {editionMode ? (
+                <InputDashboard
+                  type="text"
+                  name="dni"
+                  value={userData?.dni}
+                  onChange={handleChange}
+                />
+              ):(
+                <h3 className="font-normal text-xl">{user?.dni}</h3>
+              )}
             </div>
           ) : (
             <div className="w-1/2 h-fit">
               <h2 className="font-bold text-2xl text-primary">CUIT / CUIL:</h2>
-              <h3 className="font-normal text-xl">{user?.cuit_cuil}</h3>
+              {editionMode ? (
+                <InputDashboard
+                  type="text"
+                  name="cuit_cuil"
+                  value={userData?.cuit_cuil}
+                  onChange={handleChange}
+                />
+              ):(
+               <h3 className="font-normal text-xl">{user?.cuit_cuil}</h3>
+              )}
             </div>
           )}
         </div>
         <div className="flex flex-row">
           <div className="w-1/2 h-fit">
             <h2 className="font-bold text-2xl text-primary">Dirección:</h2>
-            <h3 className="font-normal text-xl">{user?.address}</h3>
+            {editionMode ? (
+              <InputDashboard
+                type="text"
+                name="address"
+                value={userData?.address}
+                onChange={handleChange}
+              />
+            ):(
+              <h3 className="font-normal text-xl">{user?.address}</h3>
+            )}
           </div>
           <div className="w-1/2 h-fit">
             <h2 className="font-bold text-2xl text-primary">Localidad:</h2>
-            <h3 className="font-normal text-xl">{user?.locality}</h3>
+            {editionMode ? (
+              <InputDashboard
+                type="text"
+                name="locality"
+                value={userData?.locality}
+                onChange={handleChange}
+              />
+            ):(
+              <h3 className="font-normal text-xl">{user?.locality}</h3>
+            )}
           </div>
         </div>
       </div>
@@ -88,12 +176,11 @@ export default function UserInfoDashboard() {
         {editionMode ? (
           <></>
         ) : (
-          <button
+          <Button
             onClick={handleSessionClose}
-            className="bg-primary text-white text-lg font-bold px-6 py-2 rounded-md hover:bg-white hover:text-primary border-2 border-primary"
           >
-            Cerrar sesión
-          </button>
+         Cerrar sesión
+          </Button>
         )}
       </div>
     </div>
