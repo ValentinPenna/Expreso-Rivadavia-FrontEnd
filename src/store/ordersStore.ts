@@ -9,6 +9,7 @@ interface State {
     getLocalities: () => Promise<ILocality[]>
     getUser: (userId:string) => Promise<void>
     createOrder: ({size, locality_origin, locality_destination, address_origin, address_destination}:ICreateOrderProps) => Promise<Orders>
+    getOrders: () => Promise<Orders[]>
 }
 
 export const useOrdersStore = create<State>((set, get) => ({
@@ -105,5 +106,20 @@ export const useOrdersStore = create<State>((set, get) => ({
             } catch (error) {
                 console.log(error);
             }
-        },
+      },
+      getOrders: async () => {
+        try {
+          const response = await fetch(`${apiUrl}/orders`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+          })
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.log(error);
+        }
+      },
 }))
