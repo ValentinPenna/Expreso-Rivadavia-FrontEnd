@@ -57,9 +57,9 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
                  Estado de la orden:
                 <span className='text-primary'> {statusMap[(order.status)]}</span>
                 </p>
-              <p>Paquetes:
+              {/* <p>Paquetes:
                 <span className='text-primary'> {order.packages.join(', ')}</span>
-                 </p>
+                 </p> */}
               <p>Localidad de origen: 
                 <span className='text-primary'> {order.shipments.locality_origin}</span>
                 </p>
@@ -72,9 +72,9 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
               <p>Dirección de destino: 
                 <span className='text-primary'> {order.shipments.address_destination}</span> 
                  </p>
-              <p>Precio del envío: 
+              {/* <p>Precio del envío: 
                 <span className='text-primary'> $ {order.shipments.shipment_price.toFixed(2)}</span>
-                 </p>
+                 </p> */}
                  <div className='border border-primary my-4 w-1/3'></div>
                  
                  <p>Precio de la orden: 
