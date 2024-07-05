@@ -537,32 +537,33 @@ export const useUserStore = create<State>((set, get) => ({
     }
   },
 
-  uploadImage: async (file: File, id: string): Promise<string> => {
+ uploadImage: async (file: File, id: string): Promise<string> => {
     const formData = new FormData();
     formData.append("file", file);
-    console.log(formData);
-    console.log(file);
+
     try {
-      const response = await fetch(`${apiUrl}/files/uploadImage/${id}`, {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${
-            localStorage.getItem("token") || get().token
-          }`,
-        },
-        body: formData,
-      });
-      if (!response.ok) {
-        throw new Error("Error al subir la imagen");
-      }
-      console.log(response);
-      //  const data = await response.json()
-      return response.url;
+        const response = await fetch(${apiUrl}/files/uploadImage/${id}, {
+            method: 'POST',
+            headers: {
+                Authorization: Bearer ${localStorage.getItem('token') || get().token},
+            },
+            body: formData,
+        });
+        if (!response.ok) {
+            throw new Error('Error al subir la imagen');
+        }
+        const responseData = await response.json(); 
+        if (!responseData.profilePicture) {
+            throw new Error('No se devolvió la URL de la imagen');
+        }
+        localStorage.setItem('profilePicture', responseData.profilePicture )
+        return responseData.profilePicture; 
     } catch (error) {
-      console.error(error);
-      throw new Error("Error uploading profile picture");
+        console.error(error);
+        throw new Error("Error uploading profile picture");
     }
-  },
+},
+
   googleLogin: async (emailUser: string | null) => {
     try {
       console.log(emailUser);

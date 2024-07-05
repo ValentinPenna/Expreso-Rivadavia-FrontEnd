@@ -5,6 +5,7 @@ import { GrSecure } from "react-icons/gr";
 import { ImHistory } from "react-icons/im";
 import ProfilePhoto from "./ProfilePhoto";
 
+
 export default function SideMenu() {
   const [isFocused, setIsFocused] = useState<boolean>(true);
 
