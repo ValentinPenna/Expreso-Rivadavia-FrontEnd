@@ -538,14 +538,15 @@ export const useUserStore = create<State>((set, get) => ({
   },
 
  uploadImage: async (file: File, id: string): Promise<string> => {
+  
     const formData = new FormData();
     formData.append("file", file);
 
     try {
-        const response = await fetch(${apiUrl}/files/uploadImage/${id}, {
+        const response = await fetch(`${apiUrl}/files/uploadImage/${id}`, {
             method: 'POST',
             headers: {
-                Authorization: Bearer ${localStorage.getItem('token') || get().token},
+                Authorization: `Bearer ${localStorage.getItem('token') || get().token}`,
             },
             body: formData,
         });
