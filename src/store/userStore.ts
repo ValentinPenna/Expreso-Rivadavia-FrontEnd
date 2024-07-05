@@ -12,7 +12,6 @@ import type {
 import type { Orders } from "../types/shipments";
 import { toast } from "react-toastify";
 
-
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
 const userMock: User = {
@@ -422,7 +421,7 @@ interface State {
   // setOrders: () => void;
   changePassword: (dataUser: ChangePassProps, id: string) => Promise<User>;
   uploadImage: (file: File, id: string) => Promise<string>;
-  
+  googleLogin: (email: string | null) => Promise<LoginResponse | void>;
 }
 
 export const useUserStore = create<State>((set, get) => ({
@@ -442,14 +441,14 @@ export const useUserStore = create<State>((set, get) => ({
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${
+          Authorization: `Bearer ${
             localStorage.getItem("token") || get().token
           }`,
         },
       });
       const data = await response.json();
       // console.log(data);
-      if (Object.keys(data).includes("id")){
+      if (Object.keys(data).includes("id")) {
         localStorage.setItem("user", JSON.stringify(data));
       } else {
         throw new Error("No se pudo obtener el usuario");
@@ -542,24 +541,48 @@ export const useUserStore = create<State>((set, get) => ({
     const formData = new FormData();
     formData.append("file", file);
     console.log(formData);
-    console.log(file)
+    console.log(file);
     try {
-      const response = await fetch (`${apiUrl}/files/uploadImage/${id}`, {
-        method: 'POST',
+      const response = await fetch(`${apiUrl}/files/uploadImage/${id}`, {
+        method: "POST",
         headers: {
-          authorization: `Bearer ${localStorage.getItem('token') || get().token}`,
+          authorization: `Bearer ${
+            localStorage.getItem("token") || get().token
+          }`,
         },
         body: formData,
       });
-      if (!response.ok){
-        throw new Error('Error al subir la imagen');
+      if (!response.ok) {
+        throw new Error("Error al subir la imagen");
       }
-      console.log(response)
-    //  const data = await response.json()
-    return response.url;
+      console.log(response);
+      //  const data = await response.json()
+      return response.url;
     } catch (error) {
       console.error(error);
       throw new Error("Error uploading profile picture");
     }
-  }
+  },
+  googleLogin: async (emailUser: string | null) => {
+    try {
+      console.log(emailUser);
+      const email = {
+        email: emailUser,
+      };
+      let bodyContent = JSON.stringify(email);
+      console.log(bodyContent);
+
+      const response = await fetch(`${apiUrl}/auth/google/signin`, {
+        method: `POST`,
+        headers: {
+          "Content-Type": `application/json`,
+        },
+        body: bodyContent,
+      });
+      const data = await response.json();
+      return data;
+    } catch (error: any) {
+      throw new Error(`text`, error);
+    }
+  },
 }));
