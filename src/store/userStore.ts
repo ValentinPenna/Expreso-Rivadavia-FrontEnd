@@ -449,7 +449,11 @@ export const useUserStore = create<State>((set, get) => ({
       });
       const data = await response.json();
       // console.log(data);
-      localStorage.setItem("user", JSON.stringify(data));
+      if (Object.keys(data).includes("id")){
+        localStorage.setItem("user", JSON.stringify(data));
+      } else {
+        throw new Error("No se pudo obtener el usuario");
+      }
       // set({ user: data });
     } catch (error) {
       console.log(error);
