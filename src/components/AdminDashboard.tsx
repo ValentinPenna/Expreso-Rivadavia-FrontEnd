@@ -9,7 +9,7 @@ export default function AdminDashboard() {
         getOrders().then(setOrders).catch(console.log)
     }, [])
     return (
-        <main className="flex flex-col gap-4 p-12">
+        <>
             <div className="flex flex-row justify-between px-6">
                 <h3 className="font-bold">Fecha</h3>
                 <h3 className="font-bold">Usuario</h3>
@@ -25,6 +25,6 @@ export default function AdminDashboard() {
                 </div>
             ))
             }
-        </main>
+        </>
     );
 }
