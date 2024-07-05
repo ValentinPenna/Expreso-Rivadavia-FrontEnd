@@ -84,11 +84,11 @@ export default function UserShipments() {
                     </select> */}
                     <select className="bg-primary text-white p-2 rounded-lg outline-none h-fit" onChange={(e) => {setOrderState(e.target.value);}}>
                         <option value="all">Todos los estados</option>
-                        <option value="receipted">Recibido</option>
-                        <option value="acepted">Aceptado</option>
-                        <option value="sending">En Progreso</option>
-                        <option value="delivered">Entregado</option>
-                        <option value="cancelled">Cancelado</option>
+                        <option value="Pendiente de pago">Pendiente de pago</option>
+                        <option value="Esperando retiro">Esperando Retiro</option>
+                        <option value="En camino">En Camino</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Cancelled">Cancelado</option>
                     </select>
                 </div>
             </div>
