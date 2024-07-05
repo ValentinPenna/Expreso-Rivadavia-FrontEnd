@@ -18,7 +18,8 @@ const FormLogin = () => {
   const [login, setLogin] = useState(false);
   const getUser = useUserStore((state: any) => state.getUser);
   const loginUser = useUserStore((state: any) => state.loginUser);
-  const apiUrl = import.meta.env.PUBLIC_API_URL;
+  const googleLogin = useUserStore((state: any) => state.googleLogin);
+
   useEffect(() => {
     const isAuth = auth();
     if (isAuth) window.location.href = "/";
@@ -32,28 +33,6 @@ const FormLogin = () => {
       );
       console.log(result);
       // mando el email a un endpont de back para rectificar su excistencia
-      const getfetch = async (emailUser: string | null) => {
-        try {
-          console.log(emailUser);
-          const email = {
-            email: emailUser,
-          };
-          let bodyContent = JSON.stringify(email);
-          console.log(bodyContent);
-
-          const response = await fetch(`${apiUrl}/auth/google/signin`, {
-            method: `POST`,
-            headers: {
-              "Content-Type": `application/json`,
-            },
-            body: bodyContent,
-          });
-          const data = await response.json();
-          return data;
-        } catch (error: any) {
-          throw new Error(`text`, error);
-        }
-      };
 
       const aditionalinfo = getAdditionalUserInfo(result);
       console.log(aditionalinfo);
@@ -70,7 +49,7 @@ const FormLogin = () => {
         // hace hace register con lo valores que no me trae el result.user
         window.location.href = "/auth/registergoogle";
       } else {
-        const logGoogle: LoginResponse = await getfetch(result.user.email);
+        const logGoogle: LoginResponse = await googleLogin(result.user.email);
         // se hara la logica del login donde se va a guardar todo en zustand
         console.log(logGoogle);
         localStorage.setItem("token", logGoogle.token);

@@ -15,7 +15,7 @@ export default function UserShipments() {
         setUser()
         setOrders(user?.orders?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
         setOrderState("all")
-        console.log(user)
+        // console.log(user)
         // setOrdersMock()
         // console.log(orderState)
         // localStorage.setItem("user", JSON.stringify(user))
@@ -42,7 +42,7 @@ export default function UserShipments() {
         setUser()
         // setOrdersMock()
         let filteredOrders = [...user?.orders || []]
-        console.log(user?.orders);
+        // console.log(user?.orders);
         if(searchDate && searchDate !== ""){
             filteredOrders = filteredOrders.filter(order => new Date(order.date).toISOString().split("T")[0] === new Date(searchDate).toISOString().split("T")[0])
             // setOrders(orders?.filter(order => new Date(order.date).toISOString().split("T")[0] === new Date(searchDate).toISOString().split("T")[0]))
@@ -94,7 +94,7 @@ export default function UserShipments() {
             </div>
             <div className="flex flex-col gap-4">
                 {orders?.length! > 0 ? (
-                    console.log(orders),
+                    // console.log(orders),
                     <HistoryShipment orders={orders!} />
                 ) : (
                         <div className="flex flex-row text-black pt-12 w-full justify-center">
