@@ -557,7 +557,13 @@ export const useUserStore = create<State>((set, get) => ({
         if (!responseData.profilePicture) {
             throw new Error('No se devolvió la URL de la imagen');
         }
-        localStorage.setItem('profilePicture', responseData.profilePicture )
+        localStorage.setItem('user', JSON.stringify(responseData))
+        set(state => ({
+          user: {
+            ...state.user,
+            profilePicture: responseData.profilePicture
+          }
+        }))
         return responseData.profilePicture; 
     } catch (error) {
         console.error(error);
