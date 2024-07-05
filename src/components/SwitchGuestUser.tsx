@@ -24,7 +24,7 @@ export default function SwitchGuestUser() {
 
   return (
     <>
-      {!token ? (
+      {!token || token === "undefined" ? (
         <div className="flex flex-row gap-6">
           <Button
             className="w-fit mx-10 px-4"
