@@ -18,6 +18,7 @@ const FormLogin = () => {
   const [login, setLogin] = useState(false);
   const getUser = useUserStore((state: any) => state.getUser);
   const loginUser = useUserStore((state: any) => state.loginUser);
+  const apiUrl = import.meta.env.PUBLIC_API_URL;
   useEffect(() => {
     const isAuth = auth();
     if (isAuth) window.location.href = "/";
@@ -31,10 +32,16 @@ const FormLogin = () => {
       );
       console.log(result);
       // mando el email a un endpont de back para rectificar su excistencia
-      const getfetch = async (email: string | null) => {
+      const getfetch = async (emailUser: string | null) => {
         try {
-          let bodyContent = email;
-          const response = await fetch(`/auth/google`, {
+          console.log(emailUser);
+          const email = {
+            email: emailUser,
+          };
+          let bodyContent = JSON.stringify(email);
+          console.log(bodyContent);
+
+          const response = await fetch(`${apiUrl}/auth/google/signin`, {
             method: `POST`,
             headers: {
               "Content-Type": `application/json`,
@@ -65,6 +72,8 @@ const FormLogin = () => {
       } else {
         const logGoogle: LoginResponse = await getfetch(result.user.email);
         // se hara la logica del login donde se va a guardar todo en zustand
+        console.log(logGoogle);
+        localStorage.setItem("token", logGoogle.token);
         getUser(logGoogle.userId).then(() => {
           setLogin(true);
           toast.success("Usuario conectado");
