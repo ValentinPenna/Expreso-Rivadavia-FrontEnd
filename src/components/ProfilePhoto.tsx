@@ -12,7 +12,7 @@ const ProfilePhoto = () => {
 
     if (user?.profilePicture) {
       
-        setProfilePicture(localStorage.getItem('profilePicture')!);
+        setProfilePicture(JSON.parse(localStorage.getItem('user')!).profilePicture!);
     } 
   }, [user.profilePicture]);
 
@@ -30,7 +30,7 @@ const ProfilePhoto = () => {
         toast.success('Foto de perfil actualizada con éxito');
       } catch (error) {
         console.error(error);
-        toast.error('Hubo un error al actualizar la foto de perfil');
+        toast.error( `Hubo un error al actualizar la foto de perfil`);
       } finally {
         setLoading(false);
       }
