@@ -23,8 +23,14 @@ export interface IHistoryShipmentProps {
 export interface Shipments {
     id: string;
     orders: string;
-    locality_origin: string;
-    locality_destination: string;
+    locality_origin: {
+        id: number;
+        name: string;
+    };
+    locality_destination: {
+        id: number;
+        name: string;
+    };
     address_origin: string;
     address_destination: string;
     shipment_price: number;
