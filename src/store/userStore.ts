@@ -12,6 +12,7 @@ import type {
 import type { Orders } from "../types/shipments";
 import { toast } from "react-toastify";
 
+
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
 const userMock: User = {
@@ -420,6 +421,8 @@ interface State {
   ) => Promise<RegisterResponse | void>;
   // setOrders: () => void;
   changePassword: (dataUser: ChangePassProps, id: string) => Promise<User>;
+  uploadImage: (file: File, id: string) => Promise<string>;
+  
 }
 
 export const useUserStore = create<State>((set, get) => ({
@@ -530,4 +533,29 @@ export const useUserStore = create<State>((set, get) => ({
       throw new Error(error);
     }
   },
+
+  uploadImage: async (file: File, id: string): Promise<string> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    console.log(formData);
+    console.log(file)
+    try {
+      const response = await fetch (`${apiUrl}/files/uploadImage/${id}`, {
+        method: 'POST',
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('token') || get().token}`,
+        },
+        body: formData,
+      });
+      if (!response.ok){
+        throw new Error('Error al subir la imagen');
+      }
+      console.log(response)
+    //  const data = await response.json()
+    return response.url;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error uploading profile picture");
+    }
+  }
 }));
