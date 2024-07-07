@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
-import { FaUserPen } from "react-icons/fa6";
+import { FaTruckFast, FaUserPen } from "react-icons/fa6";
 import { GrSecure } from "react-icons/gr";
 import { ImHistory } from "react-icons/im";
+import ProfilePhoto from "./ProfilePhoto";
+
 
 export default function SideMenu() {
   const [isFocused, setIsFocused] = useState<boolean>(true);
@@ -20,13 +22,7 @@ export default function SideMenu() {
         >
           <CiMenuBurger className="text-xl" color="#CB1B1A" />
         </button>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-          alt="Profile"
-          className={`${
-            isFocused ? "w-16 pt-8" : "w-8 pt-8"
-          } transition-all duration-300 rounded-full `}
-        />
+        <ProfilePhoto/>
         <div className="flex flex-col gap-6 text-xl items-start w-full">
           <div className="flex flex-row h-full">
             {window.location.pathname === "/dashboard" ? (
@@ -87,6 +83,37 @@ export default function SideMenu() {
                   } font-normal text-lg pl-1`}
                 >
                   Historial de envios
+                </a>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-row h-fit">
+            {window.location.pathname === "/dashboard/trackeo" ? (
+              <div className="flex items-center border-l-4 h-8 border-primary">
+                <a className="ml-2 " href="/dashboard/trackeo">
+                  <FaTruckFast className="text-2xl" color="#CB1B1A" />
+                </a>
+                <a
+                  href="/dashboard/trackeo"
+                  className={`${
+                    isFocused ? "block" : "hidden"
+                  } font-bold text-lg pl-3`}
+                >
+                  Ver envios
+                </a>
+              </div>
+            ) : (
+              <div className="flex  items-center">
+                <a className="ml-2 " href="/dashboard/trackeo">
+                  <FaTruckFast className="text-2xl" color="#CB1B1A" />
+                </a>
+                <a
+                  href="/dashboard/trackeo"
+                  className={`${
+                    isFocused ? "block" : "hidden"
+                  } font-normal text-lg pl-1`}
+                >
+                  Ver envios
                 </a>
               </div>
             )}

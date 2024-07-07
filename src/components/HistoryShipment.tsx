@@ -1,4 +1,4 @@
-
+import { statusMap } from '../types/shipments';
 import { useState } from 'react'
 import type { IHistoryShipmentProps, Orders} from '../types/shipments'
 
@@ -55,16 +55,16 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
             <div className="ml-8 mt-2 text-xl ">
               <p>
                  Estado de la orden:
-                <span className='text-primary'> {(order.status).toUpperCase()}</span>
+                <span className='text-primary'> {order.status}</span>
                 </p>
-              <p>Paquetes:
+              {/* <p>Paquetes:
                 <span className='text-primary'> {order.packages.join(', ')}</span>
-                 </p>
+                 </p> */}
               <p>Localidad de origen: 
-                <span className='text-primary'> {order.shipments.locality_origin}</span>
+                <span className='text-primary'> {order.shipments.locality_origin.name}</span>
                 </p>
               <p>Localidad de destino:  
-                <span className='text-primary'> {order.shipments.locality_destination}</span>
+                <span className='text-primary'> {order.shipments.locality_destination.name}</span>
                 </p>
               <p>Dirección de origen:  
                <span className='text-primary'> {order.shipments.address_origin}</span> 
@@ -72,13 +72,13 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
               <p>Dirección de destino: 
                 <span className='text-primary'> {order.shipments.address_destination}</span> 
                  </p>
-              <p>Precio del envío: 
+              {/* <p>Precio del envío: 
                 <span className='text-primary'> $ {order.shipments.shipment_price.toFixed(2)}</span>
-                 </p>
+                 </p> */}
                  <div className='border border-primary my-4 w-1/3'></div>
                  
                  <p>Precio de la orden: 
-                <span className='text-primary font-bold '> $ {order.final_price.toFixed(2)}</span>  
+                <span className='text-primary font-bold '> $ {Number(order.final_price).toFixed(2)}</span>  
                 </p>
                
             </div>

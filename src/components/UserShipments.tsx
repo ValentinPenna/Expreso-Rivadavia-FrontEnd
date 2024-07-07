@@ -5,16 +5,18 @@ import HistoryShipment from "./HistoryShipment";
 
 export default function UserShipments() {
     const user = useUserStore((state) => state.user)
-    const setOrdersMock = useUserStore((state) => state.setOrders)
+    const setUser = useUserStore((state) => state.setUser)
     const [orders, setOrders] = useState<Orders[] | undefined>([...user?.orders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())])
     const [searchDate, setSearchDate] = useState("")
     // const [sorted, setSorted] = useState("")
     const [orderState, setOrderState] = useState("")
 
     useEffect(() => {
+        setUser()
         setOrders(user?.orders?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
         setOrderState("all")
-        setOrdersMock()
+        // console.log(user)
+        // setOrdersMock()
         // console.log(orderState)
         // localStorage.setItem("user", JSON.stringify(user))
     }, [])
@@ -37,9 +39,10 @@ export default function UserShipments() {
     // }, [sorted])
     
     useEffect(() => {
-        setOrdersMock()
+        setUser()
+        // setOrdersMock()
         let filteredOrders = [...user?.orders || []]
-        console.log(user?.orders);
+        // console.log(user?.orders);
         if(searchDate && searchDate !== ""){
             filteredOrders = filteredOrders.filter(order => new Date(order.date).toISOString().split("T")[0] === new Date(searchDate).toISOString().split("T")[0])
             // setOrders(orders?.filter(order => new Date(order.date).toISOString().split("T")[0] === new Date(searchDate).toISOString().split("T")[0]))
@@ -81,16 +84,17 @@ export default function UserShipments() {
                     </select> */}
                     <select className="bg-primary text-white p-2 rounded-lg outline-none h-fit" onChange={(e) => {setOrderState(e.target.value);}}>
                         <option value="all">Todos los estados</option>
-                        <option value="receipted">Recibido</option>
-                        <option value="acepted">Aceptado</option>
-                        <option value="sending">En Progreso</option>
-                        <option value="delivered">Entregado</option>
-                        <option value="cancelled">Cancelado</option>
+                        <option value="Pendiente de pago">Pendiente de pago</option>
+                        <option value="Esperando retiro">Esperando Retiro</option>
+                        <option value="En camino">En Camino</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Cancelled">Cancelado</option>
                     </select>
                 </div>
             </div>
             <div className="flex flex-col gap-4">
                 {orders?.length! > 0 ? (
+                    // console.log(orders),
                     <HistoryShipment orders={orders!} />
                 ) : (
                         <div className="flex flex-row text-black pt-12 w-full justify-center">

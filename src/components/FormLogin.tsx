@@ -1,16 +1,71 @@
-import React, { useState } from "react";
-import { Formik, Form, ErrorMessage } from "formik";
+import React, { useEffect, useState } from "react";
+import { Formik, Form } from "formik";
 import { Input } from "./secondary/Input";
 import Button from "./secondary/Button";
 import { validateLogin } from "./validation/validateLogin";
 import type { LoginResponse, UserLogin } from "../types/user";
 import { useUserStore } from "../store/userStore";
+import { auth } from "../helpers/auth";
+import { toast } from "react-toastify";
+import { authFireBase, provider } from "../firebase/firebase";
+import {
+  getAdditionalUserInfo,
+  signInWithPopup,
+  type UserCredential,
+} from "firebase/auth";
 
 const FormLogin = () => {
   const [login, setLogin] = useState(false);
   const getUser = useUserStore((state: any) => state.getUser);
   const loginUser = useUserStore((state: any) => state.loginUser);
-  
+  const googleLogin = useUserStore((state: any) => state.googleLogin);
+
+  useEffect(() => {
+    const isAuth = auth();
+    if (isAuth) window.location.href = "/";
+  }, []);
+
+  const handleGoogle = async () => {
+    try {
+      const result: UserCredential = await signInWithPopup(
+        authFireBase,
+        provider
+      );
+      // console.log(result);
+      // mando el email a un endpont de back para rectificar su excistencia
+
+      const aditionalinfo = getAdditionalUserInfo(result);
+      // console.log(aditionalinfo);
+
+      const isNewUser = aditionalinfo?.isNewUser;
+      if (isNewUser) {
+        const userGoogleInfo = {
+          email: result.user.email as string,
+          lastName: aditionalinfo?.profile?.family_name as string,
+          name: aditionalinfo?.profile?.given_name as string,
+        };
+        localStorage.setItem("infoGoogle", JSON.stringify(userGoogleInfo));
+
+        // hace hace register con lo valores que no me trae el result.user
+        window.location.href = "/auth/registergoogle";
+      } else {
+        const logGoogle: LoginResponse = await googleLogin(result.user.email);
+        // se hara la logica del login donde se va a guardar todo en zustand
+        // console.log(logGoogle);
+        localStorage.setItem("token", logGoogle.token);
+        getUser(logGoogle.userId).then(() => {
+          setLogin(true);
+          toast.success("Usuario conectado");
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 1000);
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <Formik
@@ -18,19 +73,22 @@ const FormLogin = () => {
           email: "",
           password: "",
         }}
-        onSubmit={async (values: UserLogin, { resetForm }) => {
-          await loginUser(values)
-          .then((data: LoginResponse) => {
-            getUser(data.userId)
-            .then(() => {
-              setLogin(true);
-              window.location.href = "/";
-              // console.log(data);
+        onSubmit={(values: UserLogin, { resetForm }) => {
+          loginUser(values)
+            .then((data: LoginResponse) => {
+              getUser(data.userId).then(() => {
+                setLogin(true);
+                toast.success("Usuario conectado");
+                resetForm();
+                setTimeout(() => {
+                  window.location.href = "/";
+                }, 1000);
+                // console.log(data);
+              });
             })
-            
-            // resetForm();
-          })
-          .catch((error:any) => console.log(error));
+            .catch((error: any) => {
+              toast.error("El usuario no pudo iniciar sesión");
+            });
         }}
         validate={validateLogin}
       >
@@ -63,6 +121,9 @@ const FormLogin = () => {
                 Registrate
               </a>
             </p>
+            <Button className="text-xs p-0.5 w-fit" onClick={handleGoogle}>
+              Iniciar sesión con google
+            </Button>
           </Form>
         )}
       </Formik>

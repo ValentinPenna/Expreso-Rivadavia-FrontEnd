@@ -1,6 +1,6 @@
 ---
 import SideMenu from "../../components/SideMenu"
-import UserSecurity from "../../components/UserSecurity"
+import ShipmentProgress from '../../components/ShipmentProgress'
 import Layout from "../../layouts/Layout.astro"
 ---
 
@@ -8,7 +8,7 @@ import Layout from "../../layouts/Layout.astro"
     <main class="flex  ">
 
         <SideMenu client:only />
-        <UserSecurity client:only />
+        <ShipmentProgress client:only />
     </main>
     <script>
         import { auth } from "../../helpers/auth";

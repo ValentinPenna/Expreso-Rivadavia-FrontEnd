@@ -9,4 +9,10 @@ import UserInfoDashboard from "../../components/UserInfoDashboard"
         <SideMenu client:only transition:name="sideBar" transition:persist />
         <UserInfoDashboard client:load/>
     </main>
+    <script>
+        import { auth } from "../../helpers/auth";
+
+        const isAuth =auth()
+        if(!isAuth) window.location.href = "/" 
+    </script>
 </Layout>

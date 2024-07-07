@@ -1,0 +1,15 @@
+---
+import Layout from "../../../layouts/Layout.astro"
+import AdminDashboard from "../../../components/AdminDashboard"
+---
+
+<Layout title="Tablero de administrador">
+<main class="flex flex-col gap-4 p-12 min-h-[65dvh]">
+    <AdminDashboard client:load />
+</main>
+<script>
+    import { auth } from "../../../helpers/auth"
+    const isAuth =auth()
+    if(!isAuth) window.location.href = "/" 
+</script>
+</Layout>
