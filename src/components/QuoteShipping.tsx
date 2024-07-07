@@ -60,7 +60,7 @@ export default function QuoteShipping() {
                   </label>
                   <Field as="select" id="origin" name="origin" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56">
                     <option value={0}>Seleccionar</option>
-                    {localities.map((locality) => (
+                    {localities?.map((locality) => (
                         <option key={locality.id} value={locality.id}>{locality.name}</option>
                       ))
                     }
@@ -75,7 +75,7 @@ export default function QuoteShipping() {
                   </label>
                   <Field as="select" id="destination" name="destination" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56">
                   <option value={0}>Seleccionar</option>
-                  {localities.map((locality) => (
+                  {localities?.map((locality) => (
                       <option key={locality.id} value={locality.id}>{locality.name}</option>
                     ))
                   }
