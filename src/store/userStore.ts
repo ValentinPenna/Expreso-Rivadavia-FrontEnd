@@ -573,12 +573,12 @@ export const useUserStore = create<State>((set, get) => ({
 
   googleLogin: async (emailUser: string | null) => {
     try {
-      console.log(emailUser);
+      // console.log(emailUser);
       const email = {
         email: emailUser,
       };
       let bodyContent = JSON.stringify(email);
-      console.log(bodyContent);
+      // console.log(bodyContent);
 
       const response = await fetch(`${apiUrl}/auth/google/signin`, {
         method: `POST`,

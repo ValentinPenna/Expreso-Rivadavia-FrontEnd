@@ -40,7 +40,7 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
         onSubmit={ (values: IRegisterUser)=>{
            userRegister(values)
           .then((data: boolean) => {
-            console.log(data)
+            // console.log(data)
             if ((data)){
               setRegisterUser(true);
               toast.success("Usuario registrado con éxito");

@@ -31,11 +31,11 @@ const FormLogin = () => {
         authFireBase,
         provider
       );
-      console.log(result);
+      // console.log(result);
       // mando el email a un endpont de back para rectificar su excistencia
 
       const aditionalinfo = getAdditionalUserInfo(result);
-      console.log(aditionalinfo);
+      // console.log(aditionalinfo);
 
       const isNewUser = aditionalinfo?.isNewUser;
       if (isNewUser) {
@@ -51,7 +51,7 @@ const FormLogin = () => {
       } else {
         const logGoogle: LoginResponse = await googleLogin(result.user.email);
         // se hara la logica del login donde se va a guardar todo en zustand
-        console.log(logGoogle);
+        // console.log(logGoogle);
         localStorage.setItem("token", logGoogle.token);
         getUser(logGoogle.userId).then(() => {
           setLogin(true);

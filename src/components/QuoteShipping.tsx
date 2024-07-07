@@ -20,7 +20,7 @@ export default function QuoteShipping() {
   useEffect(() => {
     async function fetchLocalities() {
       const data = await getLocalities();
-      console.log(data)
+      // console.log(data)
       setLocalities(data);
     }
     fetchLocalities();

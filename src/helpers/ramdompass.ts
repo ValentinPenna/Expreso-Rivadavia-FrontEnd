@@ -23,4 +23,4 @@ export function generateRandomPassword() {
 }
 
 const randomPassword = generateRandomPassword();
-console.log(randomPassword); // Output: a random password between 8 and 14 characters
+// console.log(randomPassword); // Output: a random password between 8 and 14 characters

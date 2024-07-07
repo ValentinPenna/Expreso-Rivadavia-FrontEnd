@@ -20,11 +20,11 @@ const ProfilePhoto = () => {
     const file = event.target.files?.[0];
     if (file) {
       setLoading(true);
-      console.log(file)
+      // console.log(file)
       try {
-        console.log('Subiendo archivo...');
+        // console.log('Subiendo archivo...');
         const url = await useUserStore.getState().uploadImage(file, user.id);
-        console.log('Archivo subido con éxito:', url);
+        // console.log('Archivo subido con éxito:', url);
         setProfilePicture(url);
        
         toast.success('Foto de perfil actualizada con éxito');
