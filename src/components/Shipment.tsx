@@ -37,10 +37,10 @@ const Shipment = () => {
           address_destination: "",
         }}
         validate={validateShipment}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={(values) => {
           createOrder({size: values.size, locality_origin: Number(values.locality_origin), locality_destination: Number(values.locality_destination), address_origin: values.address_origin, address_destination: values.address_destination})
           .then((data: any) => alert("Pedido creado correctamente"))
-          resetForm();
+          
         }}
       >
         {({ errors }) => (

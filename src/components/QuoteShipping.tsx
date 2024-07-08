@@ -35,10 +35,10 @@ export default function QuoteShipping() {
           size: "",
         }}
         
-        onSubmit={(values: Quote, { resetForm }) => {
+        onSubmit={(values: Quote) => {
           quotation({size: values.size, locality_origin: Number(values.origin), locality_destination: Number(values.destination)})
           .then ((data: any) => alert("El envio costaria: " + data))
-          resetForm();
+          
           setQuote(true);
         }}
       >
