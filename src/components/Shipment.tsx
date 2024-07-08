@@ -14,10 +14,10 @@ const Shipment = () => {
   const getLocalities = useOrdersStore((state) => state.getLocalities);
 
   useEffect(() => {
-    const isAuth: boolean = auth();
-    if (!isAuth) {
-      window.location.href = "/auth/register";
-    }
+    // const isAuth: boolean = auth();
+    // if (!isAuth) {
+    //   window.location.href = "/auth/register";
+    // }
 
     async function fetchLocalities() {
       const data = await getLocalities();
@@ -78,7 +78,7 @@ const Shipment = () => {
                     className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56"
                   >
                     <option value={0}>Seleccionar</option>
-                    {localities.map((locality) => (
+                    {localities?.map((locality) => (
                         <option key={locality.id} value={locality.id}>{locality.name}</option>
                       ))
                     }
@@ -116,7 +116,7 @@ const Shipment = () => {
                     className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56"
                   >
                     <option value={0}>Seleccionar</option>
-                    {localities.map((locality) => (
+                    {localities?.map((locality) => (
                         <option key={locality.id} value={locality.id}>{locality.name}</option>
                       ))
                     }
@@ -160,7 +160,7 @@ const Shipment = () => {
                     type="radio"
                     id="size-sobre"
                     name="size"
-                    value="sobre"
+                    value="envelop"
                   />
                   <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Sobre</span>
