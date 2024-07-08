@@ -66,7 +66,7 @@ const Shipment = () => {
             });
           });
           setOpen(true);
-          //luego de seleccionar el metodo de pago y haber pagado se crea en envio
+          //*luego de seleccionar el metodo de pago y haber pagado se crea en envio
 
           // createOrder({
           //   size: values.size,
