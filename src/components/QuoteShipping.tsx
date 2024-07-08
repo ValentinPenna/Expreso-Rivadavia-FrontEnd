@@ -92,7 +92,7 @@ export default function QuoteShipping() {
                 <div role="group" aria-labelledby="size" className="flex flex-col lg:flex-row">
                 <label htmlFor="size-sobre" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
                    
-                   <Field type="radio" id="size-sobre" name="size" value="sobre" />
+                   <Field type="radio" id="size-sobre" name="size" value="envelop" />
                    <div className="flex  flex-col items-center space-x-2">
                    <span className="ml-2 mr-6 ">Sobre</span>
                    <span className="text-sm md:ml-0 text-primary">Máximo formato A4 </span>
