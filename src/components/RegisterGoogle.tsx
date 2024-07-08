@@ -25,7 +25,7 @@ const RegisterGoogle = () => {
     const infoGoole = localStorage.getItem("infoGoogle");
     if (infoGoole) {
       const userInfo = JSON.parse(infoGoole);
-      console.log(userInfo);
+      // console.log(userInfo);
       setGoogleInfo(userInfo);
     }
   }, []);
@@ -47,7 +47,7 @@ const RegisterGoogle = () => {
             confirmPassword: ramdom,
           };
           const combinedValues = { ...googleInfo, ...values, ...credential };
-          console.log(combinedValues);
+          // console.log(combinedValues);
 
           try {
             // Registrar usuario
@@ -61,7 +61,7 @@ const RegisterGoogle = () => {
               const logGoogle: LoginResponse = await googleLogin(
                 googleInfo!.email
               );
-              console.log(logGoogle);
+              // console.log(logGoogle);
               localStorage.setItem("token", logGoogle.token);
               await getUser(logGoogle.userId);
               setLogin(true);

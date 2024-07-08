@@ -20,7 +20,7 @@ export default function QuoteShipping() {
   useEffect(() => {
     async function fetchLocalities() {
       const data = await getLocalities();
-      console.log(data)
+      // console.log(data)
       setLocalities(data);
     }
     fetchLocalities();
@@ -60,7 +60,7 @@ export default function QuoteShipping() {
                   </label>
                   <Field as="select" id="origin" name="origin" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56">
                     <option value={0}>Seleccionar</option>
-                    {localities.map((locality) => (
+                    {localities?.map((locality) => (
                         <option key={locality.id} value={locality.id}>{locality.name}</option>
                       ))
                     }
@@ -75,7 +75,7 @@ export default function QuoteShipping() {
                   </label>
                   <Field as="select" id="destination" name="destination" className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56">
                   <option value={0}>Seleccionar</option>
-                  {localities.map((locality) => (
+                  {localities?.map((locality) => (
                       <option key={locality.id} value={locality.id}>{locality.name}</option>
                     ))
                   }
@@ -92,7 +92,7 @@ export default function QuoteShipping() {
                 <div role="group" aria-labelledby="size" className="flex flex-col lg:flex-row">
                 <label htmlFor="size-sobre" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
                    
-                   <Field type="radio" id="size-sobre" name="size" value="sobre" />
+                   <Field type="radio" id="size-sobre" name="size" value="envelop" />
                    <div className="flex  flex-col items-center space-x-2">
                    <span className="ml-2 mr-6 ">Sobre</span>
                    <span className="text-sm md:ml-0 text-primary">Máximo formato A4 </span>
