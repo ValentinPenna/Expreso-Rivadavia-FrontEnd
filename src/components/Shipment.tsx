@@ -6,12 +6,19 @@ import { validateShipment } from "./validation/validateShipment";
 import type { IShipment } from "./types/typesRegister";
 import { auth } from "../helpers/auth";
 import { useOrdersStore } from "../store/ordersStore";
-import type { ICreateOrderProps, ILocality } from "../types/shipments";
+import type { ICreateOrderModalProps, ILocality } from "../types/shipments";
+import Modal from "./secondary/Modal";
+import { BiTrash } from "react-icons/bi";
 
 const Shipment = () => {
   const [localities, setLocalities] = useState<ILocality[]>([]);
   const createOrder = useOrdersStore((state) => state.createOrder);
   const getLocalities = useOrdersStore((state) => state.getLocalities);
+  const [open, setOpen] = useState(false);
+  const [modalData, setModalData] = useState<ICreateOrderModalProps | null>(
+    null
+  );
+  const quotation = useOrdersStore((state) => state.quotation);
 
   useEffect(() => {
     // const isAuth: boolean = auth();
@@ -21,7 +28,7 @@ const Shipment = () => {
 
     async function fetchLocalities() {
       const data = await getLocalities();
-      console.log(data)
+      console.log(data);
       setLocalities(data);
     }
     fetchLocalities();
@@ -37,10 +44,39 @@ const Shipment = () => {
           address_destination: "",
         }}
         validate={validateShipment}
-        onSubmit={(values) => {
-          createOrder({size: values.size, locality_origin: Number(values.locality_origin), locality_destination: Number(values.locality_destination), address_origin: values.address_origin, address_destination: values.address_destination})
-          .then((data: any) => alert("Pedido creado correctamente"))
-          
+        onSubmit={(values, { resetForm }) => {
+          quotation({
+            size: values.size,
+            locality_origin: Number(values.locality_origin),
+            locality_destination: Number(values.locality_destination),
+          }).then((data: any) => {
+            // alert("El envio costaria: " + data)
+
+            if (values.size === "envelop") values.size = "Sobre";
+            if (values.size === "small") values.size = "Pequeño";
+            if (values.size === "medium") values.size = "Mediano";
+            if (values.size === "large") values.size = "Grande";
+            setModalData({
+              size: values.size,
+              locality_origin: Number(values.locality_origin),
+              locality_destination: Number(values.locality_destination),
+              address_origin: values.address_origin,
+              address_destination: values.address_destination,
+              price: data,
+            });
+          });
+          setOpen(true);
+          //*luego de seleccionar el metodo de pago y haber pagado se crea en envio
+
+          // createOrder({
+          //   size: values.size,
+          //   locality_origin: Number(values.locality_origin),
+          //   locality_destination: Number(values.locality_destination),
+          //   address_origin: values.address_origin,
+          //   address_destination: values.address_destination,
+          // }).then((data: any) => alert("Pedido creado correctamente"));
+          // se muestra el recibo en otro modal ?
+          // resetForm();
         }}
       >
         {({ errors }) => (
@@ -80,8 +116,8 @@ const Shipment = () => {
                     <option value={0}>Seleccionar</option>
                     {localities?.map((locality) => (
                         <option key={locality.id} value={locality.id}>{locality.name}</option>
-                      ))
-                    }
+                      ))}
+
                   </Field>
                   <Input
                     label="Dirección de origen"
@@ -118,8 +154,7 @@ const Shipment = () => {
                     <option value={0}>Seleccionar</option>
                     {localities?.map((locality) => (
                         <option key={locality.id} value={locality.id}>{locality.name}</option>
-                      ))
-                    }
+                      ))}
                   </Field>
                   <Input
                     label="Dirección de destino"
@@ -231,6 +266,61 @@ const Shipment = () => {
                 <Button type="submit">CREAR ENVIO</Button>
               </div>
             </div>
+            <Modal open={open} onClose={() => setOpen(false)}>
+              <div className="w-96 p-4">
+                {modalData && (
+                  <div>
+                    <h1 className="text-xl font-bold mb-4 text-primary">
+                      Detalles del envío
+                    </h1>
+                    <p>
+                      <strong>Ciudad de origen:</strong>{" "}
+                      {
+                        localities.find(
+                          (loc) => Number(loc.id) === modalData.locality_origin
+                        )?.name
+                      }
+                    </p>
+                    <p>
+                      <strong>Ciudad de destino:</strong>{" "}
+                      {
+                        localities.find(
+                          (loc) =>
+                            Number(loc.id) === modalData.locality_destination
+                        )?.name
+                      }
+                    </p>
+                    <p>
+                      <strong>Tamaño:</strong> {modalData.size}
+                    </p>
+                    <p>
+                      <strong>Dirección de origen:</strong>{" "}
+                      {modalData.address_origin}
+                    </p>
+                    <p>
+                      <strong>Dirección de destino:</strong>{" "}
+                      {modalData.address_destination}
+                    </p>
+                    <p>
+                      <strong>Precio:</strong>{" "}
+                      {`${modalData.price} pesos argentinos`}
+                    </p>
+                    <div className=" flex justify-center items-center gap-8 mt-8">
+                      <div
+                        onClick={() => setOpen(false)}
+                        className="text-xs p-1 flex justify-start gap-1 hover:cursor-pointer text-primary bg-transparent items-center w-fit"
+                      >
+                        Cancelar Envio
+                        <BiTrash />
+                      </div>
+                      <Button className="text-xs p-1 flex justify-center items-center w-fit">
+                        Pasarela de pago
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Modal>
           </Form>
         )}
       </Formik>
