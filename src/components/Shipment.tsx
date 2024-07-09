@@ -6,6 +6,7 @@ import { validateShipment } from "./validation/validateShipment";
 import type { IShipment } from "./types/typesRegister";
 import { auth } from "../helpers/auth";
 import { useOrdersStore } from "../store/ordersStore";
+import { useUserStore } from "../store/userStore";
 import type { ICreateOrderModalProps, ILocality } from "../types/shipments";
 import Modal from "./secondary/Modal";
 import { BiTrash } from "react-icons/bi";
