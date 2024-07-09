@@ -40,7 +40,7 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
         onSubmit={ (values: IRegisterUser)=>{
            userRegister(values)
           .then((data: boolean) => {
-            console.log(data)
+            // console.log(data)
             if ((data)){
               setRegisterUser(true);
               toast.success("Usuario registrado con éxito");
@@ -69,7 +69,7 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
                 <Input label="Localidad" name="locality" placeholder='Springfield' error={errors.locality}></Input>  
                 <div className='relative'>
                 <Input label="Contraseña" name="password" placeholder='*******' type={password ? "password" : "text"} error={errors.password} ></Input>
-                <div onClick={passwordVisibility} className="absolute right-0 top-2/3 transform -translate-y-1/2 cursor-pointer">
+                <div onClick={passwordVisibility} className="absolute right-0 top-2/3  transform  cursor-pointer">
                 {!password ? (
                       <AiFillEyeInvisible color="red" />
                     ) : (
@@ -77,7 +77,16 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
                     )}
                     </div>
                     </div>  
+                    <div className='relative'>
                 <Input label="Confirmar contraseña" name="confirmPassword" placeholder='*******' type="password" error={errors.confirmPassword}></Input>
+                <div onClick={passwordVisibility} className="absolute right-0 top-2/3  transform  cursor-pointer">
+                {!password ? (
+                      <AiFillEyeInvisible color="red" />
+                    ) : (
+                      <AiFillEye color="red" />
+                    )}
+                    </div>
+                  </div>
               </div>
               <div className="mt-10 mb-5 flex flex-col justify-center items-center">
                 <Button type="submit">Registrarse</Button>

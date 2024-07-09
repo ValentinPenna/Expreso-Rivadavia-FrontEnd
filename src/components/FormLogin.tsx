@@ -13,12 +13,14 @@ import {
   signInWithPopup,
   type UserCredential,
 } from "firebase/auth";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const FormLogin = () => {
   const [login, setLogin] = useState(false);
   const getUser = useUserStore((state: any) => state.getUser);
   const loginUser = useUserStore((state: any) => state.loginUser);
   const googleLogin = useUserStore((state: any) => state.googleLogin);
+  const [password, setPassword]= useState(true)
 
   useEffect(() => {
     const isAuth = auth();
@@ -31,11 +33,11 @@ const FormLogin = () => {
         authFireBase,
         provider
       );
-      console.log(result);
+      // console.log(result);
       // mando el email a un endpont de back para rectificar su excistencia
 
       const aditionalinfo = getAdditionalUserInfo(result);
-      console.log(aditionalinfo);
+      // console.log(aditionalinfo);
 
       const isNewUser = aditionalinfo?.isNewUser;
       if (isNewUser) {
@@ -51,7 +53,7 @@ const FormLogin = () => {
       } else {
         const logGoogle: LoginResponse = await googleLogin(result.user.email);
         // se hara la logica del login donde se va a guardar todo en zustand
-        console.log(logGoogle);
+        // console.log(logGoogle);
         localStorage.setItem("token", logGoogle.token);
         getUser(logGoogle.userId).then(() => {
           setLogin(true);
@@ -65,6 +67,10 @@ const FormLogin = () => {
       console.log(error);
     }
   };
+  const passwordVisibility = () => {
+    setPassword(!password);
+  };
+
 
   return (
     <div>
@@ -93,7 +99,7 @@ const FormLogin = () => {
         validate={validateLogin}
       >
         {({ errors }) => (
-          <Form className=" w-lg flex flex-col bg-white p-6 items-center rounded-lg  shadow-lg my-20">
+          <Form className="relative w-lg flex flex-col bg-white p-6 items-center rounded-lg  shadow-lg my-20">
             <div>
               <h1 className="text-primary text-4xl font-bold text-center">
                 Iniciar Sesión
@@ -106,14 +112,24 @@ const FormLogin = () => {
               name="email"
               placeholder="Email"
             />
+            <div className="relative">
 
             <Input
               error={errors.password}
               label="Contraseña"
-              type="password"
+              type={password ? "password" : "text"}
               name="password"
               placeholder="*********"
+              
             />
+            <div onClick={passwordVisibility} className="absolute right-0 top-2/3  transform  cursor-pointer">
+                {!password ? (
+                      <AiFillEyeInvisible color="red" />
+                    ) : (
+                      <AiFillEye color="red" />
+                    )}
+                    </div>
+                    </div>
             <Button type="submit" children="Iniciar Sesión" className="mt-6" />
             <p className="text-sm mt-4">
               No tienes cuenta?{" "}

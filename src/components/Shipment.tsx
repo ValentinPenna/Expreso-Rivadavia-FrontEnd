@@ -21,10 +21,10 @@ const Shipment = () => {
   const quotation = useOrdersStore((state) => state.quotation);
 
   useEffect(() => {
-    const isAuth: boolean = auth();
-    if (!isAuth) {
-      window.location.href = "/auth/register";
-    }
+    // const isAuth: boolean = auth();
+    // if (!isAuth) {
+    //   window.location.href = "/auth/register";
+    // }
 
     async function fetchLocalities() {
       const data = await getLocalities();
@@ -52,7 +52,7 @@ const Shipment = () => {
           }).then((data: any) => {
             // alert("El envio costaria: " + data)
 
-            if (values.size === "envelope") values.size = "Sobre";
+            if (values.size === "envelop") values.size = "Sobre";
             if (values.size === "small") values.size = "Pequeño";
             if (values.size === "medium") values.size = "Mediano";
             if (values.size === "large") values.size = "Grande";
@@ -114,11 +114,10 @@ const Shipment = () => {
                     className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56"
                   >
                     <option value={0}>Seleccionar</option>
-                    {localities.map((locality) => (
-                      <option key={locality.id} value={locality.id}>
-                        {locality.name}
-                      </option>
-                    ))}
+                    {localities?.map((locality) => (
+                        <option key={locality.id} value={locality.id}>{locality.name}</option>
+                      ))}
+
                   </Field>
                   <Input
                     label="Dirección de origen"
@@ -153,11 +152,9 @@ const Shipment = () => {
                     className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56"
                   >
                     <option value={0}>Seleccionar</option>
-                    {localities.map((locality) => (
-                      <option key={locality.id} value={locality.id}>
-                        {locality.name}
-                      </option>
-                    ))}
+                    {localities?.map((locality) => (
+                        <option key={locality.id} value={locality.id}>{locality.name}</option>
+                      ))}
                   </Field>
                   <Input
                     label="Dirección de destino"
@@ -198,7 +195,7 @@ const Shipment = () => {
                     type="radio"
                     id="size-sobre"
                     name="size"
-                    value="sobre"
+                    value="envelop"
                   />
                   <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Sobre</span>
