@@ -7,17 +7,19 @@ import type { IShipment } from "./types/typesRegister";
 import { auth } from "../helpers/auth";
 import { useOrdersStore } from "../store/ordersStore";
 import type { ICreateOrderProps, ILocality } from "../types/shipments";
+import { useUserStore } from "../store/userStore";
 
 const Shipment = () => {
   const [localities, setLocalities] = useState<ILocality[]>([]);
   const createOrder = useOrdersStore((state) => state.createOrder);
   const getLocalities = useOrdersStore((state) => state.getLocalities);
+  const token: string = useUserStore((state) => state.token);
+  
+  
 
   useEffect(() => {
-    const isAuth: boolean = auth();
-    if (!isAuth) {
-      window.location.href = "/auth/register";
-    }
+   
+  
 
     async function fetchLocalities() {
       const data = await getLocalities();
@@ -37,10 +39,10 @@ const Shipment = () => {
           address_destination: "",
         }}
         validate={validateShipment}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={(values) => {
           createOrder({size: values.size, locality_origin: Number(values.locality_origin), locality_destination: Number(values.locality_destination), address_origin: values.address_origin, address_destination: values.address_destination})
           .then((data: any) => alert("Pedido creado correctamente"))
-          resetForm();
+          
         }}
       >
         {({ errors }) => (
@@ -78,7 +80,7 @@ const Shipment = () => {
                     className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56"
                   >
                     <option value={0}>Seleccionar</option>
-                    {localities.map((locality) => (
+                    {localities?.map((locality) => (
                         <option key={locality.id} value={locality.id}>{locality.name}</option>
                       ))
                     }
@@ -116,7 +118,7 @@ const Shipment = () => {
                     className="p-1 focus:border focus:rounded-lg focus:outline-none focus:border-primary hover:border-primary w-56"
                   >
                     <option value={0}>Seleccionar</option>
-                    {localities.map((locality) => (
+                    {localities?.map((locality) => (
                         <option key={locality.id} value={locality.id}>{locality.name}</option>
                       ))
                     }
@@ -160,7 +162,7 @@ const Shipment = () => {
                     type="radio"
                     id="size-sobre"
                     name="size"
-                    value="sobre"
+                    value="envelop"
                   />
                   <div className="flex  flex-col items-center space-x-2">
                     <span className="ml-2 mr-6 ">Sobre</span>
@@ -227,9 +229,16 @@ const Shipment = () => {
                   </label>
                 </div>
               </div>
-              <div className="mt-10 mb-5 flex justify-center">
+              {!token ? (
+              <div className="mt-10 mb-5 flex justify-center flex-col items-center">
+                <Button disabled={!token}>CREAR ENVIO</Button>
+                <span className="text-sm text-center mt-2">Debes iniciar sesión para poder realizar un envío</span>
+              </div>
+              ):(
+                <div className="mt-10 mb-5 flex justify-center flex-col items-center">
                 <Button type="submit">CREAR ENVIO</Button>
               </div>
+              )}
             </div>
           </Form>
         )}

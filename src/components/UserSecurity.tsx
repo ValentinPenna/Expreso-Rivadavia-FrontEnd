@@ -59,6 +59,7 @@ const UserSecurity = () => {
           >
             {({ errors }) => (
               <Form className=" flex flex-col justify-center items-center ">
+                <div className="relative">
                 <Input
                   error={errors.oldPassword}
                   label="Contraseña Actual"
@@ -66,6 +67,17 @@ const UserSecurity = () => {
                   placeholder="**********"
                   type="password"
                 />
+                 <div
+                    onClick={passwordVisibility}
+                    className="absolute right-0 top-2/3  transform  cursor-pointer"
+                  >
+                    {!password ? (
+                      <AiFillEyeInvisible color="red" />
+                    ) : (
+                      <AiFillEye color="red" />
+                    )}
+                  </div>
+                </div>
                 <div className="relative">
                   <Input
                     error={errors.newPassword}
@@ -85,6 +97,7 @@ const UserSecurity = () => {
                     )}
                   </div>
                 </div>
+                <div className="relative">
                 <Input
                   error={errors.confirmNewPassword}
                   label="Confirmar contraseña"
@@ -92,6 +105,17 @@ const UserSecurity = () => {
                   placeholder="**********"
                   type="password"
                 />
+                <div
+                    onClick={passwordVisibility}
+                    className="absolute right-0 top-2/3  transform  cursor-pointer"
+                  >
+                    {!password ? (
+                      <AiFillEyeInvisible color="red" />
+                    ) : (
+                      <AiFillEye color="red" />
+                    )}
+                  </div>
+                  </div>
                 <Button className="mt-4 p-0.5 text-base w-fit" type="submit">
                   Hacer Cambio
                 </Button>
