@@ -7,17 +7,19 @@ import type { IShipment } from "./types/typesRegister";
 import { auth } from "../helpers/auth";
 import { useOrdersStore } from "../store/ordersStore";
 import type { ICreateOrderProps, ILocality } from "../types/shipments";
+import { useUserStore } from "../store/userStore";
 
 const Shipment = () => {
   const [localities, setLocalities] = useState<ILocality[]>([]);
   const createOrder = useOrdersStore((state) => state.createOrder);
   const getLocalities = useOrdersStore((state) => state.getLocalities);
+  const token: string = useUserStore((state) => state.token);
+  
+  
 
   useEffect(() => {
-    // const isAuth: boolean = auth();
-    // if (!isAuth) {
-    //   window.location.href = "/auth/register";
-    // }
+   
+  
 
     async function fetchLocalities() {
       const data = await getLocalities();
@@ -227,9 +229,16 @@ const Shipment = () => {
                   </label>
                 </div>
               </div>
-              <div className="mt-10 mb-5 flex justify-center">
+              {!token ? (
+              <div className="mt-10 mb-5 flex justify-center flex-col items-center">
+                <Button disabled={!token}>CREAR ENVIO</Button>
+                <span className="text-sm text-center mt-2">Debes iniciar sesión para poder realizar un envío</span>
+              </div>
+              ):(
+                <div className="mt-10 mb-5 flex justify-center flex-col items-center">
                 <Button type="submit">CREAR ENVIO</Button>
               </div>
+              )}
             </div>
           </Form>
         )}
