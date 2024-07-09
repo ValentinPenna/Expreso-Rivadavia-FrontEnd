@@ -14,6 +14,7 @@ const Shipment = () => {
   const [localities, setLocalities] = useState<ILocality[]>([]);
   const createOrder = useOrdersStore((state) => state.createOrder);
   const getLocalities = useOrdersStore((state) => state.getLocalities);
+  const token: string = useUserStore((state) => state.token);
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState<ICreateOrderModalProps | null>(
     null
