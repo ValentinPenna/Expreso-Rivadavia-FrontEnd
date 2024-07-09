@@ -35,10 +35,10 @@ export default function QuoteShipping() {
           size: "",
         }}
         
-        onSubmit={(values: Quote) => {
+        onSubmit={(values: Quote, { resetForm }) => {
           quotation({size: values.size, locality_origin: Number(values.origin), locality_destination: Number(values.destination)})
           .then ((data: any) => alert("El envio costaria: " + data))
-          
+          resetForm();
           setQuote(true);
         }}
       >
@@ -92,7 +92,7 @@ export default function QuoteShipping() {
                 <div role="group" aria-labelledby="size" className="flex flex-col lg:flex-row">
                 <label htmlFor="size-sobre" className="flex items-center space-x-2 mb-2 md:mb-0 ml-5">
                    
-                   <Field type="radio" id="size-sobre" name="size" value="envelop" />
+                   <Field type="radio" id="size-sobre" name="size" value="sobre" />
                    <div className="flex  flex-col items-center space-x-2">
                    <span className="ml-2 mr-6 ">Sobre</span>
                    <span className="text-sm md:ml-0 text-primary">Máximo formato A4 </span>
