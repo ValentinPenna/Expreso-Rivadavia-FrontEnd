@@ -1,18 +1,17 @@
 ---
 import CarrierDashboard from "../../../components/CarrierDashboard"
-import SideMenu from "../../../components/SideMenu"
 import Layout from "../../../layouts/Layout.astro"
 
 ---
 
 <Layout title="Tablero de administrador">
 <main class="flex flex-row">
-    <SideMenu client:only transition:name="sideBar" transition:persist />
     <CarrierDashboard client:only/>
 </main>
 <script>
-    import { authTransport } from "../../../helpers/auth"
+    import { authAdmin, authTransport } from "../../../helpers/auth"
     const isAuth =authTransport()
-    if(!isAuth) window.location.href = "/" 
+    const isAuthAdmin = authAdmin() 
+    if(!isAuth || isAuthAdmin) window.location.href = "/" 
 </script>
 </Layout>
