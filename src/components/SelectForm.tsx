@@ -3,6 +3,7 @@ import Button from "./secondary/Button";
 import RegisterUser from "./RegisterUser";
 import RegisterCompany from "./RegisterCompany";
 import { auth } from "../helpers/auth";
+import LoginGoogle from "./LoginGoogle";
 
 const SelectForm: React.FC = () => {
   const [selectForm, setSelectForm] = useState<"user" | "company" | null>(null);
@@ -63,7 +64,7 @@ const SelectForm: React.FC = () => {
               Registrarse como empresa{" "}
             </Button>
           </div>
-          <div className="text-3xl m-10 text-center bg-white p-10 rounded-lg shadow-lg col-span-1 lg:col-span-2">
+          <div className="lg:text-3xl m-10 text-center bg-white p-10 rounded-lg shadow-lg col-span-1 lg:col-span-2">
             <span className="m-5">
               Ya tienes cuenta?
               <a href="/auth/login" className="text-primary font-bold">
@@ -71,6 +72,9 @@ const SelectForm: React.FC = () => {
                 Inicia sesión
               </a>
             </span>
+            <div className="mt-4 flex justify-center items-center">
+            <LoginGoogle/>
+            </div>
           </div>
         </div>
       )}

@@ -6,7 +6,7 @@ import type { IRegisterUser } from './types/typesRegister'
 import validateUser from './validation/validateUser'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { useUserStore } from '../store/userStore'
-import type { RegisterResponse } from '../types/user'
+
 import { toast} from 'react-toastify'
 
 interface RegisterUserProps {

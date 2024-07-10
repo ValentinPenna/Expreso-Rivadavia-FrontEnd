@@ -6,6 +6,7 @@ import { validateShipment } from "./validation/validateShipment";
 import type { IShipment } from "./types/typesRegister";
 import { auth } from "../helpers/auth";
 import { useOrdersStore } from "../store/ordersStore";
+import { useUserStore } from "../store/userStore";
 import type { ICreateOrderModalProps, ILocality } from "../types/shipments";
 import Modal from "./secondary/Modal";
 import { BiTrash } from "react-icons/bi";
@@ -14,6 +15,7 @@ const Shipment = () => {
   const [localities, setLocalities] = useState<ILocality[]>([]);
   const createOrder = useOrdersStore((state) => state.createOrder);
   const getLocalities = useOrdersStore((state) => state.getLocalities);
+  const token: string = useUserStore((state) => state.token);
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState<ICreateOrderModalProps | null>(
     null
@@ -25,10 +27,8 @@ const Shipment = () => {
     if (!isAuth) {
       window.location.href = "/auth/register";
     }
-
     async function fetchLocalities() {
       const data = await getLocalities();
-      console.log(data);
       setLocalities(data);
     }
     fetchLocalities();
@@ -52,10 +52,10 @@ const Shipment = () => {
           }).then((data: any) => {
             // alert("El envio costaria: " + data)
 
-            if (values.size === "envelop") values.size = "Sobre";
-            if (values.size === "small") values.size = "Pequeño";
-            if (values.size === "medium") values.size = "Mediano";
-            if (values.size === "large") values.size = "Grande";
+            // if (values.size === "envelop") values.size = "Sobre";
+            // if (values.size === "small") values.size = "Pequeño";
+            // if (values.size === "medium") values.size = "Mediano";
+            // if (values.size === "large") values.size = "Grande";
             setModalData({
               size: values.size,
               locality_origin: Number(values.locality_origin),
@@ -68,13 +68,13 @@ const Shipment = () => {
           setOpen(true);
           //*luego de seleccionar el metodo de pago y haber pagado se crea en envio
 
-          // createOrder({
-          //   size: values.size,
-          //   locality_origin: Number(values.locality_origin),
-          //   locality_destination: Number(values.locality_destination),
-          //   address_origin: values.address_origin,
-          //   address_destination: values.address_destination,
-          // }).then((data: any) => alert("Pedido creado correctamente"));
+          createOrder({
+            size: values.size,
+            locality_origin: Number(values.locality_origin),
+            locality_destination: Number(values.locality_destination),
+            address_origin: values.address_origin,
+            address_destination: values.address_destination,
+          }).then((data: any) => alert("Pedido creado correctamente"));
           // se muestra el recibo en otro modal ?
           // resetForm();
         }}
@@ -115,9 +115,10 @@ const Shipment = () => {
                   >
                     <option value={0}>Seleccionar</option>
                     {localities?.map((locality) => (
-                        <option key={locality.id} value={locality.id}>{locality.name}</option>
-                      ))}
-
+                      <option key={locality.id} value={locality.id}>
+                        {locality.name}
+                      </option>
+                    ))}
                   </Field>
                   <Input
                     label="Dirección de origen"
@@ -153,8 +154,10 @@ const Shipment = () => {
                   >
                     <option value={0}>Seleccionar</option>
                     {localities?.map((locality) => (
-                        <option key={locality.id} value={locality.id}>{locality.name}</option>
-                      ))}
+                      <option key={locality.id} value={locality.id}>
+                        {locality.name}
+                      </option>
+                    ))}
                   </Field>
                   <Input
                     label="Dirección de destino"
@@ -262,9 +265,16 @@ const Shipment = () => {
                   </label>
                 </div>
               </div>
-              <div className="mt-10 mb-5 flex justify-center">
+              {!token ? (
+              <div className="mt-10 mb-5 flex justify-center flex-col items-center">
+                <Button disabled={!token}>CREAR ENVIO</Button>
+                <span className="text-sm text-center mt-2">Debes iniciar sesión para poder realizar un envío</span>
+              </div>
+              ):(
+                <div className="mt-10 mb-5 flex justify-center flex-col items-center">
                 <Button type="submit">CREAR ENVIO</Button>
               </div>
+              )}
             </div>
             <Modal open={open} onClose={() => setOpen(false)}>
               <div className="w-96 p-4">
