@@ -52,10 +52,10 @@ const Shipment = () => {
           }).then((data: any) => {
             // alert("El envio costaria: " + data)
 
-            if (values.size === "envelop") values.size = "Sobre";
-            if (values.size === "small") values.size = "Pequeño";
-            if (values.size === "medium") values.size = "Mediano";
-            if (values.size === "large") values.size = "Grande";
+            // if (values.size === "envelop") values.size = "Sobre";
+            // if (values.size === "small") values.size = "Pequeño";
+            // if (values.size === "medium") values.size = "Mediano";
+            // if (values.size === "large") values.size = "Grande";
             setModalData({
               size: values.size,
               locality_origin: Number(values.locality_origin),
@@ -68,13 +68,13 @@ const Shipment = () => {
           setOpen(true);
           //*luego de seleccionar el metodo de pago y haber pagado se crea en envio
 
-          // createOrder({
-          //   size: values.size,
-          //   locality_origin: Number(values.locality_origin),
-          //   locality_destination: Number(values.locality_destination),
-          //   address_origin: values.address_origin,
-          //   address_destination: values.address_destination,
-          // }).then((data: any) => alert("Pedido creado correctamente"));
+          createOrder({
+            size: values.size,
+            locality_origin: Number(values.locality_origin),
+            locality_destination: Number(values.locality_destination),
+            address_origin: values.address_origin,
+            address_destination: values.address_destination,
+          }).then((data: any) => alert("Pedido creado correctamente"));
           // se muestra el recibo en otro modal ?
           // resetForm();
         }}
@@ -115,9 +115,10 @@ const Shipment = () => {
                   >
                     <option value={0}>Seleccionar</option>
                     {localities?.map((locality) => (
-                        <option key={locality.id} value={locality.id}>{locality.name}</option>
-                      ))}
-
+                      <option key={locality.id} value={locality.id}>
+                        {locality.name}
+                      </option>
+                    ))}
                   </Field>
                   <Input
                     label="Dirección de origen"
@@ -153,8 +154,10 @@ const Shipment = () => {
                   >
                     <option value={0}>Seleccionar</option>
                     {localities?.map((locality) => (
-                        <option key={locality.id} value={locality.id}>{locality.name}</option>
-                      ))}
+                      <option key={locality.id} value={locality.id}>
+                        {locality.name}
+                      </option>
+                    ))}
                   </Field>
                   <Input
                     label="Dirección de destino"

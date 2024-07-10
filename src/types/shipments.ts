@@ -73,6 +73,12 @@ export interface IordersQuotationsProps {
   locality_origin: number;
   locality_destination: number;
 }
+export interface IordersQuotationsModalProps {
+  size: string;
+  locality_origin: number;
+  locality_destination: number;
+  price: string;
+}
 
 export interface ILocality {
   id: string;
