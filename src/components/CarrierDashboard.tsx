@@ -61,7 +61,7 @@ const CarrierDashboard = () => {
   };
 
   return (
-    <div className="w-full my-4 bg-white p-12 rounded-l-lg flex flex-col max-w-[80%]">
+    <div className="w-full my-4 bg-white p-12 rounded-l-lg flex flex-col ">
       <h1 className="text-xl lg:text-3xl text-primary font-bold mb-4 text-center">
         Lista de ordenes
       </h1>
@@ -108,7 +108,7 @@ const CarrierDashboard = () => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-8 ">
+      <div className="grid grid-cols-6 ">
         <h3 className="flex justify-center items-center font-bold text-xs p-1 text-primary lg:text-base text-center border-b-2 border-x">
           Número de Orden
         </h3>
@@ -119,16 +119,10 @@ const CarrierDashboard = () => {
           Usuario
         </h3>
         <h3 className="flex justify-center items-center font-bold text-xs p-1 text-primary lg:text-base text-center border-b-2 border-x">
-          Localidad de Origen
+          Origen
         </h3>
         <h3 className="flex justify-center items-center font-bold text-xs p-1 text-primary lg:text-base text-center border-b-2 border-x">
-          Localidad de Destino
-        </h3>
-        <h3 className="flex justify-center items-center font-bold text-xs p-1 text-primary lg:text-base text-center border-b-2 border-x">
-          Dirección de Origen
-        </h3>
-        <h3 className="flex justify-center items-center font-bold text-xs p-1 text-primary lg:text-base text-center border-b-2 border-x">
-          Dirección de Destino
+          Destino
         </h3>
         <h3 className="flex justify-center items-center font-bold text-xs p-1 text-primary lg:text-base text-center border-b-2 border-x">
           Estado...
@@ -146,17 +140,14 @@ const CarrierDashboard = () => {
                 {order.user.lastName}, {order.user.name}
               </p>
               <p className="flex items-center justify-center text-xs p-1 text-center text-ellipsis overflow-hidden lg:text-base border-b border-x ">
+                {order.shipments.address_origin},{" "}
                 {order.shipments.locality_origin.name}
               </p>
               <p className="flex items-center justify-center text-xs p-1 text-center text-ellipsis overflow-hidden lg:text-base border-b border-x">
+                {order.shipments.address_destination},{" "}
                 {order.shipments.locality_destination.name}
               </p>
-              <p className="flex items-center justify-center text-xs p-1 text-center text-ellipsis overflow-hidden lg:text-base border-b border-x">
-                {order.shipments.address_origin}
-              </p>
-              <p className="flex items-center justify-center text-xs p-1 text-center  text-ellipsis overflow-hidden lg:text-base border-b border-x">
-                {order.shipments.address_destination}
-              </p>
+
               <div className="flex items-center justify-center relative text-xs p-1 text-center text-ellipsis overflow-hidden lg:text-base border-b border-x">
                 <button
                   className="  w-fit text-primary font-bold p-4 text-xs lg:text-base"

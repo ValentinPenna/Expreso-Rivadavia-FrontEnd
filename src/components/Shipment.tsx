@@ -12,6 +12,7 @@ import Modal from "./secondary/Modal";
 import { BiTrash } from "react-icons/bi";
 
 const Shipment = () => {
+  const user = useUserStore((state) => state.user);
   const [localities, setLocalities] = useState<ILocality[]>([]);
   const createOrder = useOrdersStore((state) => state.createOrder);
   const getLocalities = useOrdersStore((state) => state.getLocalities);
@@ -23,12 +24,8 @@ const Shipment = () => {
   const quotation = useOrdersStore((state) => state.quotation);
 
   useEffect(() => {
-   
-  
-
     async function fetchLocalities() {
       const data = await getLocalities();
-      console.log(data);
       setLocalities(data);
     }
     fetchLocalities();
@@ -40,7 +37,7 @@ const Shipment = () => {
           locality_origin: "0",
           locality_destination: "0",
           size: "",
-          address_origin: "",
+          address_origin: user.address,
           address_destination: "",
         }}
         validate={validateShipment}
@@ -266,14 +263,16 @@ const Shipment = () => {
                 </div>
               </div>
               {!token ? (
-              <div className="mt-10 mb-5 flex justify-center flex-col items-center">
-                <Button disabled={!token}>CREAR ENVIO</Button>
-                <span className="text-sm text-center mt-2">Debes iniciar sesión para poder realizar un envío</span>
-              </div>
-              ):(
                 <div className="mt-10 mb-5 flex justify-center flex-col items-center">
-                <Button type="submit">CREAR ENVIO</Button>
-              </div>
+                  <Button disabled={!token}>CREAR ENVIO</Button>
+                  <span className="text-sm text-center mt-2">
+                    Debes iniciar sesión para poder realizar un envío
+                  </span>
+                </div>
+              ) : (
+                <div className="mt-10 mb-5 flex justify-center flex-col items-center">
+                  <Button type="submit">CREAR ENVIO</Button>
+                </div>
               )}
             </div>
             <Modal open={open} onClose={() => setOpen(false)}>
