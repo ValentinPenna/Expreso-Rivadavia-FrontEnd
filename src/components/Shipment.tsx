@@ -23,12 +23,12 @@ const Shipment = () => {
   const quotation = useOrdersStore((state) => state.quotation);
 
   useEffect(() => {
-   
-  
-
+    const isAuth: boolean = auth();
+    if (!isAuth) {
+      window.location.href = "/auth/register";
+    }
     async function fetchLocalities() {
       const data = await getLocalities();
-      console.log(data);
       setLocalities(data);
     }
     fetchLocalities();
