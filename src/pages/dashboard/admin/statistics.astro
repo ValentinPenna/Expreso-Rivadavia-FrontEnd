@@ -1,0 +1,18 @@
+---
+import Layout from "../../../layouts/Layout.astro"
+import Stadistic from "../../../components/Stadistics"
+export const prerender = false
+---
+
+<Layout title="Tablero de administrador">
+<main class="flex flex-col gap-4 px-80 py-12">
+    <a href="/dashboard/admin" class="hover:text-primary text-lg bg-white w-fit px-3 rounded-lg font-bold">Volver</a>
+    <h1 class="text-4xl font-bold text-center">Localidades como origen o destino</h1>
+    <Stadistic client:load/>
+</main>
+<script>
+    import { auth } from "../../../helpers/auth"
+    const isAuth =auth()
+    if(!isAuth) window.location.href = "/" 
+</script>
+</Layout>
