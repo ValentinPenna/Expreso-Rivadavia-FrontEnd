@@ -182,7 +182,17 @@ export const useUserStore = create<State>((set, get) => ({
       if (!responseData.profilePicture) {
         throw new Error("No se devolvió la URL de la imagen");
       }
-      localStorage.setItem("user", JSON.stringify(responseData));
+      //* en vez de guardar el nuevo item sacar el viejo reemplazar el valor y volverlo a guardar
+      // 1 sacar el user de local storage
+      const oldUser: User = JSON.parse(localStorage.getItem("user")!);
+      // 2 modificar el user con el nuevo valor de la foto
+      const updatedUser = {
+        ...oldUser,
+        profilePicture: responseData.profilePicture,
+      };
+      //3 volver a guardar el user modificado en el local
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
       set((state) => ({
         user: {
           ...state.user,

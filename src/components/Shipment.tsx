@@ -50,6 +50,11 @@ const Shipment = () => {
       });
       toast.success("El pago a sido exitoso");
       setOpen(false);
+      if (
+        window.confirm("Te gustaria dejar un Comentario de nuestro Servicio?")
+      ) {
+        window.location.href = "/review";
+      }
     } catch (error) {
       console.error("Error creating order:", error);
     }
