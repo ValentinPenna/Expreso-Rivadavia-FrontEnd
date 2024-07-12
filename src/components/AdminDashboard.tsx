@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useOrdersStore } from "../store/ordersStore";
 import type { ILocality, Orders } from "../types/shipments";
 import { useUserStore } from "../store/userStore";
+import Button from "./secondary/Button";
 
 export default function AdminDashboard() {
     const [showedOrders, setShowedOrders] = useState<Orders[]>([])
@@ -40,32 +41,42 @@ export default function AdminDashboard() {
 
     return (
         <>
-            <div className="flex flex-row gap-3">
-                <div className="flex flex-col">
-                    <input type="text" placeholder="Buscar por nombre" onChange={(e) => setSearchUser(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none placeholder-light-gray" value={searchUser}/>
-                    {searchUser && <button className="text-sm" onClick={() => setSearchUser("")}>Borrar filtro</button>}
+            <div className="flex flex-col justify-between lg:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
+                    <div className="flex flex-col md:flex-row gap-3">
+                        <div className="flex flex-col">
+                            <input type="text" placeholder="Buscar por nombre" onChange={(e) => setSearchUser(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none placeholder-light-gray w-36" value={searchUser}/>
+                            {searchUser && <button className="text-sm" onClick={() => setSearchUser("")}>Borrar filtro</button>}
+                        </div>
+                        <div className="flex flex-col">
+                            <input type="date" onChange={(e) => setSearchDate(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none w-40" value={searchDate}/>
+                            {searchDate && <button className="text-sm" onClick={() => setSearchDate("")}>Borrar filtro</button>}
+                        </div>
+                    </div>
+                    <div className="flex flex-col md:flex-row gap-3">
+                        <div className="flex flex-col">
+                            <select onChange={(e) => setOrigin(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none placeholder-light-gray w-32" value={origin}>
+                            <option value={0}>Origen</option>
+                            {localities?.map((locality) => (
+                                <option key={locality.id} value={locality.id}>{locality.name}</option>
+                            ))}
+                            </select>
+                            {origin !== "0" && <button className="text-sm" onClick={() => setOrigin("0")}>Borrar filtro</button>}
+                        </div>
+                        <div className="flex flex-col">
+                            <select onChange={(e) => setDestination(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none placeholder-light-gray w-32" value={destination}>
+                            <option value={0}>Destino</option>
+                            {localities?.map((locality) => (
+                                <option key={locality.id} value={locality.id}>{locality.name}</option>
+                            ))}
+                            </select>
+                            {destination !== "0" && <button className="text-sm" onClick={() => setDestination("0")}>Borrar filtro</button>}
+                        </div>
+                    </div>
                 </div>
-                <div className="flex flex-col">
-                    <input type="date" onChange={(e) => setSearchDate(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none" value={searchDate}/>
-                    {searchDate && <button className="text-sm" onClick={() => setSearchDate("")}>Borrar filtro</button>}
-                </div>
-                <div className="flex flex-col">
-                    <select onChange={(e) => setOrigin(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none placeholder-light-gray" value={origin}>
-                    <option value={0}>Origen</option>
-                    {localities?.map((locality) => (
-                        <option key={locality.id} value={locality.id}>{locality.name}</option>
-                      ))}
-                    </select>
-                    {origin !== "0" && <button className="text-sm" onClick={() => setOrigin("0")}>Borrar filtro</button>}
-                </div>
-                <div className="flex flex-col">
-                    <select onChange={(e) => setDestination(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none placeholder-light-gray" value={destination}>
-                    <option value={0}>Destino</option>
-                    {localities?.map((locality) => (
-                        <option key={locality.id} value={locality.id}>{locality.name}</option>
-                      ))}
-                    </select>
-                    {destination !== "0" && <button className="text-sm" onClick={() => setDestination("0")}>Borrar filtro</button>}
+                <div className="flex flex-row gap-3">
+                <button onClick={() => window.location.href = "/dashboard/admin/statistics"} className="bg-primary text-white p-2 rounded-lg px-3 font-bold">Ver Estadisticas</button>
+                <button onClick={() => window.location.href = "/dashboard/admin/users"} className="bg-primary text-white p-2 rounded-lg px-3 font-bold">Ver Usuarios</button>
                 </div>
             </div>
             <div className="flex flex-row justify-between px-6">

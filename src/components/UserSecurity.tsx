@@ -18,7 +18,7 @@ const UserSecurity = () => {
   const removeSession = useUserStore((state) => state.removeSession);
 
   return (
-    <section className="w-full text-center my-4 bg-white px-12 py-16 rounded-l-lg flex flex-col max-w-[80%] gap-2">
+    <section className="w-full text-center my-4 bg-white px-12 pt-16 rounded-l-lg flex flex-col max-w-[80%] gap-2">
       <h1 className="font-bold text-4xl text-primary">Seguridad</h1>
       <div className="p-4 flex flex-col items-center rounded-lg  ">
         {/* Cambio de Contraseña */}

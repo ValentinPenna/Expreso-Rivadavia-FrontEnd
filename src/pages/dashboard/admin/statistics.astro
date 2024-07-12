@@ -1,0 +1,17 @@
+---
+import Layout from "../../../layouts/Layout.astro"
+import Stadistic from "../../../components/Stadistics"
+---
+
+<Layout title="Estadisticas de envios">
+<main class="flex flex-col gap-4 px-96 py-6">
+    <a href="/dashboard/admin" class="hover:text-primary text-lg bg-white w-fit px-3 rounded-lg font-bold">Volver</a>
+    <h1 class="text-3xl font-bold text-center text-primary">Localidades como origen o destino</h1>
+    <Stadistic client:load/>
+</main>
+<script>
+    import { authAdmin } from "../../../helpers/auth"
+    const isAuth = authAdmin()
+    if(!isAuth) window.location.href = "/" 
+</script>
+</Layout>

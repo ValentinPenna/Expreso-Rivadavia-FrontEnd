@@ -8,8 +8,8 @@ import AdminDashboard from "../../../components/AdminDashboard"
     <AdminDashboard client:load />
 </main>
 <script>
-    import { auth } from "../../../helpers/auth"
-    const isAuth =auth()
+    import { authAdmin } from "../../../helpers/auth"
+    const isAuth = authAdmin()
     if(!isAuth) window.location.href = "/" 
 </script>
 </Layout>
