@@ -1,0 +1,13 @@
+---
+import AdminUsers from "../../../components/AdminUsers"
+import Layout from "../../../layouts/Layout.astro"
+---
+
+<Layout title="Usuarios - Tablero de administrador">
+    <AdminUsers client:load/>
+    <script>
+        import { authAdmin } from "../../../helpers/auth"
+        const isAuth = authAdmin()
+        if(!isAuth) window.location.href = "/" 
+    </script>
+</Layout>

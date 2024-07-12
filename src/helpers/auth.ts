@@ -7,17 +7,15 @@ export const auth = (): boolean => {
 
 export const authTransport = (): boolean => {
   const userInfo = localStorage.getItem("user");
-
   if (!userInfo) {
     return false;
   }
 
   const user: User = JSON.parse(userInfo);
-
   return user.role === "transporte";
 };
 
-export const authAdmin = (): Boolean => {
+export const authAdmin = (): boolean => {
   const userInfo = localStorage.getItem("user");
   if (!userInfo) {
     return false;
