@@ -73,7 +73,7 @@ const Shipment = () => {
             locality_origin: "0",
             locality_destination: "0",
             size: "",
-            address_origin: user.address,
+            address_origin: user?.address,
             address_destination: "",
           }}
           validate={validateShipment}

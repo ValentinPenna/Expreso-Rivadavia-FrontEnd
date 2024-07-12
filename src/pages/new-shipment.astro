@@ -5,4 +5,9 @@ import Shipment from '../components/Shipment';
 
 <Layout title="Hacer un envio">
     <Shipment client:only transition:persist/>
+    <script>
+        import { auth } from "../helpers/auth";
+        const isAuth = auth()
+        if(!isAuth) window.location.href = "/auth/register"
+    </script>
 </Layout>
