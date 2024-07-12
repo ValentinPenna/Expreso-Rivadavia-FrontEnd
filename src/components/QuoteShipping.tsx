@@ -232,9 +232,11 @@ export default function QuoteShipping() {
                 </label>
               </div>
             </div>
-            <div className="mt-10 mb-5 flex justify-center">
+            <div className="mt-10 mb-5 flex justify-center items-center flex-col">
               <Button type="submit">COTIZAR</Button>
+              <span className="text-sm mt-2"> Contactate con nosotros para mas información <a href="https://wa.me/5492634766992" className="text-primary font-bold">expreso rivadavia</a></span>
             </div>
+            
           </div>
           <Modal open={open} onClose={() => setOpen(false)}>
             <div className="w-96 p-4">

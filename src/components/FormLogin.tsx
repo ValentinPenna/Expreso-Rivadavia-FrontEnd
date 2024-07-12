@@ -85,16 +85,16 @@ const FormLogin = () => {
                     )}
                     </div>
                     </div>
-            
+                    
             <Button type="submit" children="Iniciar Sesión" className="mt-6" />
+            <div className="mt-4 flex justify-center items-center">
+              <LoginGoogle/>
+              </div>
             <p className="text-sm mt-4">
               No tienes cuenta?{" "}
               <a className="font-bold text-primary" href="/auth/register">
                 Registrate
               </a>
-              <div className="mt-4 flex justify-center items-center">
-              <LoginGoogle/>
-              </div>
             </p>          
           </Form>
         )}

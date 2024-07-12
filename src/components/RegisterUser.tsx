@@ -78,7 +78,7 @@ const RegisterUser: React.FC<RegisterUserProps>= ({handleBackToSelection}) => {
                     </div>
                     </div>  
                     <div className='relative'>
-                <Input label="Confirmar contraseña" name="confirmPassword" placeholder='*******' type="password" error={errors.confirmPassword}></Input>
+                <Input label="Confirmar contraseña" name="confirmPassword" placeholder='*******' type={password ? "password" : "text"} error={errors.confirmPassword}></Input>
                 <div onClick={passwordVisibility} className="absolute right-0 top-2/3  transform  cursor-pointer">
                 {!password ? (
                       <AiFillEyeInvisible color="red" />

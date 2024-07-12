@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Button from "./secondary/Button";
 import { Input } from "./secondary/Input";
 import { validateShipment } from "./validation/validateShipment";
-import type { IShipment } from "./types/typesRegister";
 import { auth } from "../helpers/auth";
 import { useOrdersStore } from "../store/ordersStore";
 import { useUserStore } from "../store/userStore";
@@ -296,6 +295,7 @@ const Shipment = () => {
                 ) : (
                   <div className="mt-10 mb-5 flex justify-center flex-col items-center">
                     <Button type="submit">CREAR ENVIO</Button>
+                    <span className="text-sm mt-2"> Contactate con nosotros para mas información <a href="https://wa.me/5492634766992" className="text-primary font-bold">expreso rivadavia</a></span>
                   </div>
                 )}
               </div>
