@@ -22,12 +22,10 @@ const FormLogin = () => {
     const isAuth = auth();
     if (isAuth) window.location.href = "/";
   }, []);
-
   
   const passwordVisibility = () => {
     setPassword(!password);
   };
-
 
   return (
     <div>
