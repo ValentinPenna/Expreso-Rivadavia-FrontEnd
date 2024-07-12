@@ -20,13 +20,14 @@ const CarrierDashboard = () => {
   useEffect(() => {
     getOrders()
       .then((data) => {
-        setOrders(data);
-        setFilteredOrders(data);
+        const dataOrdered = data.filter((order) => {
+          return order.status !== "Entregado";
+        });
+        setOrders(dataOrdered);
+        setFilteredOrders(dataOrdered);
       })
       .catch(console.log);
   }, [getOrders]);
-
-  //* aunto re render cuando se cambia el estado de la orden
 
   const handleStatusChange = (orderId: string, newStatus: string) => {
     // acciona el endpoint de back
@@ -130,7 +131,7 @@ const CarrierDashboard = () => {
         {filteredOrders.length > 0 ? (
           filteredOrders.map((order) => (
             <React.Fragment key={order.id}>
-              <p className=" text-xs overflow-hidden text-ellipsis p-1 whitespace-nowrap lg:text-base border-b border-x">
+              <p className=" text-xs  p-1 lg:text-base border-b border-x">
                 {order.id}
               </p>
               <p className="flex items-center justify-center text-xs overflow-hidden text-center text-ellipsis p-1 whitespace-nowrap lg:text-base border-b border-x">
