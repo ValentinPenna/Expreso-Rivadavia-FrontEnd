@@ -42,6 +42,7 @@ export interface User {
   role: string;
   orders: Orders[];
   profilePicture: string;
+  isDeleted: boolean;
 }
 
 export interface Company {
