@@ -40,6 +40,10 @@ const Shipment = () => {
 
   const handlePaymentSuccess = async () => {
     try {
+      if (modalData?.size === "Sobre") modalData.size = "envelope";
+      if (modalData?.size === "Pequeño") modalData.size = "small";
+      if (modalData?.size === "Mediano") modalData.size = "medium";
+      if (modalData?.size === "Grande") modalData.size = "large";
       await createOrder({
         size: modalData?.size || "",
         locality_origin: modalData?.locality_origin || 0,
@@ -49,11 +53,6 @@ const Shipment = () => {
       });
       toast.success("El pago a sido exitoso");
       setOpen(false);
-      if (
-        window.confirm("Te gustaria dejar un Comentario de nuestro Servicio?")
-      ) {
-        window.location.href = "/review";
-      }
     } catch (error) {
       console.error("Error creating order:", error);
     }
@@ -83,10 +82,10 @@ const Shipment = () => {
               locality_origin: Number(values.locality_origin),
               locality_destination: Number(values.locality_destination),
             }).then((data: any) => {
-              // if (values.size === "envelop") values.size = "Sobre";
-              // if (values.size === "small") values.size = "Pequeño";
-              // if (values.size === "medium") values.size = "Mediano";
-              // if (values.size === "large") values.size = "Grande";
+              if (values.size === "envelop") values.size = "Sobre";
+              if (values.size === "small") values.size = "Pequeño";
+              if (values.size === "medium") values.size = "Mediano";
+              if (values.size === "large") values.size = "Grande";
               setModalData({
                 size: values.size,
                 locality_origin: Number(values.locality_origin),
@@ -222,7 +221,7 @@ const Shipment = () => {
                     />
                     <div className="flex  flex-col items-center space-x-2">
                       <span className="ml-2 mr-6 ">Sobre</span>
-                      <span className="text-sm md:ml-0 text-primary">
+                      <span className="text-sm md:ml-0 font-quicksand text-black">
                         Máximo formato A4{" "}
                       </span>
                     </div>
@@ -244,7 +243,7 @@ const Shipment = () => {
                       />
                       <div className="flex  flex-col items-center space-x-2">
                         <span className="ml-2 mr-6 ">Pequeño</span>
-                        <span className="text-sm md:ml-0 text-primary">
+                        <span className="text-sm md:ml-0 font-quicksand text-black">
                           Máximo de 150cm / 10000 grs
                         </span>
                       </div>
@@ -261,7 +260,7 @@ const Shipment = () => {
                       />
                       <div className="flex  flex-col items-center space-x-2">
                         <span className="ml-2 mr-6 ">Mediano</span>
-                        <span className="text-sm md:ml-0 text-primary">
+                        <span className="text-sm md:ml-0 font-quicksand text-black">
                           Máximo de 300cm / 25000 grs
                         </span>
                       </div>
@@ -278,7 +277,7 @@ const Shipment = () => {
                       />
                       <div className="flex  flex-col items-center space-x-2">
                         <span className="ml-2 mr-6 ">Grande</span>
-                        <span className="text-sm md:ml-0 text-primary">
+                        <span className="text-sm md:ml-0 font-quicksand text-black">
                           Máximo de 495cm / 50000 grs
                         </span>
                       </div>
@@ -295,7 +294,16 @@ const Shipment = () => {
                 ) : (
                   <div className="mt-10 mb-5 flex justify-center flex-col items-center">
                     <Button type="submit">CREAR ENVIO</Button>
-                    <span className="text-sm mt-2"> Contactate con nosotros para mas información <a href="https://wa.me/5492634766992" className="text-primary font-bold">expreso rivadavia</a></span>
+                    <span className="text-sm mt-2">
+                      {" "}
+                      Contactate con nosotros para mas información{" "}
+                      <a
+                        href="https://wa.me/5492634766992"
+                        className="text-primary font-bold"
+                      >
+                        expreso rivadavia
+                      </a>
+                    </span>
                   </div>
                 )}
               </div>

@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import QuoteShipping from '../components/QuoteShipping'
 import MapSection from '../components/MapSection.astro';
+import ReviewsUsers from '../components/ReviewsUsers'
+import type { only } from 'node:test';
+
 ---
 
 <Layout title="Expreso Rivadavia">
@@ -12,6 +15,9 @@ import MapSection from '../components/MapSection.astro';
 			</div>
 		<div class="flex justify-center">
 			<MapSection/>
+		</div>
+		<div>
+			<ReviewsUsers client:only/>
 		</div>
 	</main>
 </Layout>
