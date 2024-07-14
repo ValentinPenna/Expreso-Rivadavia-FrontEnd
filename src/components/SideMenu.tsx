@@ -64,7 +64,7 @@ export default function SideMenu() {
               </div>
             )}
           </div>
-          {!isTransporter || !isAdmin && (
+          {!isTransporter && !isAdmin && (
             <div className="flex flex-row h-fit">
               {window.location.pathname === "/dashboard/shipments" ? (
                 <div className="flex items-center border-l-4 h-8 border-primary">
@@ -97,7 +97,7 @@ export default function SideMenu() {
               )}
             </div>
           )}
-          {!isTransporter || !isAdmin && (
+          {!isTransporter && !isAdmin && (
             <div className="flex flex-row h-fit">
               {window.location.pathname === "/dashboard/trackeo" ? (
                 <div className="flex items-center border-l-4 h-8 border-primary">

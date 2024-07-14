@@ -76,7 +76,9 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
                 <span className='text-primary'> $ {order.shipments.shipment_price.toFixed(2)}</span>
                  </p> */}
                  <div className='border border-primary my-4 w-1/3'></div>
-                 
+                 <p>Id del envío:
+                 <span className='text-primary'> {order.shipments.id}</span> 
+                 </p>
                  <p>Precio de la orden: 
                 <span className='text-primary font-bold '> $ {Number(order.final_price).toFixed(2)}</span>  
                 </p>
