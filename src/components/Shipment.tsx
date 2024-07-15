@@ -51,7 +51,7 @@ const Shipment = () => {
         address_origin: modalData?.address_origin || "",
         address_destination: modalData?.address_destination || "",
       });
-      toast.success("El pago a sido exitoso");
+      toast.success("El pago ha sido exitoso");
       setOpen(false);
     } catch (error) {
       console.error("Error creating order:", error);
