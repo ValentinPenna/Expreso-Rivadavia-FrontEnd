@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import SwitchGuestUser from "./SwitchGuestUser";
+import { auth } from "../helpers/auth";
 
 const UlNavBar = () => {
+  const isAuth: boolean = auth();
   const [isFocused, setIsFocused] = useState<boolean>(false);
   return (
     <>
@@ -24,11 +26,19 @@ const UlNavBar = () => {
               Cotizar un envío
             </a>
           </li>
-          <li>
-            <a href="/new-shipment" className="hover:text-primary">
-              Hacer un envío
-            </a>
-          </li>
+          {isAuth ? (
+            <li>
+              <a href="/new-shipment" className="hover:text-primary">
+                Hacer un envio
+              </a>
+            </li>
+          ) : (
+            <li>
+              <a href="/auth/register" className="hover:text-primary">
+                Hacer un envio
+              </a>
+            </li>
+          )}
           <li>
             <a href="/faqs" className="hover:text-primary">
               Preguntas Frecuentes
