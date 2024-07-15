@@ -144,6 +144,9 @@ export const useOrdersStore = create<State>((set, get) => ({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
       const data = await response.json();
       return data;
     } catch (error) {

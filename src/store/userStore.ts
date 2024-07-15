@@ -28,6 +28,7 @@ const initialUser: User = {
   role: "",
   orders: [],
   profilePicture: "",
+  isDeleted: false,
 };
 
 interface State {
@@ -48,6 +49,7 @@ interface State {
   changeUserData: (dataUser: UserChangeData, id: string) => Promise<void>;
   getUsers: () => Promise<User[]>;
   postReview: (userReview: ReviewUser, id: string) => Promise<void>;
+  deleteUser: (id: string) => Promise<any>;
 }
 
 export const useUserStore = create<State>((set, get) => ({
@@ -283,4 +285,19 @@ export const useUserStore = create<State>((set, get) => ({
       throw new Error(`text`, error);
     }
   },
+  deleteUser: async (id: string) => {
+    try {
+      const response = await fetch(`${apiUrl}/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }));
