@@ -10,19 +10,17 @@ import { toast } from "react-toastify";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import LoginGoogle from "./LoginGoogle";
 
-
-
 const FormLogin = () => {
   const [login, setLogin] = useState(false);
   const getUser = useUserStore((state: any) => state.getUser);
   const loginUser = useUserStore((state: any) => state.loginUser);
-  const [password, setPassword]= useState(true)
+  const [password, setPassword] = useState(true);
 
   useEffect(() => {
     const isAuth = auth();
     if (isAuth) window.location.href = "/";
   }, []);
-  
+
   const passwordVisibility = () => {
     setPassword(!password);
   };
@@ -68,34 +66,39 @@ const FormLogin = () => {
               placeholder="Email"
             />
             <div className="relative">
-
-            <Input
-              error={errors.password}
-              label="Contraseña"
-              type={password ? "password" : "text"}
-              name="password"
-              placeholder="*********"
-              
-            />
-            <div onClick={passwordVisibility} className="absolute right-0 top-2/3  transform  cursor-pointer">
+              <Input
+                error={errors.password}
+                label="Contraseña"
+                type={password ? "password" : "text"}
+                name="password"
+                placeholder="*********"
+              />
+              <div
+                onClick={passwordVisibility}
+                className="absolute right-0 top-2/3  transform  cursor-pointer"
+              >
                 {!password ? (
-                      <AiFillEyeInvisible color="red" />
-                    ) : (
-                      <AiFillEye color="red" />
-                    )}
-                    </div>
-                    </div>
-                    
-            <Button type="submit" children="Iniciar Sesión" className="mt-6" />
-            <div className="mt-4 flex justify-center items-center">
-              <LoginGoogle/>
+                  <AiFillEyeInvisible color="red" />
+                ) : (
+                  <AiFillEye color="red" />
+                )}
               </div>
+            </div>
+
+            <Button
+              type="submit"
+              children="Iniciar Sesión"
+              className="mt-6 hover:bg-primary hover:text-white"
+            />
+            <div className="mt-4 flex justify-center items-center">
+              <LoginGoogle />
+            </div>
             <p className="text-sm mt-4">
               No tienes cuenta?{" "}
               <a className="font-bold text-primary" href="/auth/register">
                 Registrate
               </a>
-            </p>          
+            </p>
           </Form>
         )}
       </Formik>

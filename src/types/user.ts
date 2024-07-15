@@ -105,3 +105,8 @@ export interface UserChangeData {
   address: string;
   locality: string;
 }
+
+export interface ReviewUser {
+  rating: number | null;
+  comment: string;
+}

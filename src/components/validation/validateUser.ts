@@ -1,7 +1,11 @@
-import type { IRegisterUser, IRegisterUserErrors } from "../types/typesRegister";
+import type {
+  IRegisterUser,
+  IRegisterUserErrors,
+} from "../types/typesRegister";
 
-
-export default function validateUser(values :IRegisterUser): IRegisterUserErrors{
+export default function validateUser(
+  values: IRegisterUser
+): IRegisterUserErrors {
   const errors: IRegisterUserErrors = {};
   if (!values.email) {
     errors.email = "Por favor ingrese un correo electrónico";
@@ -9,11 +13,11 @@ export default function validateUser(values :IRegisterUser): IRegisterUserErrors
     !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)
   ) {
     errors.email =
-      "El correo solo puede contener letras, números, puntos, guiones y guion bajo";
-  }else if (values.email.length > 50) {
+      "El correo solo puede contener letras, números, puntos y guines";
+  } else if (values.email.length > 50) {
     errors.email = "El correo no puede tener más de 50 caracteres";
   }
-  if(!values.dni) {
+  if (!values.dni) {
     errors.dni = "Por favor ingrese un número de DNI";
   }
   if (!values.name) {
@@ -28,12 +32,12 @@ export default function validateUser(values :IRegisterUser): IRegisterUserErrors
   }
   if (!values.address) {
     errors.address = "Por favor ingrese una dirección";
-  }else if (values.address.length > 50) {
+  } else if (values.address.length > 50) {
     errors.address = "El correo no puede tener más de 50 caracteres";
   }
-  if(!values.locality) {
+  if (!values.locality) {
     errors.locality = "Por favor ingrese una localidad";
-  }else if (values.locality.length > 50) {
+  } else if (values.locality.length > 50) {
     errors.locality = "El correo no puede tener más de 50 caracteres";
   }
   if (!values.password) {
@@ -42,20 +46,18 @@ export default function validateUser(values :IRegisterUser): IRegisterUserErrors
     errors.password = "La contraseña debe tener al menos 8 caracteres";
   } else if (values.password.length > 15) {
     errors.password = "La contraseña no puede tener más de 15 caracteres";
-  } else if (/^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&])/.test(values.password)){
-    errors.password = "La contraseña debe tener una letra mayuscula, una letra minuscula, un numero y un caracter especial"
+  } else if (
+    /^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&])/.test(values.password)
+  ) {
+    errors.password =
+      "La contraseña debe tener una letra mayuscula, una letra minuscula, un numero y un caracter especial";
   }
   if (!values.confirmPassword) {
     errors.confirmPassword = "Por favor confirme su contraseña";
   }
   if (values.password !== values.confirmPassword) {
     errors.confirmPassword = "Las contraseñas no coinciden";
-  } 
-  
+  }
+
   return errors;
 }
-
-
-
-
-

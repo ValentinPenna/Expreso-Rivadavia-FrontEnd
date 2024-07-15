@@ -8,7 +8,7 @@ import type {
   IordersQuotationsModalProps,
 } from "../types/shipments";
 import Modal from "./secondary/Modal";
-import { BiTrash } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 export interface Quote {
   origin: string;
@@ -47,14 +47,25 @@ export default function QuoteShipping() {
             size: values.size,
             locality_origin: Number(values.origin),
             locality_destination: Number(values.destination),
-          }).then((data: any) => {
-            setModalData({
-              size: values.size,
-              locality_origin: Number(values.origin),
-              locality_destination: Number(values.destination),
-              price: data,
+          })
+            .then((data: any) => {
+              if (values.size === "envelop") values.size = "Sobre";
+              if (values.size === "small") values.size = "Pequeño";
+              if (values.size === "medium") values.size = "Mediano";
+              if (values.size === "large") values.size = "Grande";
+              setModalData({
+                size: values.size,
+                locality_origin: Number(values.origin),
+                locality_destination: Number(values.destination),
+                price: data,
+              });
+            })
+            .catch((err) => {
+              setOpen(false);
+              toast.error(
+                "Rellena todos los campos para realizar la cotización"
+              );
             });
-          });
           setOpen(true);
           setQuote(true);
         }}
@@ -65,8 +76,8 @@ export default function QuoteShipping() {
               Cotizar envío
             </h1>
           </div>
-          <div className="text-xl lg:text-2xl m-10">
-            <div className="flex flex-col lg:flex-row items-center justify-between">
+          <div className="text-xl lg:text-2xl my-8 xl:m-10">
+            <div className="flex flex-col xl:flex-row items-center justify-between">
               <div>
                 <label
                   htmlFor="origin"
@@ -160,7 +171,7 @@ export default function QuoteShipping() {
               <div
                 role="group"
                 aria-labelledby="size"
-                className="flex flex-col lg:flex-row"
+                className="flex flex-col xl:flex-row"
               >
                 <label
                   htmlFor="size-sobre"
@@ -234,42 +245,59 @@ export default function QuoteShipping() {
             </div>
             <div className="mt-10 mb-5 flex justify-center items-center flex-col">
               <Button type="submit">COTIZAR</Button>
-              <span className="text-sm mt-2"> Contactate con nosotros para mas información <a href="https://wa.me/5492634766992" className="text-primary font-bold">expreso rivadavia</a></span>
+              <span className="text-sm mt-2">
+                {" "}
+                Contactate con nosotros para mas información{" "}
+                <a
+                  href="https://wa.me/5492634766992"
+                  className="text-primary font-bold"
+                >
+                  expreso rivadavia
+                </a>
+              </span>
             </div>
-            
           </div>
           <Modal open={open} onClose={() => setOpen(false)}>
-            <div className="w-96 p-4">
+            <div className=" p-4">
               {modalData && (
-                <div>
-                  <h1 className="text-xl font-bold mb-4 text-primary">
+                <div className="flex flex-col gap-6">
+                  <h1 className="text-xl text-center font-bold text-primary">
                     Detalles del envío
                   </h1>
-                  <p>
-                    <strong>Ciudad de origen:</strong>{" "}
-                    {
-                      localities.find(
-                        (loc) => Number(loc.id) === modalData.locality_origin
-                      )?.name
-                    }
-                  </p>
-                  <p>
-                    <strong>Ciudad de destino:</strong>{" "}
-                    {
-                      localities.find(
-                        (loc) =>
-                          Number(loc.id) === modalData.locality_destination
-                      )?.name
-                    }
-                  </p>
-                  <p>
-                    <strong>Tamaño:</strong> {modalData.size}
-                  </p>
-                  <p>
-                    <strong>Precio:</strong>{" "}
-                    {`${modalData.price} pesos argentinos`}
-                  </p>
-                  <div className=" flex justify-center items-center gap-8 mt-8">
+                  <div className="flex justify-between gap-24">
+                    <p className="text-center">
+                      <strong>Ciudad de origen:</strong>
+                      <br />
+                      {
+                        localities.find(
+                          (loc) => Number(loc.id) === modalData.locality_origin
+                        )?.name
+                      }
+                    </p>
+                    <p className="text-center">
+                      <strong>Ciudad de destino:</strong>
+                      <br />
+                      {
+                        localities.find(
+                          (loc) =>
+                            Number(loc.id) === modalData.locality_destination
+                        )?.name
+                      }
+                    </p>
+                  </div>
+                  <div className="flex gap-24 justify-between items-center">
+                    <p className="m-auto text-center">
+                      <strong>Tamaño:</strong>
+                      <br /> {modalData.size}
+                    </p>
+                    <p className="text-center m-auto">
+                      <strong>Precio:</strong>
+                      <br />
+                      {`${modalData.price} AR$`}
+                    </p>
+                  </div>
+
+                  <div className=" flex justify-center items-center ">
                     <div
                       onClick={() => setOpen(false)}
                       className="text-base p-1 flex justify-start gap-1 hover:cursor-pointer text-primary bg-transparent items-center w-fit"

@@ -5,6 +5,7 @@ import type {
   CompanyRegister,
   LoginResponse,
   RegisterResponse,
+  ReviewUser,
   User,
   UserChangeData,
   UserLogin,
@@ -47,6 +48,7 @@ interface State {
   googleLogin: (email: string | null) => Promise<LoginResponse | void>;
   changeUserData: (dataUser: UserChangeData, id: string) => Promise<void>;
   getUsers: () => Promise<User[]>;
+  postReview: (userReview: ReviewUser, id: string) => Promise<void>;
   deleteUser: (id: string) => Promise<any>;
 }
 
@@ -264,6 +266,23 @@ export const useUserStore = create<State>((set, get) => ({
       return data;
     } catch (error) {
       console.log(error);
+    }
+  },
+  postReview: async (userReview, id) => {
+    try {
+      let bodyContent = JSON.stringify(userReview);
+      const response = await fetch(`${apiUrl}/reviews/new/${id}`, {
+        method: `POST`,
+        headers: {
+          "Content-Type": `application/json`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: bodyContent,
+      });
+      const data = await response.json();
+      return data;
+    } catch (error: any) {
+      throw new Error(`text`, error);
     }
   },
   deleteUser: async (id: string) => {

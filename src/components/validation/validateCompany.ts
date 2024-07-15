@@ -1,7 +1,11 @@
-import type { IRegisterCompany, IRegisterCompanyErrors,  } from "../types/typesRegister";
+import type {
+  IRegisterCompany,
+  IRegisterCompanyErrors,
+} from "../types/typesRegister";
 
-
-export default function validateCompany(values :IRegisterCompany) :IRegisterCompanyErrors {
+export default function validateCompany(
+  values: IRegisterCompany
+): IRegisterCompanyErrors {
   const errors: IRegisterCompanyErrors = {};
   if (!values.email) {
     errors.email = "Por favor ingrese un correo electrónico";
@@ -9,14 +13,14 @@ export default function validateCompany(values :IRegisterCompany) :IRegisterComp
     !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)
   ) {
     errors.email =
-      "El correo solo puede contener letras, números, puntos, guiones y guion bajo";
-  }else if (values.email.length > 50) {
+      "El correo solo puede contener letras, números, puntos y guines";
+  } else if (values.email.length > 50) {
     errors.email = "El correo no puede tener más de 50 caracteres";
   }
-  if(!values.cuit_cuil) {
+  if (!values.cuit_cuil) {
     errors.cuit_cuil = "Por favor ingrese un número de DNI";
   }
-  if(!values.companyName) {
+  if (!values.companyName) {
     errors.companyName = "Por favor ingrese un nombre de empresa";
   }
   if (!values.name) {
@@ -31,12 +35,12 @@ export default function validateCompany(values :IRegisterCompany) :IRegisterComp
   }
   if (!values.address) {
     errors.address = "Por favor ingrese una dirección";
-  }else if (values.address.length > 50) {
+  } else if (values.address.length > 50) {
     errors.address = "La direccion no puede tener más de 50 caracteres";
   }
-  if(!values.locality) {
+  if (!values.locality) {
     errors.locality = "Por favor ingrese una localidad";
-  }else if (values.locality.length > 50) {
+  } else if (values.locality.length > 50) {
     errors.locality = "La localidad no puede tener más de 50 caracteres";
   }
   if (!values.password) {
@@ -45,8 +49,11 @@ export default function validateCompany(values :IRegisterCompany) :IRegisterComp
     errors.password = "La contraseña debe tener al menos 8 caracteres";
   } else if (values.password.length > 15) {
     errors.password = "La contraseña no puede tener más de 15 caracteres";
-  } else if (/^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&])/.test(values.password)){
-    errors.password = "La contraseña debe tener una letra mayuscula, una letra minuscula, un numero y un caracter especial"
+  } else if (
+    /^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#$%^&])/.test(values.password)
+  ) {
+    errors.password =
+      "La contraseña debe tener una letra mayuscula, una letra minuscula, un numero y un caracter especial";
   }
   if (!values.confirmPassword) {
     errors.confirmPassword = "Por favor confirme su contraseña";

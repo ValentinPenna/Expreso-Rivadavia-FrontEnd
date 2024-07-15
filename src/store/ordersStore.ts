@@ -55,10 +55,14 @@ export const useOrdersStore = create<State>((set, get) => ({
           },
         }),
       });
+      if (!response.ok) {
+        throw new Error("error en la solicitud");
+      }
       const data = await response.json();
       return data;
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      throw new Error(error);
     }
   },
   getLocalities: async () => {

@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa6";
 import Button from "./Button";
+import { useUserStore } from "../../store/userStore";
+import type { ReviewUser } from "../../types/user";
+import { toast } from "react-toastify";
 
-const CardReview: React.FC = () => {
+const CardReviewPost: React.FC = () => {
   const [rating, setRating] = useState<number | null>(null);
   const [color, setColor] = useState<number | null>(null);
   const [comment, setComment] = useState<string>("");
+  const postReview = useUserStore((state) => state.postReview);
+  const user = useUserStore((state) => state.user);
 
-  interface CommentProps {
-    rate: number | null;
-    userComment: string;
-  }
-
-  const handleSubmit = ({ rate, userComment }: CommentProps) => {
-    // se llama al endpoint del backend donde
-    console.log(rate, userComment);
+  const handleSubmit = async ({ rating, comment }: ReviewUser) => {
+    try {
+      const data = await postReview({ rating, comment }, user.id);
+      toast.success("¡Gracias por tu comentario!");
+      setComment("");
+      setRating(null);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="bg-white  flex gap-2 flex-col shadow-lg rounded-lg w-[500px] max-h-[320px] p-6">
@@ -55,7 +61,7 @@ const CardReview: React.FC = () => {
       ></textarea>
       <Button
         type="submit"
-        onClick={() => handleSubmit({ rate: rating, userComment: comment })}
+        onClick={() => handleSubmit({ rating: rating, comment: comment })}
         className="w-fit p-0.5 max-h-40  text-xs"
       >
         Enviar
@@ -64,4 +70,4 @@ const CardReview: React.FC = () => {
   );
 };
 
-export default CardReview;
+export default CardReviewPost;
