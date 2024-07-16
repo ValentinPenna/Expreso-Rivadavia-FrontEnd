@@ -14,7 +14,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="min-h-screen">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -24,7 +24,7 @@ const { title } = Astro.props;
 		<title>{title}</title>
 		<ViewTransitions />
 	</head>
-	<body>
+	<body class="min-h-screen">
 		<ToastContainer 
         position="bottom-right"
         autoClose={5000}
@@ -40,9 +40,20 @@ const { title } = Astro.props;
 		/>
 		<Navbar />
         <slot transition:persist/>
-		
 		<Footer />
-		
+		<script is:inline type="text/javascript">
+			(function(d, t) {
+				var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+				v.onload = function() {
+				  window.voiceflow.chat.load({
+					verify: { projectID: '669139a87bfcd9cc5f3c8cc4' },
+					url: 'https://general-runtime.voiceflow.com',
+					versionID: 'production'
+				  });
+				}
+				v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+			})(document, 'script');
+		  </script>
 	</body>
 </html>
 <style is:global>

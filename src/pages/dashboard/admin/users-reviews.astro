@@ -1,0 +1,13 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import AdminUserReviews from "../../../components/AdminUserReviews.tsx"
+---
+
+<Layout title="Comentarios de usuarios">
+    <AdminUserReviews client:load/>
+    <script>
+        import { authAdmin } from "../../../helpers/auth"
+        const isAuth = authAdmin()
+        if(!isAuth) window.location.href = "/" 
+    </script>
+</Layout>

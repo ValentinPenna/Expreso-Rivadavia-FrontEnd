@@ -4,5 +4,10 @@ import Shipment from '../components/Shipment';
 ---
 
 <Layout title="Hacer un envio">
-    <Shipment client:load/>
+    <Shipment client:only transition:persist/>
+    <script is:inline>
+        import { auth } from "../helpers/auth";
+        const isAuth = auth()
+        if(!isAuth) window.location.href = "/auth/register"
+    </script>
 </Layout>

@@ -5,392 +5,15 @@ import type {
   CompanyRegister,
   LoginResponse,
   RegisterResponse,
+  ReviewUser,
   User,
+  UserChangeData,
   UserLogin,
   UserRegister,
 } from "../types/user";
-import type { Orders } from "../types/shipments";
 import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.PUBLIC_API_URL;
-
-const userMock: User = {
-  id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  email: "user@example.com",
-  name: "Pedro",
-  lastName: "Gomez",
-  companyName: "Gucci",
-  dni: "",
-  cuit_cuil: "20304050607",
-  address: "string",
-  locality: "string",
-  role: "user",
-  orders: [],
-  profilePicture: "",
-};
-
-// const ordersMock: Orders[] = [
-//   {
-//     id: "order1",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-30T22:30:46.427Z",
-//     final_price: 10000,
-//     status: "delivered",
-//   },
-//   {
-//     id: "order2",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-27T22:30:46.427Z",
-//     final_price: 16000,
-//     status: "delivered",
-//   },
-//   {
-//     id: "order3",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-29T22:30:46.427Z",
-//     final_price: 25000,
-//     status: "delivered",
-//   },
-//   {
-//     id: "order4",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-29T22:30:46.427Z",
-//     final_price: 11000,
-//     status: "sending",
-//   },
-//   {
-//     id: "order5",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-25T22:30:46.427Z",
-//     final_price: 19000,
-//     status: "sending",
-//   },
-//   {
-//     id: "order6",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-17T22:30:46.427Z",
-//     final_price: 15000,
-//     status: "acepted",
-//   },
-//   {
-//     id: "order7",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-10T22:30:46.427Z",
-//     final_price: 20000,
-//     status: "cancelled",
-//   },
-//   {
-//     id: "order8",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-10T22:30:46.427Z",
-//     final_price: 12000,
-//     status: "delivered",
-//   },
-//   {
-//     id: "order9",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-30T22:30:46.427Z",
-//     final_price: 7000,
-//     status: "receipted",
-//   },
-//   {
-//     id: "order10",
-//     user: {
-//       id: "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//       email: "user@example.com",
-//       name: "Pedro",
-//       lastName: "Gomez",
-//       companyName: "Gucci",
-//       dni: "12345678",
-//       cuit_cuil: "20304050607",
-//       address: "string",
-//       locality: "string",
-//       role: "user",
-//       orders: [],
-//       profilePicture: "",
-//     },
-//     shipments: {
-//       id: "706becbe-9521-43be-a8ab-1938210ad078",
-//       orders: "string",
-//       locality_origin: "Rivadavia",
-//       locality_destination: "San Martín",
-//       address_origin: "string",
-//       address_destination: "string",
-//       shipment_price: 4000,
-//     },
-//     packages: ["string"],
-//     receipt: {
-//       id: "string",
-//       user: "string",
-//       orders: "string",
-//       link: "string",
-//     },
-//     date: "2024-06-25T22:30:46.427Z",
-//     final_price: 8000,
-//     status: "delivered",
-//    },
-// ];
 
 const initialUser: User = {
   id: "",
@@ -405,6 +28,7 @@ const initialUser: User = {
   role: "",
   orders: [],
   profilePicture: "",
+  isDeleted: false,
 };
 
 interface State {
@@ -422,6 +46,11 @@ interface State {
   changePassword: (dataUser: ChangePassProps, id: string) => Promise<User>;
   uploadImage: (file: File, id: string) => Promise<string>;
   googleLogin: (email: string | null) => Promise<LoginResponse | void>;
+  changeUserData: (dataUser: UserChangeData, id: string) => Promise<User>;
+  getUsers: () => Promise<User[]>;
+  postReview: (userReview: ReviewUser, id: string) => Promise<void>;
+  deleteUser: (id: string) => Promise<any>;
+  getUsersRewies: () => Promise<void>
 }
 
 export const useUserStore = create<State>((set, get) => ({
@@ -537,39 +166,50 @@ export const useUserStore = create<State>((set, get) => ({
     }
   },
 
- uploadImage: async (file: File, id: string): Promise<string> => {
-  
+  uploadImage: async (file: File, id: string): Promise<string> => {
     const formData = new FormData();
     formData.append("file", file);
 
     try {
-        const response = await fetch(`${apiUrl}/files/uploadImage/${id}`, {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token') || get().token}`,
-            },
-            body: formData,
-        });
-        if (!response.ok) {
-            throw new Error('Error al subir la imagen');
-        }
-        const responseData = await response.json(); 
-        if (!responseData.profilePicture) {
-            throw new Error('No se devolvió la URL de la imagen');
-        }
-        localStorage.setItem('user', JSON.stringify(responseData))
-        set(state => ({
-          user: {
-            ...state.user,
-            profilePicture: responseData.profilePicture
-          }
-        }))
-        return responseData.profilePicture; 
+      const response = await fetch(`${apiUrl}/files/uploadImage/${id}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${
+            localStorage.getItem("token") || get().token
+          }`,
+        },
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error("Error al subir la imagen");
+      }
+      const responseData = await response.json();
+      if (!responseData.profilePicture) {
+        throw new Error("No se devolvió la URL de la imagen");
+      }
+      //* en vez de guardar el nuevo item sacar el viejo reemplazar el valor y volverlo a guardar
+      // 1 sacar el user de local storage
+      const oldUser: User = JSON.parse(localStorage.getItem("user")!);
+      // 2 modificar el user con el nuevo valor de la foto
+      const updatedUser = {
+        ...oldUser,
+        profilePicture: responseData.profilePicture,
+      };
+      //3 volver a guardar el user modificado en el local
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
+      set((state) => ({
+        user: {
+          ...state.user,
+          profilePicture: responseData.profilePicture,
+        },
+      }));
+      return responseData.profilePicture;
     } catch (error) {
-        console.error(error);
-        throw new Error("Error uploading profile picture");
+      console.error(error);
+      throw new Error("Error uploading profile picture");
     }
-},
+  },
 
   googleLogin: async (emailUser: string | null) => {
     try {
@@ -592,5 +232,136 @@ export const useUserStore = create<State>((set, get) => ({
     } catch (error: any) {
       throw new Error(`text`, error);
     }
+  },
+  changeUserData: async (userData, userId) => {
+    try {
+      let bodyContent = JSON.stringify(userData);
+
+      const response = await fetch(`${apiUrl}/users/${userId}`, {
+        method: `PUT`,
+        headers: {
+          "Content-Type": `application/json`,
+          authorization: `Bearer ${
+            localStorage.getItem("token") || get().token
+          } `,
+        },
+        body: bodyContent,
+      });
+
+      const data: User = await response.json();
+
+      const oldUser: User = JSON.parse(localStorage.getItem("user")!);
+
+      const updatedUser = {
+        ...oldUser,
+        address: data.address,
+
+        companyName: data.companyName,
+
+        cuit_cuil: data.cuit_cuil,
+        dni: data.dni,
+
+        email: data.email,
+
+        lastName: data.lastName,
+
+        locality: data.locality,
+
+        name: data.name,
+      };
+      //3 volver a guardar el user modificado en el local
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
+      set((state) => ({
+        user: {
+          ...state.user,
+          address: data.address,
+
+          companyName: data.companyName,
+
+          cuit_cuil: data.cuit_cuil,
+          dni: data.dni,
+
+          email: data.email,
+
+          lastName: data.lastName,
+
+          locality: data.locality,
+
+          name: data.name,
+        },
+      }));
+      return data;
+    } catch (error: any) {
+      throw new Error(`text`, error);
+    }
+  },
+  getUsers: async () => {
+    try {
+      const response = await fetch(`${apiUrl}/users/?page=1&limit=10`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  postReview: async (userReview, id) => {
+    try {
+      let bodyContent = JSON.stringify(userReview);
+      const response = await fetch(`${apiUrl}/reviews/new/${id}`, {
+        method: `POST`,
+        headers: {
+          "Content-Type": `application/json`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: bodyContent,
+      });
+      const data = await response.json();
+      return data;
+    } catch (error: any) {
+      throw new Error(`text`, error);
+    }
+  },
+  deleteUser: async (id: string) => {
+    try {
+      const response = await fetch(`${apiUrl}/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  getUsersRewies: async ()=>{
+    
+       try{ 
+        const response = await fetch(`${apiUrl}/reviews`, {
+          method: `GET`,
+          headers: {
+             'Content-Type': `application/json`,
+             Authorization: `Bearer ${
+              localStorage.getItem("token")}`,
+          },
+          
+        })
+        const data = await response.json();
+        console.log(data);
+        return data
+        }
+        catch (error: any) {
+          throw new Error(`text`, error)
+        }
+    
   },
 }));

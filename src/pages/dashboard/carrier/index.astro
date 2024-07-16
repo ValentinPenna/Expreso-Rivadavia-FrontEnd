@@ -1,0 +1,21 @@
+---
+import CarrierDashboard from "../../../components/CarrierDashboard"
+import Layout from "../../../layouts/Layout.astro"
+---
+
+<Layout title="Tablero de administrador">
+<main class="flex flex-row">
+    <CarrierDashboard client:only/>
+</main>
+<script>
+    import { authAdmin, authTransport } from "../../../helpers/auth"
+    const isAuth = authTransport()
+    const isAuthAdmin = authAdmin()
+    const isHabilitated = () => {
+        if(isAuth) return true
+        if(isAuthAdmin) return true
+        return false
+    }
+    if(!isHabilitated()) window.location.href = "/" 
+</script>
+</Layout>

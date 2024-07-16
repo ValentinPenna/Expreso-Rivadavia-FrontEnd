@@ -7,6 +7,8 @@ import type { LoginResponse, UserLogin } from "../types/user";
 import { useUserStore } from "../store/userStore";
 import { auth } from "../helpers/auth";
 import { toast } from "react-toastify";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import LoginGoogle from "./LoginGoogle";
 import { authFireBase, provider } from "../firebase/firebase";
 import {
   getAdditionalUserInfo,
@@ -18,12 +20,17 @@ const FormLogin = () => {
   const [login, setLogin] = useState(false);
   const getUser = useUserStore((state: any) => state.getUser);
   const loginUser = useUserStore((state: any) => state.loginUser);
+  const [password, setPassword] = useState(true);
   const googleLogin = useUserStore((state: any) => state.googleLogin);
 
   useEffect(() => {
     const isAuth = auth();
     if (isAuth) window.location.href = "/";
   }, []);
+
+  const passwordVisibility = () => {
+    setPassword(!password);
+  };
 
   const handleGoogle = async () => {
     try {
@@ -106,15 +113,34 @@ const FormLogin = () => {
               name="email"
               placeholder="Email"
             />
+            <div className="relative">
+              <Input
+                error={errors.password}
+                label="Contraseña"
+                type={password ? "password" : "text"}
+                name="password"
+                placeholder="*********"
+              />
+              <div
+                onClick={passwordVisibility}
+                className="absolute right-0 top-2/3  transform  cursor-pointer"
+              >
+                {!password ? (
+                  <AiFillEyeInvisible color="red" />
+                ) : (
+                  <AiFillEye color="red" />
+                )}
+              </div>
+            </div>
 
-            <Input
-              error={errors.password}
-              label="Contraseña"
-              type="password"
-              name="password"
-              placeholder="*********"
+            <Button
+              type="submit"
+              children="Iniciar Sesión"
+              className="mt-6 hover:bg-primary hover:text-white"
             />
-            <Button type="submit" children="Iniciar Sesión" className="mt-6" />
+            <div className="mt-4 flex justify-center items-center">
+              <LoginGoogle />
+            </div>
             <p className="text-sm mt-4">
               No tienes cuenta?{" "}
               <a className="font-bold text-primary" href="/auth/register">

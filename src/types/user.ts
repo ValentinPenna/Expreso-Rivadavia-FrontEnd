@@ -42,6 +42,7 @@ export interface User {
   role: string;
   orders: Orders[];
   profilePicture: string;
+  isDeleted: boolean;
 }
 
 export interface Company {
@@ -94,4 +95,18 @@ export interface ChangePassProps {
   newPassword: string;
 }
 
+export interface UserChangeData {
+  email: string;
+  name: string;
+  lastName: string;
+  companyName?: string;
+  dni?: string;
+  cuit_cuil?: string;
+  address: string;
+  locality: string;
+}
 
+export interface ReviewUser {
+  rating: number | null;
+  comment: string;
+}
