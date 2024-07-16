@@ -147,9 +147,6 @@ const FormLogin = () => {
                 Registrate
               </a>
             </p>
-            <Button className="text-xs p-0.5 w-fit" onClick={handleGoogle}>
-              Iniciar sesión con google
-            </Button>
           </Form>
         )}
       </Formik>
