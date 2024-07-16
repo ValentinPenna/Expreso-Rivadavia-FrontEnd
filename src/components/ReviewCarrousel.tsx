@@ -26,7 +26,7 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({ reviews }) => {
   };
   let count = reviews.length;
   return (
-    <div className="relative overflow-hidden max-w-[600px] w-full">
+    <div className="relative overflow-hidden w-80 md:w-full ">
       <div
         className="flex transition-transform duration-500"
         style={{

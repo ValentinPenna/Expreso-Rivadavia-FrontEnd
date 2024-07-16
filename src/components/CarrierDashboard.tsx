@@ -4,7 +4,6 @@ import type { Orders } from "../types/shipments";
 import Button from "./secondary/Button";
 import Modal from "./secondary/Modal";
 import { toast } from "react-toastify";
-import { authTransport } from "../helpers/auth";
 
 const CarrierDashboard = () => {
   const [orders, setOrders] = useState<Orders[]>([]);
@@ -30,7 +29,6 @@ const CarrierDashboard = () => {
   }, [getOrders]);
 
   const handleStatusChange = (orderId: string, newStatus: string) => {
-    // acciona el endpoint de back
     changeStatusOrders(newStatus, orderId).then((res) => {
       if (res) {
         toast.success(`Se cambió el estado de la orden a ${res.status} `);
@@ -61,8 +59,25 @@ const CarrierDashboard = () => {
     setFilteredOrders(filtered);
   };
 
+  const getStatusBgColor = (status: string) => {
+    switch (status) {
+      case "En camino":
+        return "bg-yellow-300";
+      case "Entregado":
+        return "bg-green-400";
+      default:
+        return "bg-zinc-300";
+    }
+  };
+
   return (
     <div className="w-full my-4 bg-white p-12 rounded-l-lg flex flex-col ">
+      <a
+        href="/dashboard"
+        className="hover:text-primary text-lg bg-zinc-200 w-fit px-3 rounded-full font-bold"
+      >
+        Volver
+      </a>
       <h1 className="text-xl lg:text-3xl text-primary font-bold mb-4 text-center">
         Lista de ordenes
       </h1>
@@ -151,14 +166,16 @@ const CarrierDashboard = () => {
 
               <div className="flex items-center justify-center relative text-xs p-1 text-center text-ellipsis overflow-hidden lg:text-base border-b border-x">
                 <button
-                  className="  w-fit text-primary font-bold p-4 text-xs lg:text-base"
+                  className={`rounded-lg w-fit font-bold p-1 text-xs lg:text-base ${getStatusBgColor(
+                    order.status
+                  )}`}
                   onClick={() =>
                     setDropdownVisible(
                       dropdownVisible === order.id ? null : order.id
                     )
                   }
                 >
-                  {order.status}...
+                  {order.status}
                 </button>
                 {dropdownVisible === order.id && (
                   <Modal onClose={() => setDropdownVisible(null)} open={true}>
@@ -167,7 +184,7 @@ const CarrierDashboard = () => {
                         Cambiar estado del envio
                       </h1>
                       <button
-                        className="block px-4 py-2 font-bold border-primary border rounded-full text-primary hover:bg-zinc-50"
+                        className="block px-4 py-2 font-bold border-primary border rounded-full text-primary hover:bg-zinc-100"
                         onClick={() =>
                           handleStatusChange(order.id, "En camino")
                         }
@@ -175,7 +192,7 @@ const CarrierDashboard = () => {
                         Empaque Recibido
                       </button>
                       <button
-                        className="block px-4 py-2 font-bold border-primary border rounded-full text-primary mt-4 hover:bg-zinc-50"
+                        className="block px-4 py-2 font-bold border-primary border rounded-full text-primary mt-4 hover:bg-zinc-100"
                         onClick={() =>
                           handleStatusChange(order.id, "Entregado")
                         }

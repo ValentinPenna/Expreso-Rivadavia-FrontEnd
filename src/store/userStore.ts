@@ -46,7 +46,7 @@ interface State {
   changePassword: (dataUser: ChangePassProps, id: string) => Promise<User>;
   uploadImage: (file: File, id: string) => Promise<string>;
   googleLogin: (email: string | null) => Promise<LoginResponse | void>;
-  changeUserData: (dataUser: UserChangeData, id: string) => Promise<void>;
+  changeUserData: (dataUser: UserChangeData, id: string) => Promise<User>;
   getUsers: () => Promise<User[]>;
   postReview: (userReview: ReviewUser, id: string) => Promise<void>;
   deleteUser: (id: string) => Promise<any>;
@@ -247,7 +247,49 @@ export const useUserStore = create<State>((set, get) => ({
         body: bodyContent,
       });
 
-      const data = await response.json();
+      const data: User = await response.json();
+
+      const oldUser: User = JSON.parse(localStorage.getItem("user")!);
+
+      const updatedUser = {
+        ...oldUser,
+        address: data.address,
+
+        companyName: data.companyName,
+
+        cuit_cuil: data.cuit_cuil,
+        dni: data.dni,
+
+        email: data.email,
+
+        lastName: data.lastName,
+
+        locality: data.locality,
+
+        name: data.name,
+      };
+      //3 volver a guardar el user modificado en el local
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+
+      set((state) => ({
+        user: {
+          ...state.user,
+          address: data.address,
+
+          companyName: data.companyName,
+
+          cuit_cuil: data.cuit_cuil,
+          dni: data.dni,
+
+          email: data.email,
+
+          lastName: data.lastName,
+
+          locality: data.locality,
+
+          name: data.name,
+        },
+      }));
       return data;
     } catch (error: any) {
       throw new Error(`text`, error);
@@ -299,5 +341,5 @@ export const useUserStore = create<State>((set, get) => ({
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 }));

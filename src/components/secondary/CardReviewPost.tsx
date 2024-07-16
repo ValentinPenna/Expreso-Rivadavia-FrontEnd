@@ -66,6 +66,13 @@ const CardReviewPost: React.FC = () => {
       >
         Enviar
       </Button>
+      <p className="text-xs">
+        Para dejar un comentario{" "}
+        <a href="/auth/login" className="text-primary font-bold">
+          {" "}
+          Inicia sesión
+        </a>
+      </p>
     </div>
   );
 };
