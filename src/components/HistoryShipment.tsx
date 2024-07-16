@@ -1,16 +1,25 @@
-import { statusMap } from "../types/shipments";
-import { useState } from "react";
-import type { IHistoryShipmentProps, Orders } from "../types/shipments";
+import { statusMap } from '../types/shipments';
+import { useState } from 'react'
+import type { IHistoryShipmentProps, Orders} from '../types/shipments'
+import { FaClipboard } from 'react-icons/fa6';
+import { MdOutlineContentCopy } from 'react-icons/md';
 
-const HistoryShipment: React.FC<IHistoryShipmentProps> = ({ orders }) => {
-  const [expandedOrder, setExpandedOrder] = useState<string[]>([]);
-
+const HistoryShipment: React.FC<IHistoryShipmentProps> = ({orders}) => {
+  const [expandedOrder, setExpandedOrder]=useState<string[]>([]);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const handleToggleExpandedOrder = (orderId: string) => {
     if (expandedOrder.includes(orderId)) {
       setExpandedOrder(expandedOrder.filter((id) => id !== orderId));
     } else {
-      setExpandedOrder([...expandedOrder, orderId]);
-    }
+      setExpandedOrder([...expandedOrder, orderId])
+  }
+  }
+
+  const handleCopyId = (id: string) => {
+    navigator.clipboard.writeText(id).then(() => {
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000); 
+    });
   };
   return (
     <div className="w-full my-4 pt-10 flex flex-col gap-2 ">
@@ -66,49 +75,32 @@ const HistoryShipment: React.FC<IHistoryShipmentProps> = ({ orders }) => {
               {/* <p>Paquetes:
                 <span className='text-primary'> {order.packages.join(', ')}</span>
                  </p> */}
-              <p>
-                Localidad de origen:
-                <span className="text-primary">
-                  {" "}
-                  {order.shipments.locality_origin.name}
-                </span>
+              <p>Localidad de origen: 
+                <span className='text-primary'> {order.shipments.locality_origin.name}</span>
+                </p>
+              <p>Localidad de destino:  
+                <span className='text-primary'> {order.shipments.locality_destination.name}</span>
+                </p>
+              <p>Dirección de origen:  
+               <span className='text-primary'> {order.shipments.address_origin}</span> 
+                </p>
+              <p>Dirección de destino: 
+                <span className='text-primary'> {order.shipments.address_destination}</span> 
+                 </p>
+                 <div className='border border-primary my-4 w-1/3'></div>
+                 <p className='flex flex-row'>
+                Id del envío:<span className='text-primary ml-2'>{order.id}</span>
+                <button
+                  onClick={() => handleCopyId(order.id)}
+                  className="ml-2 px-2 py-1 rounded flex items-center"
+                >
+                  <MdOutlineContentCopy className="mr-1" /> 
+                </button>
+                {copiedId === order.id && <span className="ml-2">¡Copiado!</span>}
               </p>
-              <p>
-                Localidad de destino:
-                <span className="text-primary">
-                  {" "}
-                  {order.shipments.locality_destination.name}
-                </span>
-              </p>
-              <p>
-                Dirección de origen:
-                <span className="text-primary">
-                  {" "}
-                  {order.shipments.address_origin}
-                </span>
-              </p>
-              <p>
-                Dirección de destino:
-                <span className="text-primary">
-                  {" "}
-                  {order.shipments.address_destination}
-                </span>
-              </p>
-              {/* <p>Precio del envío: 
-                <span className='text-primary'> $ {order.shipments.shipment_price.toFixed(2)}</span>
-                 </p> */}
-              <div className="border border-primary my-4 w-1/3"></div>
-              <p>
-                Id del envío:
-                <span className="text-primary"> {order.shipments.id}</span>
-              </p>
-              <p>
-                Precio de la orden:
-                <span className="text-primary font-bold ">
-                  {" "}
-                  $ {Number(order.final_price).toFixed(2)}
-                </span>
-              </p>
+                 <p>Precio de la orden: 
+                <span className='text-primary font-bold '> ${Number(order.final_price).toFixed(2)}</span>  
+                </p>
               <a className="text-base border-b font-bold" href="/review">
                 Dejanos un Comentario!
               </a>

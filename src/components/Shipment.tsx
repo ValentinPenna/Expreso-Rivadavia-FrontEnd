@@ -27,10 +27,10 @@ const Shipment = () => {
   const quotation = useOrdersStore((state) => state.quotation);
 
   useEffect(() => {
-    const isAuth: boolean = auth();
-    if (!isAuth) {
-      window.location.href = "/auth/register";
-    }
+    // const isAuth: boolean = auth();
+    // if (!isAuth) {
+    //   window.location.href = "/auth/register";
+    // }
     async function fetchLocalities() {
       const data = await getLocalities();
       setLocalities(data);
@@ -51,7 +51,7 @@ const Shipment = () => {
         address_origin: modalData?.address_origin || "",
         address_destination: modalData?.address_destination || "",
       });
-      toast.success("El pago a sido exitoso");
+      toast.success("El pago ha sido exitoso");
       setOpen(false);
     } catch (error) {
       console.error("Error creating order:", error);

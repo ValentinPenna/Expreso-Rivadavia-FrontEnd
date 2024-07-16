@@ -26,6 +26,7 @@ interface State {
   }: ICreateOrderProps) => Promise<Orders>;
   getOrders: () => Promise<Orders[]>;
   changeStatusOrders: (estado: string, orderId: string) => Promise<Orders>;
+  getOrderId: (id: string) => Promise<Orders | null>
 }
 
 export const useOrdersStore = create<State>((set, get) => ({
@@ -153,6 +154,27 @@ export const useOrdersStore = create<State>((set, get) => ({
       console.log(error);
     }
   },
+
+  getOrderId: async (id: string) => {
+    try {
+      const response = await fetch(`${apiUrl}/orders/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error: any) {
+      console.log(error);
+    }
+  },
+
+  
   changeStatusOrders: async (estado: string, orderId: string) => {
     try {
       let bodyContent = JSON.stringify({
