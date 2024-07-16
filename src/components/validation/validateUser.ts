@@ -22,12 +22,12 @@ export default function validateUser(
   }
   if (!values.name) {
     errors.name = "Por favor ingrese un nombre";
-  } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
+  } else if (!/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,40}$/.test(values.name)) {
     errors.name = "El nombre solo puede contener letras y espacios";
   }
   if (!values.lastName) {
     errors.lastName = "Por favor ingrese un apellido";
-  } else if (!/^[a-zA-Z��-��\s]{1,40}$/.test(values.lastName)) {
+  } else if (!/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,40}$/.test(values.lastName)) {
     errors.lastName = "El apellido solo puede contener letras y espacios";
   }
   if (!values.address) {

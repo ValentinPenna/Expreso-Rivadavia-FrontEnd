@@ -23,7 +23,7 @@ interface State {
     locality_destination,
     address_origin,
     address_destination,
-  }: ICreateOrderProps) => Promise<Orders>;
+  }: ICreateOrderProps,dataPayment:any) => Promise<Orders>;
   getOrders: () => Promise<Orders[]>;
   changeStatusOrders: (estado: string, orderId: string) => Promise<Orders>;
   getOrderId: (id: string) => Promise<Orders | null>
@@ -104,7 +104,7 @@ export const useOrdersStore = create<State>((set, get) => ({
     locality_destination,
     address_origin,
     address_destination,
-  }: ICreateOrderProps) => {
+  }: ICreateOrderProps,dataPayment) => {
     const userId = JSON.parse(localStorage.getItem("user")!).id;
     try {
       const response = await fetch(`${apiUrl}/orders/new/${userId}`, {
@@ -127,6 +127,9 @@ export const useOrdersStore = create<State>((set, get) => ({
             address_origin: address_origin,
             address_destination: address_destination,
           },
+          dataPayment :{
+            ...dataPayment
+          }
         }),
       });
       await get().getUser(userId);
