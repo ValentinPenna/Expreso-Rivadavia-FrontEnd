@@ -50,6 +50,7 @@ interface State {
   getUsers: () => Promise<User[]>;
   postReview: (userReview: ReviewUser, id: string) => Promise<void>;
   deleteUser: (id: string) => Promise<any>;
+  getUsersRewies: () => Promise<void>
 }
 
 export const useUserStore = create<State>((set, get) => ({
@@ -341,5 +342,26 @@ export const useUserStore = create<State>((set, get) => ({
     } catch (error) {
       console.log(error);
     }
+  },
+  getUsersRewies: async ()=>{
+    
+       try{ 
+        const response = await fetch(`${apiUrl}/reviews`, {
+          method: `GET`,
+          headers: {
+             'Content-Type': `application/json`,
+             Authorization: `Bearer ${
+              localStorage.getItem("token")}`,
+          },
+          
+        })
+        const data = await response.json();
+        console.log(data);
+        return data
+        }
+        catch (error: any) {
+          throw new Error(`text`, error)
+        }
+    
   },
 }));
