@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUserStore } from "../store/userStore";
+import {  useUserStore } from "../store/userStore";
 import Button from "./secondary/Button";
 import { toast } from "react-toastify";
 
@@ -13,6 +13,7 @@ export default function SwitchGuestUser() {
   useEffect(() => {
     setUser();
     setToken();
+   
   }, []);
   
   const handleSessionClose = () => {
@@ -42,7 +43,7 @@ export default function SwitchGuestUser() {
             className="absolute right-14 top-6 lg:flex z-50 flex-col gap-[3px] "
             onClick={() => setIsFocused(!isFocused)}
           >
-            <img src={user.profilePicture} alt="profile" className="rounded-full w-14 h-14"/>
+            <img src={user.profilePicture } alt="profile" className="rounded-full w-14 h-14"/>
             
           </button>
           <ul
