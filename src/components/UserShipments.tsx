@@ -58,11 +58,11 @@ export default function UserShipments() {
 
     return (
         <div className="w-full my-4 bg-white px-24 pb-24 pt-20 rounded-l-lg flex flex-col max-w-[80%] gap-2">
-            <div className="flex flex-row justify-between">
-                <h1 className="font-bold text-4xl text-primary">Historial de Envios</h1>
-                <div className="flex flex-row gap-4 justify-end">
+            <div className="">
+                <h1 className="font-bold text-center text-2xl lg:text-4xl text-primary mb-10">Historial de Envios</h1>
+                <div className="flex flex-wrap gap-4 justify-end">
                     <div className="flex flex-col items-start ">
-                    <input type="date" onChange={(e) => setSearchDate(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none h-fit" />
+                    <input type="date" onChange={(e) => setSearchDate(e.target.value)} className="bg-primary text-white p-2 rounded-lg px-2 outline-none h-fit " />
                     {searchDate && <button className="text-sm m-2" onClick={() => setSearchDate("")}>Borrar filtro</button>}
                     </div>
                     {/* <select className="bg-primary text-white p-2 rounded-lg outline-none h-fit" onChange={(e) => {

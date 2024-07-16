@@ -8,7 +8,7 @@ import { authAdmin, authTransport } from "../helpers/auth";
 import { LuClipboardList } from "react-icons/lu";
 
 export default function SideMenu() {
-  const [isFocused, setIsFocused] = useState<boolean>(true);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isTransporter, setIsTransporter] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
@@ -77,7 +77,7 @@ export default function SideMenu() {
                       isFocused ? "block" : "hidden"
                     } font-bold text-lg pl-3`}
                   >
-                    Historial de envios
+                    Historial de envíos
                   </a>
                 </div>
               ) : (
