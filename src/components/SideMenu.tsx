@@ -8,7 +8,7 @@ import { authAdmin, authTransport } from "../helpers/auth";
 import { LuClipboardList } from "react-icons/lu";
 
 export default function SideMenu() {
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(true);
   const [isTransporter, setIsTransporter] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 

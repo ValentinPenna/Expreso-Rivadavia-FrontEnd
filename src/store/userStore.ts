@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.PUBLIC_API_URL;
 
+
 const initialUser: User = {
   id: "",
   email: "",
@@ -27,7 +28,7 @@ const initialUser: User = {
   locality: "",
   role: "",
   orders: [],
-  profilePicture: "",
+  profilePicture: 'https://ui-avatars.com/api/?name=Anonymous&background=random',
   isDeleted: false,
 };
 
@@ -57,8 +58,30 @@ export const useUserStore = create<State>((set, get) => ({
   user: initialUser,
   token: "",
   setUser: () => {
-    const userLocalStorage = JSON.parse(localStorage.getItem("user")!);
-    set({ user: userLocalStorage });
+    const userLocalStorage = localStorage.getItem("user");
+  
+    if (!userLocalStorage) {
+      console.error("No user found in local storage");
+      return;
+    }
+  
+    let parsedUser;
+    try {
+      parsedUser = JSON.parse(userLocalStorage);
+    } catch (error) {
+      console.error("Error parsing user from local storage", error);
+      return;
+    }
+  
+    if (!parsedUser.profilePicture) {
+      const initials = parsedUser.name
+        ? parsedUser.name.split(" ").map((name: string) => name[0]).join("")
+        : "Anonymous";
+      parsedUser.profilePicture = `https://ui-avatars.com/api/?name=${initials}&background=random`;
+      localStorage.setItem("user", JSON.stringify(parsedUser));
+    }
+  
+    set({ user: parsedUser });
   },
   setToken: () => {
     const tokenLocalStorage = localStorage.getItem("token")!;
