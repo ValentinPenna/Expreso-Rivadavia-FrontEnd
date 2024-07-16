@@ -30,7 +30,12 @@ export default function AdminUsers() {
 
     return (
         <main className="flex flex-col p-6 gap-6 min-h-[80vh]">
+            <div className="flex justify-between items-center">
+
             <a href="/dashboard/admin" className="hover:text-primary text-lg bg-white w-fit px-3 rounded-lg font-bold">Volver</a>
+            <button onClick={() => window.location.href = "/dashboard/admin/users-reviews"} className="bg-primary text-white p-2 rounded-lg px-3 font-bold">Ver Comentarios</button>
+            </div>
+
             <h1 className="text-4xl font-bold text-primary text-center">Listado de usuarios</h1>
             <div className="flex flex-col gap-3">
                 {users.map((user) => (

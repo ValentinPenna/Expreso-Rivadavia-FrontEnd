@@ -28,7 +28,6 @@ export default function UserInfoDashboard() {
     if (userData) {
       setUserData({ ...userData, [name]: value });
     }
-    console.log(userData);
   };
   const handleChangeData = () => {
     if (userData) {
@@ -44,9 +43,7 @@ export default function UserInfoDashboard() {
       };
       const idUser = userData.id;
       changeUserData(userinfo, idUser).then((res) => {
-        toast.success(
-          "se cambiaron los datos con exito, para ver los cambios porfavor cierra y vuelve abrir sesion"
-        );
+        toast.success("¡Se cambiaron los datos con exito!");
         setEditionMode(!editionMode);
       });
     }
@@ -173,7 +170,7 @@ export default function UserInfoDashboard() {
               <InputDashboard
                 type="text"
                 name="address"
-                value={user?.address}
+                value={userData?.address}
                 onChange={handleChange}
               />
             ) : (
@@ -186,7 +183,7 @@ export default function UserInfoDashboard() {
               <InputDashboard
                 type="text"
                 name="locality"
-                value={user?.locality}
+                value={userData?.locality}
                 onChange={handleChange}
               />
             ) : (

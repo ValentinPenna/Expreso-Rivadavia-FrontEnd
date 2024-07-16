@@ -27,17 +27,15 @@ const ReviewsUsers: React.FC = () => {
       .catch((err) => {
         console.log(err);
       });
-
-    // setReviews(response)
   }, []);
   return (
-    <div className="bg-white p-6  items-center mt-5 flex shadow-md">
-      <div className="flex items-center w-1/2 justify-center   mb-4">
+    <div className="bg-white p-6  items-center mt-5 flex  flex-col lg:flex-row shadow-md">
+      <div className="flex items-balance w-1/2 justify-center   mb-4">
         <div>
-          <h2 className="text-xl lg:text-2xl text-center font-semibold">
+          <h2 className="text-lg  lg:text-2xl text-center font-semibold">
             Lo que opinan nuestros clientes!
           </h2>
-          <p className="text-lg text-center text-gray-600">
+          <p className="text-base text-center text-gray-600">
             Promedio de calificación
             <br />
             <span className="text-primary font-bold">
@@ -50,7 +48,7 @@ const ReviewsUsers: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-col items-center ">
-        <h2 className="font-bold text-xl">
+        <h2 className="font-bold text-center text-xl">
           Opiniones de clientes satisfechos.
         </h2>
         <ReviewCarousel reviews={reviews} />
