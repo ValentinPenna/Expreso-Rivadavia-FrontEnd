@@ -76,8 +76,8 @@ export default function QuoteShipping() {
               Cotizar envío
             </h1>
           </div>
-          <div className="text-xl lg:text-2xl my-8 xl:m-10">
-            <div className="flex flex-col xl:flex-row items-center justify-between">
+          <div className="text-xl sm:text-2xl my-3 md:m-10">
+            <div className="flex flex-col md:flex-row items-center justify-between">
               <div>
                 <label
                   htmlFor="origin"
@@ -171,12 +171,13 @@ export default function QuoteShipping() {
               <div
                 role="group"
                 aria-labelledby="size"
-                className="flex flex-col xl:flex-row"
+                className="flex flex-col lg:flex-row"
               >
+                <div className="flex flex-col md:flex-row md:justify-between">
                 <label
                   htmlFor="size-sobre"
                   className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
-                >
+                  >
                   <Field
                     type="radio"
                     id="size-sobre"
@@ -193,7 +194,7 @@ export default function QuoteShipping() {
                 <label
                   htmlFor="size-pequeño"
                   className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
-                >
+                  >
                   <Field
                     type="radio"
                     id="size-pequeño"
@@ -207,6 +208,8 @@ export default function QuoteShipping() {
                     </span>
                   </div>
                 </label>
+                </div>
+                <div className="flex flex-col md:flex-row md:justify-between md:w-full">
                 <label
                   htmlFor="size-mediano"
                   className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
@@ -242,17 +245,18 @@ export default function QuoteShipping() {
                   </div>
                 </label>
               </div>
+              </div>
             </div>
             <div className="mt-10 mb-5 flex justify-center items-center flex-col">
               <Button type="submit">COTIZAR</Button>
-              <span className="text-sm mt-2">
+              <span className="text-sm mt-2 text-center">
                 {" "}
-                Contactate con nosotros para mas información{" "}
+                Contactate con nosotros para mas información aqui:{" "}
                 <a
                   href="https://wa.me/5492634766992"
                   className="text-primary font-bold"
                 >
-                  expreso rivadavia
+                  Expreso Rivadavia
                 </a>
               </span>
             </div>
