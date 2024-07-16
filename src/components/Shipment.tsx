@@ -25,7 +25,7 @@ const Shipment = () => {
     null
   );
   const quotation = useOrdersStore((state) => state.quotation);
-
+  const [dataPayment , setDataPayment] = useState(null)
   useEffect(() => {
     // const isAuth: boolean = auth();
     // if (!isAuth) {
@@ -37,6 +37,11 @@ const Shipment = () => {
     }
     fetchLocalities();
   }, []);
+  useEffect(() => {
+    if (dataPayment) {
+      handlePaymentSuccess();
+    }
+  }, [dataPayment]);
 
   const handlePaymentSuccess = async () => {
     try {
@@ -44,15 +49,21 @@ const Shipment = () => {
       if (modalData?.size === "Pequeño") modalData.size = "small";
       if (modalData?.size === "Mediano") modalData.size = "medium";
       if (modalData?.size === "Grande") modalData.size = "large";
+      console.log(dataPayment);
+      
       await createOrder({
         size: modalData?.size || "",
         locality_origin: modalData?.locality_origin || 0,
         locality_destination: modalData?.locality_destination || 0,
         address_origin: modalData?.address_origin || "",
         address_destination: modalData?.address_destination || "",
-      });
+      },dataPayment);
       toast.success("El pago ha sido exitoso");
       setOpen(false);
+      setTimeout(() => {
+        window.location.href = "/dashboard/shipments";
+      }, 3000);
+    ;
     } catch (error) {
       console.error("Error creating order:", error);
     }
@@ -383,8 +394,9 @@ const Shipment = () => {
                               return orderData.orderId;
                             }}
                             onApprove={async (data, actions) => {
+                              
                               const response = await fetch(
-                                `${apiUrl}/paypal/capture-order`,
+                                `${apiUrl}/paypal/capture-order/`,
                                 {
                                   method: "POST",
                                   headers: {
@@ -397,8 +409,11 @@ const Shipment = () => {
                                 }
                               );
                               const orderData = await response.json();
+                              console.log(orderData);
+                            
+                              setDataPayment(orderData)
 
-                              handlePaymentSuccess();
+                              // await handlePaymentSuccess();
                             }}
                           />
                         </div>
