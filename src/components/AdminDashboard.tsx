@@ -85,15 +85,19 @@ export default function AdminDashboard() {
                 <h3 className="font-bold w-1/4 text-center">Origen / Destino</h3>
                 <h3 className="font-bold w-1/4 text-end">Estado</h3>
             </div>
-            {showedOrders?.map((order) => (
-                <div key={order.id} className="flex flex-row bg-white justify-between p-6 shadow-lg rounded-lg">
+            {showedOrders.length > 0 ? (
+                showedOrders?.map((order) => (
+                    <div key={order.id} className="flex flex-row bg-white justify-between p-6 shadow-lg rounded-lg">
                     <h3 className="font-bold w-1/4 text-start">{new Date(order.date).toLocaleDateString()}</h3>
                     <h3 className="font-bold w-1/4 text-center">{order.user.lastName}, {order.user.name}</h3>
                     <h3 className="font-bold w-1/4 text-center">{order.shipments.locality_origin.name} / {order.shipments.locality_destination.name}</h3>
                     <h3 className="font-bold w-1/4 text-end">{order.status}</h3>
-                </div>
-            ))
-            }
+                    </div>
+                ))
+            ) : (
+                <h3 className="text-center font-bold">No hay pedidos que concidan con la busqueda</h3>
+            )
+        }
         </>
     );
 }
