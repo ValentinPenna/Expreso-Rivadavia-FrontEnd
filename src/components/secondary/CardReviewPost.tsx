@@ -18,6 +18,9 @@ const CardReviewPost: React.FC = () => {
       toast.success("¡Gracias por tu comentario!");
       setComment("");
       setRating(null);
+      setTimeout(() => {
+        window.location.href = "/dashboard/shipments";
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
