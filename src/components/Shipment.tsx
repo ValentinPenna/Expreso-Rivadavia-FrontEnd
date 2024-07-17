@@ -116,8 +116,8 @@ const Shipment = () => {
                   Realizar envío
                 </h1>
               </div>
-              <div className="text-xl lg:text-2xl m-10">
-                <div className="flex flex-col lg:flex-row items-center justify-between">
+              <div className="text-xl sm:text-2xl m-10">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                   <div>
                     <label
                       htmlFor="locality_origin"
@@ -220,79 +220,83 @@ const Shipment = () => {
                     </svg>
                     Selecciona un tamaño:
                   </label>
-                  <label
-                    htmlFor="size-sobre"
-                    className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
-                  >
-                    <Field
-                      type="radio"
-                      id="size-sobre"
-                      name="size"
-                      value="envelop"
-                    />
-                    <div className="flex  flex-col items-center space-x-2">
-                      <span className="ml-2 mr-6 ">Sobre</span>
-                      <span className="text-sm md:ml-0 font-quicksand text-black">
-                        Máximo formato A4{" "}
-                      </span>
-                    </div>
-                  </label>
                   <div
                     role="group"
                     aria-labelledby="size"
-                    className="flex flex-col lg:flex-row"
+                    className="flex flex-col md:flex-row"
                   >
+                  <div className="flex flex-col sm:flex-row">
                     <label
-                      htmlFor="size-pequeño"
+                      htmlFor="size-sobre"
                       className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
                     >
                       <Field
                         type="radio"
-                        id="size-pequeño"
+                        id="size-sobre"
                         name="size"
-                        value="small"
+                        value="envelop"
                       />
                       <div className="flex  flex-col items-center space-x-2">
-                        <span className="ml-2 mr-6 ">Pequeño</span>
+                        <span className="ml-2 mr-6 text-2xl">Sobre</span>
                         <span className="text-sm md:ml-0 font-quicksand text-black">
-                          Máximo de 150cm / 10000 grs
+                          Máximo formato A4{" "}
                         </span>
                       </div>
                     </label>
-                    <label
-                      htmlFor="size-mediano"
-                      className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
-                    >
-                      <Field
-                        type="radio"
-                        id="size-mediano"
-                        name="size"
-                        value="medium"
-                      />
-                      <div className="flex  flex-col items-center space-x-2">
-                        <span className="ml-2 mr-6 ">Mediano</span>
-                        <span className="text-sm md:ml-0 font-quicksand text-black">
-                          Máximo de 300cm / 25000 grs
-                        </span>
-                      </div>
-                    </label>
-                    <label
-                      htmlFor="size-grande"
-                      className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
-                    >
-                      <Field
-                        type="radio"
-                        id="size-grande"
-                        name="size"
-                        value="large"
-                      />
-                      <div className="flex  flex-col items-center space-x-2">
-                        <span className="ml-2 mr-6 ">Grande</span>
-                        <span className="text-sm md:ml-0 font-quicksand text-black">
-                          Máximo de 495cm / 50000 grs
-                        </span>
-                      </div>
-                    </label>
+                      <label
+                        htmlFor="size-pequeño"
+                        className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
+                      >
+                        <Field
+                          type="radio"
+                          id="size-pequeño"
+                          name="size"
+                          value="small"
+                        />
+                        <div className="flex  flex-col items-center space-x-2">
+                          <span className="ml-2 mr-6 text-2xl">Pequeño</span>
+                          <span className="text-sm md:ml-0 font-quicksand text-black">
+                            Máximo de 150cm / 10000 grs
+                          </span>
+                        </div>
+                      </label>
+                    </div>
+                    <div className="flex flex-col sm:flex-row">
+                      <label
+                        htmlFor="size-mediano"
+                        className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
+                      >
+                        <Field
+                          type="radio"
+                          id="size-mediano"
+                          name="size"
+                          value="medium"
+                        />
+                        <div className="flex  flex-col items-center space-x-2">
+                          <span className="ml-2 mr-6 text-2xl">Mediano</span>
+                          <span className="text-sm md:ml-0 font-quicksand text-black">
+                            Máximo de 300cm / 25000 grs
+                          </span>
+                        </div>
+                      </label>
+                      <label
+                        htmlFor="size-grande"
+                        className="flex items-center space-x-2 mb-2 md:mb-0 ml-5"
+                      >
+                        <Field
+                          type="radio"
+                          id="size-grande"
+                          name="size"
+                          value="large"
+                        />
+                        <div className="flex  flex-col items-center space-x-2">
+                          <span className="ml-2 mr-6 text-2xl">Grande</span>
+                          <span className="text-sm md:ml-0 font-quicksand text-black">
+                            Máximo de 495cm / 50000 grs
+                          </span>
+                        </div>
+                      </label>
+                    </div>
                   </div>
                 </div>
                 {!token ? (
@@ -305,14 +309,14 @@ const Shipment = () => {
                 ) : (
                   <div className="mt-10 mb-5 flex justify-center flex-col items-center">
                     <Button type="submit">CREAR ENVIO</Button>
-                    <span className="text-sm mt-2">
+                    <span className="text-sm mt-2 text-center">
                       {" "}
-                      Contactate con nosotros para mas información{" "}
+                      Contactate con nosotros para mas información aqui:{" "}
                       <a
                         href="https://wa.me/5492634766992"
                         className="text-primary font-bold"
                       >
-                        expreso rivadavia
+                        Expreso Rivadavia
                       </a>
                     </span>
                   </div>
