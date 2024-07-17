@@ -45,7 +45,7 @@ const Shipment = () => {
 
   const handlePaymentSuccess = async () => {
     try {
-      if (modalData?.size === "Sobre") modalData.size = "envelope";
+      if (modalData?.size === "Sobre") modalData.size = "envelop";
       if (modalData?.size === "Pequeño") modalData.size = "small";
       if (modalData?.size === "Mediano") modalData.size = "medium";
       if (modalData?.size === "Grande") modalData.size = "large";
@@ -63,11 +63,14 @@ const Shipment = () => {
       setTimeout(() => {
         window.location.href = "/dashboard/shipments";
       }, 3000);
-    ;
     } catch (error) {
       console.error("Error creating order:", error);
     }
   };
+  const handleCancel = () =>{
+    setOpen(false)
+    setModalData(null)
+  }
 
   const initialOptions = {
     clientId: CLIENTID,
@@ -105,8 +108,11 @@ const Shipment = () => {
                 address_destination: values.address_destination,
                 price: data,
               });
+              setOpen(true);
+            }).catch((err)=>{
+              toast.error("Recuerda rellenar todos los campos")
+              setOpen(false)
             });
-            setOpen(true);
           }}
         >
           {({ errors }) => (
@@ -360,7 +366,7 @@ const Shipment = () => {
                       </p>
                       <div className=" flex justify-center items-center gap-24 mt-8">
                         <div
-                          onClick={() => setOpen(false)}
+                          onClick={() => handleCancel()}
                           className="text-xs p-1 flex justify-start gap-1 hover:cursor-pointer text-primary bg-transparent items-center w-fit"
                         >
                           Cancelar Envio
@@ -374,9 +380,15 @@ const Shipment = () => {
                             style={{
                               shape: "rect",
                               color: "blue",
-                              layout: "horizontal", //default value. Can be changed to
+                              layout: "horizontal",
                             }}
                             createOrder={async (data, actions) => {
+                              console.log(modalData.price);
+                              
+                              let newPrice: number | string = Number(modalData.price) / 1420
+                              newPrice = newPrice.toFixed(1)
+                              console.log(newPrice);
+                              
                               const response = await fetch(
                                 `${apiUrl}/paypal/create-order`,
                                 {
@@ -386,7 +398,7 @@ const Shipment = () => {
                                     Authorization: `Bearer ${token}`,
                                   },
                                   body: JSON.stringify({
-                                    amount: modalData?.price,
+                                    amount: newPrice,
                                   }),
                                 }
                               );

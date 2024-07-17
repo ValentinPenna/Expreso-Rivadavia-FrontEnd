@@ -22,7 +22,7 @@ export default function SideMenu() {
       <nav
         className={`${
           isFocused ? " w-44 lg:w-full pr-4 " : "w-12 pr:4"
-        } duration-300 relative transition-all overflow-hidden flex flex-col gap-10 items-center bg-white my-4 rounded-r-lg py-4 min-h-[79dvh] h-full`}
+        } duration-300 relative transition-all overflow-hidden shadow-xl flex flex-col gap-10 items-center bg-white my-4 rounded-r-lg py-4 min-h-[79dvh] h-full`}
       >
         <button
           className="absolute right-4 lg:hidden "
@@ -30,8 +30,7 @@ export default function SideMenu() {
         >
           <CiMenuBurger className="text-xl" color="#CB1B1A" />
         </button>
-        <ProfilePhoto />
-        <div className="flex flex-col gap-6 text-xl items-start w-full">
+        <div className="flex flex-col gap-6 mt-24 text-xl items-start w-full">
           <div className="flex flex-row h-full">
             {window.location.pathname === "/dashboard" ? (
               <div className="flex items-center border-l-4 h-8 border-primary">

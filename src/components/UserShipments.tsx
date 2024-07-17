@@ -92,7 +92,7 @@ export default function UserShipments() {
                     </select>
                 </div>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col overflow-y-scroll max-h-[500px] gap-4">
                 {orders?.length! > 0 ? (
                     // console.log(orders),
                     <HistoryShipment orders={orders!} />
