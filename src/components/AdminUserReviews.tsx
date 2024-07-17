@@ -28,7 +28,7 @@ const AdminUserReviews = () => {
         Comentarios de usuarios
       </h1>
       <div className="flex flex-wrap justify-center  gap-3">
-        {reviewsUser.map((review) => (
+        {reviewsUser?.map((review) => (
           <div
             key={review.id}
             className="flex w-full md:w-2/3 lg:w-2/5 items-center bg-white shadow-lg justify-between p-4 sm:p-6 text-sm sm:text-lg rounded-lg"

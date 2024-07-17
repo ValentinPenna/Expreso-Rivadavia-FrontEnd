@@ -42,7 +42,7 @@ export default function AdminUsers() {
 
             <h1 className="text-4xl font-bold text-primary text-center">Listado de usuarios</h1>
             <div className="flex flex-col items-center gap-3">
-                {users.map((user) => (
+                {users?.map((user) => (
                     <div key={user.id} className="flex w-80 md:w-2/3 lg:w-full relative flex-col lg:flex-row gap-2 bg-white shadow-lg justify-between p-6 text-lg rounded-lg">
                         {user.dni ? (
                             <>
