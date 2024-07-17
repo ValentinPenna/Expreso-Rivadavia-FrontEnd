@@ -48,7 +48,7 @@ const FormLogin = () => {
       if (isNewUser) {
         const userGoogleInfo = {
           email: result.user.email as string,
-          lastName: aditionalinfo?.profile?.family_name as string,
+          lastName: aditionalinfo?.profile?.family_name as string || "",
           name: aditionalinfo?.profile?.given_name as string,
         };
         localStorage.setItem("infoGoogle", JSON.stringify(userGoogleInfo));
@@ -147,9 +147,6 @@ const FormLogin = () => {
                 Registrate
               </a>
             </p>
-            <Button className="text-xs p-0.5 w-fit" onClick={handleGoogle}>
-              Iniciar sesión con google
-            </Button>
           </Form>
         )}
       </Formik>

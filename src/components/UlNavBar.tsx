@@ -29,21 +29,17 @@ const UlNavBar = () => {
           {isAuth ? (
             <li>
               <a href="/new-shipment" className="hover:text-primary">
-                Hacer un envio
+                Hacer un envío
               </a>
             </li>
           ) : (
             <li>
               <a href="/auth/register" className="hover:text-primary">
-                Hacer un envio
+                Hacer un envío
               </a>
             </li>
           )}
-          <li>
-            <a href="/faqs" className="hover:text-primary">
-              Preguntas Frecuentes
-            </a>
-          </li>
+          
           <li>
             <a href="/about" className="hover:text-primary">
               Sobre Nosotros

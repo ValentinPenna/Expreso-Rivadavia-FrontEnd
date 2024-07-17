@@ -75,25 +75,29 @@ export default function AdminDashboard() {
                     </div>
                 </div>
                 <div className="flex flex-row gap-3">
-                <button onClick={() => window.location.href = "/dashboard/admin/statistics"} className="bg-primary text-white p-2 rounded-lg px-3 font-bold">Ver Estadisticas</button>
-                <button onClick={() => window.location.href = "/dashboard/admin/users"} className="bg-primary text-white p-2 rounded-lg px-3 font-bold">Ver Usuarios</button>
+                <button onClick={() => window.location.href = "/dashboard/admin/statistics"} className="bg-primary text-sm md:text-base text-white p-2 rounded-lg px-3 font-bold">Ver Estadisticas</button>
+                <button onClick={() => window.location.href = "/dashboard/admin/users"} className="bg-primary text-sm md:text-base text-white p-2 rounded-lg px-3 font-bold">Ver Usuarios</button>
                 </div>
             </div>
-            <div className="flex flex-row justify-between px-6">
+            <div className="flex flex-row justify-between px-1 lg:px-6">
                 <h3 className="font-bold w-1/4 text-start">Fecha</h3>
                 <h3 className="font-bold w-1/4 text-center">Usuario</h3>
                 <h3 className="font-bold w-1/4 text-center">Origen / Destino</h3>
                 <h3 className="font-bold w-1/4 text-end">Estado</h3>
             </div>
-            {showedOrders?.map((order) => (
-                <div key={order.id} className="flex flex-row bg-white justify-between p-6 shadow-lg rounded-lg">
+            {showedOrders.length > 0 ? (
+                showedOrders?.map((order) => (
+                    <div key={order.id} className="flex flex-row bg-white justify-between p-6 shadow-lg rounded-lg">
                     <h3 className="font-bold w-1/4 text-start">{new Date(order.date).toLocaleDateString()}</h3>
                     <h3 className="font-bold w-1/4 text-center">{order.user.lastName}, {order.user.name}</h3>
                     <h3 className="font-bold w-1/4 text-center">{order.shipments.locality_origin.name} / {order.shipments.locality_destination.name}</h3>
                     <h3 className="font-bold w-1/4 text-end">{order.status}</h3>
-                </div>
-            ))
-            }
+                    </div>
+                ))
+            ) : (
+                <h3 className="text-center font-bold">No hay pedidos que concidan con la busqueda</h3>
+            )
+        }
         </>
     );
 }
