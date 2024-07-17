@@ -42,20 +42,20 @@ const ProfilePhoto = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto px-8 pt-8 pb-4 mb-4">
+    <div className="max-w-md mx-auto lg:px-4 pt-8 pb-4 mb-4">
       <div className="mb-4">
-        <div className="flex justify-center">
+        <div className="flex justify-start lg:justify-center">
           <img
             src={profilePicture}
             alt="Profile"
-            className="rounded-full h-32 w-32 object-cover"
+            className="rounded-full  h-auto w-12 object-cover lg:w-24 "
           />
         </div>
       </div>
       <div className="mb-4">
         <button
           onClick={handleClick}
-          className="border border-primary rounded w-full py-2 px-3 text-gray-700"
+          className="border ml-1 text-xs lg:text-base border-primary rounded w-full py-2 px-3 text-gray-700"
         >
           Cambiar foto de perfil
         </button>

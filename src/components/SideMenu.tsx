@@ -8,7 +8,7 @@ import { authAdmin, authTransport } from "../helpers/auth";
 import { LuClipboardList } from "react-icons/lu";
 
 export default function SideMenu() {
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(true);
   const [isTransporter, setIsTransporter] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
@@ -21,7 +21,7 @@ export default function SideMenu() {
     <aside className="relative w-[20%] pr-4 pb-8">
       <nav
         className={`${
-          isFocused ? " w-40 lg:w-full pr-4 " : "w-12 pr:4"
+          isFocused ? " w-44 lg:w-full pr-4 " : "w-12 pr:4"
         } duration-300 relative transition-all overflow-hidden flex flex-col gap-10 items-center bg-white my-4 rounded-r-lg py-4 min-h-[79dvh] h-full`}
       >
         <button
