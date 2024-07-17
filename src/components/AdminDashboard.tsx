@@ -75,11 +75,11 @@ export default function AdminDashboard() {
                     </div>
                 </div>
                 <div className="flex flex-row gap-3">
-                <button onClick={() => window.location.href = "/dashboard/admin/statistics"} className="bg-primary text-white p-2 rounded-lg px-3 font-bold">Ver Estadisticas</button>
-                <button onClick={() => window.location.href = "/dashboard/admin/users"} className="bg-primary text-white p-2 rounded-lg px-3 font-bold">Ver Usuarios</button>
+                <button onClick={() => window.location.href = "/dashboard/admin/statistics"} className="bg-primary text-sm md:text-base text-white p-2 rounded-lg px-3 font-bold">Ver Estadisticas</button>
+                <button onClick={() => window.location.href = "/dashboard/admin/users"} className="bg-primary text-sm md:text-base text-white p-2 rounded-lg px-3 font-bold">Ver Usuarios</button>
                 </div>
             </div>
-            <div className="flex flex-row justify-between px-6">
+            <div className="flex flex-row justify-between px-1 lg:px-6">
                 <h3 className="font-bold w-1/4 text-start">Fecha</h3>
                 <h3 className="font-bold w-1/4 text-center">Usuario</h3>
                 <h3 className="font-bold w-1/4 text-center">Origen / Destino</h3>
