@@ -5,6 +5,7 @@ import { useState } from "react";
 import Button from "./secondary/Button";
 import { toast } from "react-toastify";
 import InputDashboard from "./secondary/InputDashboard";
+import ProfilePhoto from "./ProfilePhoto";
 
 export default function UserInfoDashboard() {
   const changeUserData = useUserStore((state) => state.changeUserData);
@@ -50,6 +51,7 @@ export default function UserInfoDashboard() {
 
   return (
     <div className="w-full my-4 bg-white px-4 sm:px-8 lg:px-24 pb-8 lg:pb-24 pt-10 lg:pt-20 rounded-l-lg flex flex-col max-w-full lg:max-w-[80%] mx-auto">
+              <ProfilePhoto />
       <div className="flex flex-row justify-end mb-4">
         {editionMode ? (
           <button
@@ -69,7 +71,7 @@ export default function UserInfoDashboard() {
           </button>
         )}
       </div>
-      <div className="flex flex-col gap-8 lg:gap-16">
+      <div className="flex flex-col gap-4 lg:gap-16">
         {user?.companyName && (
           <div className="flex flex-col lg:flex-row">
             <div className="w-full lg:w-1/2">
